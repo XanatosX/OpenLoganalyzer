@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLoganalyzer", "OpenLoganalyzer\OpenLoganalyzer.csproj", "{D791160E-DC8A-4461-B2E3-CB36AA77A509}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLoganalyzerTests", "OpenLoganalyzerTests\OpenLoganalyzerTests.csproj", "{A47902F7-6C33-4639-8E66-ACD2B8E358F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D791160E-DC8A-4461-B2E3-CB36AA77A509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D791160E-DC8A-4461-B2E3-CB36AA77A509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D791160E-DC8A-4461-B2E3-CB36AA77A509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47902F7-6C33-4639-8E66-ACD2B8E358F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47902F7-6C33-4639-8E66-ACD2B8E358F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47902F7-6C33-4639-8E66-ACD2B8E358F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47902F7-6C33-4639-8E66-ACD2B8E358F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
