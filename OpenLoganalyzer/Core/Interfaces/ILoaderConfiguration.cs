@@ -15,9 +15,14 @@ namespace OpenLoganalyzer.Core.Interfaces
         LoaderTypeEnum LoaderType { get; }
 
         /// <summary>
-        /// The all the filters of this configuration
+        /// All the filters of this configuration
         /// </summary>
         Dictionary<string, string> Filters { get; }
+
+        /// <summary>
+        /// All the filter names
+        /// </summary>
+        List<string> FilterNames { get; }
 
         /// <summary>
         /// Get an addition setting by name
@@ -27,17 +32,10 @@ namespace OpenLoganalyzer.Core.Interfaces
         string GetAdditionalSetting(string settingName);
 
         /// <summary>
-        /// Load the current configuration
+        /// Get an additional setting by enum
         /// </summary>
-        /// <param name="pathToFile">The path to the requested file</param>
+        /// <param name="additionalSettings"></param>
         /// <returns></returns>
-        bool Load(string pathToFile);
-
-        /// <summary>
-        /// Save the current configuration
-        /// </summary>
-        /// <param name="pathToSaveFile">The path to the file to save into</param>
-        /// <returns></returns>
-        bool Save(string pathToSaveFile);
+        string GetAdditionalSetting(AdditionalSettingsEnum additionalSettings);
     }
 }

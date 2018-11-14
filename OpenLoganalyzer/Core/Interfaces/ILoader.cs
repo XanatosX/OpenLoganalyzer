@@ -8,6 +8,17 @@ namespace OpenLoganalyzer.Core.Interfaces
 {
     public interface ILoader
     {
-        List<ILogLine> Load(ILoaderConfiguration configuration);
+        /// <summary>
+        /// Set the configuration
+        /// </summary>
+        /// <param name="configuration"></param>
+        void SetConfiguration(ILoaderConfiguration newConfiguration);
+
+        /// <summary>
+        /// Load the data
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        List<ILogLine> Load();
     }
 }

@@ -29,6 +29,8 @@ namespace OpenLoganalyzer.Core.Factories
                     break;
             }
 
+            returnValue.SetConfiguration(configuration);
+
             return returnValue;
         }
           

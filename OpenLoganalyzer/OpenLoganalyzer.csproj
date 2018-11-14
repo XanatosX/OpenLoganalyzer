@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,13 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Container\Filter.cs" />
+    <Compile Include="Core\Enum\AdditionalSettingsEnum.cs" />
+    <Compile Include="Core\Enum\FilterTypeEnum.cs" />
     <Compile Include="Core\Enum\LoaderTypeEnum.cs" />
     <Compile Include="Core\Factories\LoaderFactory.cs" />
     <Compile Include="Core\Interfaces\ILoader.cs" />
     <Compile Include="Core\Interfaces\ILoaderConfiguration.cs" />
+    <Compile Include="Core\Interfaces\ILoaderConfigurationLoader.cs" />
     <Compile Include="Core\Interfaces\ILoaderFactory.cs" />
     <Compile Include="Core\Interfaces\ILogLine.cs" />
+    <Compile Include="Core\LoaderCofiguration\SimpleConfiguration.cs" />
     <Compile Include="Core\Loader\FileLoader.cs" />
+    <Compile Include="Core\Loglines\SimpleLogline.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +69,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -69,6 +81,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -83,7 +96,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Container\" />
+    <Folder Include="Core\Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,6 +9,7 @@ namespace OpenLoganalyzer.Core.Container
     public class Filter
     {
         string type;
+
         string name;
     }
 }

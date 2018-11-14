@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenLoganalyzer.Core.Enum
 {
-    public enum FilterTypeEnum
+    public enum AdditionalSettingsEnum
     {
-        Message,
-        Severity,
-        Datetime,
-        Caller
+        FilePath,
+        DateTimeFormat
     }
 }
