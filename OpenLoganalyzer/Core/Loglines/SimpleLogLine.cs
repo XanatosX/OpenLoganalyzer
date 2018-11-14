@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenLoganalyzer.Core.Loglines
 {
-    class SimpleLogline : ILogLine
+    public class SimpleLogline : ILogLine
     {
         private readonly Dictionary<string, string> additionalContent;
 
@@ -38,6 +38,8 @@ namespace OpenLoganalyzer.Core.Loglines
             {
                 additionalContent = newAdditionalContent;
             }
+
+            additionalFilters = additionalContent.Keys.ToList();
         }
 
         public string GetAdditionalContent(string filter)
