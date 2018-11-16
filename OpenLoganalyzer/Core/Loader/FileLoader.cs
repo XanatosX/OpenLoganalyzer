@@ -61,13 +61,13 @@ namespace OpenLoganalyzer.Core.Loader
                         switch (filterName)
                         {
                             case "Caller":
-                                thrownBy = matches[0].Value;
+                                thrownBy = matches[0].Value.Trim();
                                 break;
                             case "Message":
-                                message = matches[0].Value;
+                                message = matches[0].Value.Trim();
                                 break;
                             case "Severity":
-                                severity = matches[0].Value;
+                                severity = matches[0].Value.Trim();
                                 break;
                             case "Datetime":
                                 string format = configuration.GetAdditionalSetting(AdditionalSettingsEnum.DateTimeFormat);
