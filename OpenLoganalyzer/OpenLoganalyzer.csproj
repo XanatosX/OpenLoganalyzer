@@ -59,6 +59,7 @@
     <Compile Include="Core\Interfaces\ILoaderFactory.cs" />
     <Compile Include="Core\Interfaces\ILogLine.cs" />
     <Compile Include="Core\LoaderCofiguration\SimpleConfiguration.cs" />
+    <Compile Include="Core\LoaderCofiguration\SimpleConfigurationLoader.cs" />
     <Compile Include="Core\Loader\FileLoader.cs" />
     <Compile Include="Core\Loglines\SimpleLogline.cs" />
     <Compile Include="Forms\Form1.cs">
