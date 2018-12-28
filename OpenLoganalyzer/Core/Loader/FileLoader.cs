@@ -61,13 +61,13 @@ namespace OpenLoganalyzer.Core.Loader
                         switch (filterName)
                         {
                             case "Caller":
-                                thrownBy = matches[0].Value.Trim();
+                                thrownBy = getMatch(matches);
                                 break;
                             case "Message":
-                                message = matches[0].Value.Trim();
+                                message = getMatch(matches);
                                 break;
                             case "Severity":
-                                severity = matches[0].Value.Trim();
+                                severity = getMatch(matches);
                                 break;
                             case "Datetime":
                                 string format = configuration.GetAdditionalSetting(AdditionalSettingsEnum.DateTimeFormat);
@@ -76,7 +76,7 @@ namespace OpenLoganalyzer.Core.Loader
                                     continue;
                                 }
 
-                                DateTime.TryParseExact(matches[0].Value, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out time);
+                                DateTime.TryParseExact(getMatch(matches), format, CultureInfo.InvariantCulture, DateTimeStyles.None, out time);
                                 break;
                             default:
                                 additionalLines.Add(filterName, matches[0].Value);
@@ -91,6 +91,23 @@ namespace OpenLoganalyzer.Core.Loader
 
 
             return logLines;
+        }
+
+        private string getMatch(MatchCollection matchCollection)
+        {
+            string returnString = "";
+
+            Match realMatch = matchCollection[0];
+
+            returnString = realMatch.Value.Trim();
+
+            if (realMatch.Groups.Count == 2)
+            {
+                Group currentGroup = realMatch.Groups[1];
+                returnString = currentGroup.Value.Trim();
+            }
+
+            return returnString;
         }
     }
 }
