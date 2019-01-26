@@ -8,6 +8,8 @@ namespace OpenLoganalyzerLib.Core.Interfaces
 {
     public interface ILoaderConfigurationLoader
     {
+        event EventHandler LoadingError;
+
         ILoaderConfiguration Load(string pathToFile);
 
         bool Save(ILoaderConfiguration configuration, string filePath);

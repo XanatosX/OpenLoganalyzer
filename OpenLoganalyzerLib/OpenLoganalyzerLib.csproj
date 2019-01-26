@@ -47,6 +47,8 @@
     <Compile Include="Core\Enum\AdditionalSettingsEnum.cs" />
     <Compile Include="Core\Enum\FilterTypeEnum.cs" />
     <Compile Include="Core\Enum\LoaderTypeEnum.cs" />
+    <Compile Include="Core\Events\BaseEvent.cs" />
+    <Compile Include="Core\Events\ErrorLoadingEvent.cs" />
     <Compile Include="Core\Factories\LoaderFactory.cs" />
     <Compile Include="Core\Interfaces\ILoader.cs" />
     <Compile Include="Core\Interfaces\ILoaderConfiguration.cs" />

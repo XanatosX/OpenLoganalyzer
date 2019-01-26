@@ -1,4 +1,5 @@
 ﻿using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 
+
 namespace OpenLoganalyzerLib.Core.LoaderCofiguration
 {
     public class SimpleConfigurationLoader : ILoaderConfigurationLoader
     {
+        public event EventHandler LoadingError;
+
         public ILoaderConfiguration Load(string pathToFile)
         {
             ILoaderConfiguration returnConfiguration = null;
@@ -28,7 +32,12 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
             }
             catch (Exception ex)
             {
-                
+                EventHandler handler = LoadingError;
+                if (handler != null)
+                {
+                    EventArgs loadingError = new ErrorLoadingEvent();
+                    handler.Invoke(this, loadingError);
+                }
             }
             return returnConfiguration;
         }
