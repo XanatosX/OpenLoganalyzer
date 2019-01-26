@@ -35,16 +35,20 @@ namespace OpenLoganalyzer
             }
             else
             {
-                Dictionary<string, string> filters = new Dictionary<string, string>();
-                filters.Add(FilterTypeEnum.Severity.ToString(), "\\[([A-Z]*)\\]");
-                filters.Add(FilterTypeEnum.Caller.ToString(), "(^[A-Z][a-zA-z\\/]*) \\[[A-Z]*\\]");
-                filters.Add(FilterTypeEnum.Datetime.ToString(), "-> ([0-9]{2}:[0-9]{2}:[0-9]{2}): ");
-                filters.Add(FilterTypeEnum.Message.ToString(), ": ([a-zA-Z][a-zA-Z:\\\\/ !0-9-]*)");
+                Dictionary<string, string> filters = new Dictionary<string, string>
+                {
+                    { FilterTypeEnum.Severity.ToString(), "\\[([A-Z]*)\\]" },
+                    { FilterTypeEnum.Caller.ToString(), "(^[A-Z][a-zA-z\\/]*) \\[[A-Z]*\\]" },
+                    { FilterTypeEnum.Datetime.ToString(), "-> ([0-9]{2}:[0-9]{2}:[0-9]{2}): " },
+                    { FilterTypeEnum.Message.ToString(), ": ([a-zA-Z][a-zA-Z:\\\\/ !0-9-]*)" }
+                };
 
 
-                Dictionary<string, string> additionalSettings = new Dictionary<string, string>();
-                additionalSettings.Add(AdditionalSettingsEnum.FilePath.ToString(), @"F:\Onedrive\Work share\output.log");
-                additionalSettings.Add(AdditionalSettingsEnum.DateTimeFormat.ToString(), "HH':'mm':'ss");
+                Dictionary<string, string> additionalSettings = new Dictionary<string, string>
+                {
+                    { AdditionalSettingsEnum.FilePath.ToString(), @"F:\Onedrive\Work share\output.log" },
+                    { AdditionalSettingsEnum.DateTimeFormat.ToString(), "HH':'mm':'ss" }
+                };
 
 
                 configuration = new SimpleConfiguration(LoaderTypeEnum.FileLoader, filters, additionalSettings);
