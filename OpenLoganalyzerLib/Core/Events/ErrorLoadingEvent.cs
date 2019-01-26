@@ -8,6 +8,9 @@ namespace OpenLoganalyzerLib.Core.Events
 {
     public class ErrorLoadingEvent : BaseEvent
     {
-        
+        public ErrorLoadingEvent(Exception newException) : base(newException)
+        {
+
+        }
     }
 }
