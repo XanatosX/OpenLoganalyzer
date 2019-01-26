@@ -25,8 +25,10 @@ namespace OpenLoganalyzerTests
         [TestMethod]
         public void TestBasicSetup2()
         {
-            Dictionary<string, string> filters = new Dictionary<string, string>();
-            filters.Add(FilterTypeEnum.Caller.ToString(), TEST_FILTER_CONTENT);
+            Dictionary<string, string> filters = new Dictionary<string, string>
+            {
+                { FilterTypeEnum.Caller.ToString(), TEST_FILTER_CONTENT }
+            };
             SimpleConfiguration config = new SimpleConfiguration(LoaderTypeEnum.FileLoader, filters, new Dictionary<string, string>());
 
             Assert.AreEqual(LoaderTypeEnum.FileLoader, config.LoaderType);
@@ -40,8 +42,10 @@ namespace OpenLoganalyzerTests
         [TestMethod]
         public void TestBasicSetup3()
         {
-            Dictionary<string, string> additional = new Dictionary<string, string>();
-            additional.Add(AdditionalSettingsEnum.FilePath.ToString(), TEST_FILE_PATH);
+            Dictionary<string, string> additional = new Dictionary<string, string>
+            {
+                { AdditionalSettingsEnum.FilePath.ToString(), TEST_FILE_PATH }
+            };
             SimpleConfiguration config = new SimpleConfiguration(LoaderTypeEnum.FileLoader, new Dictionary<string, string>(), additional);
 
             Assert.AreEqual(LoaderTypeEnum.FileLoader, config.LoaderType);

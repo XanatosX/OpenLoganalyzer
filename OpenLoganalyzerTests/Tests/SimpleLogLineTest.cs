@@ -50,8 +50,10 @@ namespace OpenLoganalyzerTests
         {
             DateTime dt = DateTime.Now;
 
-            Dictionary<string, string> testAdditional = new Dictionary<string, string>();
-            testAdditional.Add(ADDITIONALKEY, ADDITIONALVALUE);
+            Dictionary<string, string> testAdditional = new Dictionary<string, string>
+            {
+                { ADDITIONALKEY, ADDITIONALVALUE }
+            };
 
             SimpleLogline logline = new SimpleLogline(THROWNBY, dt, MESSAGE, SEVERITY, testAdditional);
 
