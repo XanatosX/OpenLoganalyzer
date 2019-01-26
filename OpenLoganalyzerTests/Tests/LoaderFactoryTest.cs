@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using OpenLoganalyzer.Core.Factories;
-using OpenLoganalyzer.Core.Interfaces;
-using OpenLoganalyzer.Core.Enum;
-using OpenLoganalyzer.Core.Loader;
+using OpenLoganalyzerLib.Core.Factories;
+using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.Enum;
+using OpenLoganalyzerLib.Core.Loader;
 
 namespace OpenLoganalyzerTests
 {

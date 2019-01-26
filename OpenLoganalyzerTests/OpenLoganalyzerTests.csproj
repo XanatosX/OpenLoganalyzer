@@ -72,9 +72,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenLoganalyzer\OpenLoganalyzer.csproj">
-      <Project>{d791160e-dc8a-4461-b2e3-cb36aa77a509}</Project>
-      <Name>OpenLoganalyzer</Name>
+    <ProjectReference Include="..\OpenLoganalyzerLib\OpenLoganalyzerLib.csproj">
+      <Project>{38d17d38-7326-4e84-85ff-8fe239cf2879}</Project>
+      <Name>OpenLoganalyzerLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

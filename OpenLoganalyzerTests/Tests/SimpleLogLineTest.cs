@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenLoganalyzer.Core;
-using OpenLoganalyzer.Core.Loglines;
+using OpenLoganalyzerLib.Core;
+using OpenLoganalyzerLib.Core.Loglines;
 using System.Collections.Generic;
 using System.Threading;
 

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenLoganalyzer.Core.Enum
+namespace OpenLoganalyzerLib.Core.Enum
 {
-    public enum FilterTypeEnum
+    public enum LoaderTypeEnum
     {
-        Message,
-        Severity,
-        Datetime,
-        Caller
+        FileLoader
     }
 }

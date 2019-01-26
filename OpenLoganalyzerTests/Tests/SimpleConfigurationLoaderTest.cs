@@ -2,8 +2,8 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using OpenLoganalyzer.Core.Interfaces;
-using OpenLoganalyzer.Core.LoaderCofiguration;
+using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.LoaderCofiguration;
 using OpenLoganalyzerTests.Helper;
 
 namespace OpenLoganalyzerTests
@@ -33,7 +33,7 @@ namespace OpenLoganalyzerTests
             SimpleConfigurationLoader simpleConfigurationLoader = new SimpleConfigurationLoader();
 
             Mock<ILoaderConfiguration> configuration = new Mock<ILoaderConfiguration>();
-            configuration.Setup(x => x.LoaderType).Returns(OpenLoganalyzer.Core.Enum.LoaderTypeEnum.FileLoader);
+            configuration.Setup(x => x.LoaderType).Returns(OpenLoganalyzerLib.Core.Enum.LoaderTypeEnum.FileLoader);
             configuration.Setup(x => x.Filters).Returns(new System.Collections.Generic.Dictionary<string, string>());
             configuration.Setup(x => x.FilterNames).Returns(new System.Collections.Generic.List<string>());
 

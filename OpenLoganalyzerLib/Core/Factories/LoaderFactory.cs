@@ -1,13 +1,13 @@
-﻿using OpenLoganalyzer.Core.Enum;
-using OpenLoganalyzer.Core.Interfaces;
-using OpenLoganalyzer.Core.Loader;
+﻿using OpenLoganalyzerLib.Core.Enum;
+using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.Loader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenLoganalyzer.Core.Factories
+namespace OpenLoganalyzerLib.Core.Factories
 {
     public class LoaderFactory : ILoaderFactory
     {

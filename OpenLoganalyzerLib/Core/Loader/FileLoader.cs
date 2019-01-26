@@ -1,6 +1,6 @@
-﻿using OpenLoganalyzer.Core.Enum;
-using OpenLoganalyzer.Core.Interfaces;
-using OpenLoganalyzer.Core.Loglines;
+﻿using OpenLoganalyzerLib.Core.Enum;
+using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.Loglines;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace OpenLoganalyzer.Core.Loader
+namespace OpenLoganalyzerLib.Core.Loader
 {
     public class FileLoader : ILoader
     {

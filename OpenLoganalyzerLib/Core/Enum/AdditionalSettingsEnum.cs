@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenLoganalyzer.Core.Enum
+namespace OpenLoganalyzerLib.Core.Enum
 {
-    public enum LoaderTypeEnum
+    public enum AdditionalSettingsEnum
     {
-        FileLoader
+        FilePath,
+        DateTimeFormat
     }
 }

@@ -1,12 +1,13 @@
-﻿using OpenLoganalyzer.Core.Enum;
-using OpenLoganalyzer.Core.Interfaces;
+﻿using Newtonsoft.Json;
+using OpenLoganalyzerLib.Core.Enum;
+using OpenLoganalyzerLib.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenLoganalyzer.Core.LoaderCofiguration
+namespace OpenLoganalyzerLib.Core.LoaderCofiguration
 {
     public class SimpleConfiguration : ILoaderConfiguration
     {
@@ -18,6 +19,8 @@ namespace OpenLoganalyzer.Core.LoaderCofiguration
         public Dictionary<string, string> Filters => filters;
 
         private readonly List<string> filterNames;
+
+        [JsonIgnore]
         public List<string> FilterNames => filterNames;
 
         private readonly Dictionary<string, string> additionalSettingContainer;

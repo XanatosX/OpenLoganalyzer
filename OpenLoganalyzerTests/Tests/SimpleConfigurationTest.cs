@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenLoganalyzer.Core.LoaderCofiguration;
-using OpenLoganalyzer.Core.Enum;
+using OpenLoganalyzerLib.Core.LoaderCofiguration;
+using OpenLoganalyzerLib.Core.Enum;
 using System.Collections.Generic;
 
 namespace OpenLoganalyzerTests

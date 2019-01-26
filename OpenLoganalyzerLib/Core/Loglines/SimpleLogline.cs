@@ -1,11 +1,11 @@
-﻿using OpenLoganalyzer.Core.Interfaces;
+﻿using OpenLoganalyzerLib.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenLoganalyzer.Core.Loglines
+namespace OpenLoganalyzerLib.Core.Loglines
 {
     public class SimpleLogline : ILogLine
     {

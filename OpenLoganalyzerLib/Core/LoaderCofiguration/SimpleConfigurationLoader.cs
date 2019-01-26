@@ -1,4 +1,4 @@
-﻿using OpenLoganalyzer.Core.Interfaces;
+﻿using OpenLoganalyzerLib.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace OpenLoganalyzer.Core.LoaderCofiguration
+namespace OpenLoganalyzerLib.Core.LoaderCofiguration
 {
     public class SimpleConfigurationLoader : ILoaderConfigurationLoader
     {
