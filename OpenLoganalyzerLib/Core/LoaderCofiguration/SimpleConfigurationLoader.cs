@@ -35,7 +35,7 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
                 EventHandler handler = LoadingError;
                 if (handler != null)
                 {
-                    EventArgs loadingError = new ErrorLoadingEvent();
+                    EventArgs loadingError = new ErrorLoadingEvent(ex);
                     handler.Invoke(this, loadingError);
                 }
             }
