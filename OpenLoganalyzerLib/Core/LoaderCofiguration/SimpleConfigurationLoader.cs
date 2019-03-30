@@ -24,7 +24,6 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
                 return returnConfiguration;
             }
 
-            JsonSerializer jsonSerializer = new JsonSerializer();
             try
             {
                 string content = File.ReadAllText(pathToFile);
