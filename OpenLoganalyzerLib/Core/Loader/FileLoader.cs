@@ -69,13 +69,13 @@ namespace OpenLoganalyzerLib.Core.Loader
                         switch (filterName)
                         {
                             case "Caller":
-                                thrownBy = getMatch(matches);
+                                thrownBy = GetMatch(matches);
                                 break;
                             case "Message":
-                                message = getMatch(matches);
+                                message = GetMatch(matches);
                                 break;
                             case "Severity":
-                                severity = getMatch(matches);
+                                severity = GetMatch(matches);
                                 break;
                             case "Datetime":
                                 string format = configuration.GetAdditionalSetting(AdditionalSettingsEnum.DateTimeFormat);
@@ -84,7 +84,7 @@ namespace OpenLoganalyzerLib.Core.Loader
                                     continue;
                                 }
 
-                                DateTime.TryParseExact(getMatch(matches), format, CultureInfo.InvariantCulture, DateTimeStyles.None, out time);
+                                DateTime.TryParseExact(GetMatch(matches), format, CultureInfo.InvariantCulture, DateTimeStyles.None, out time);
                                 break;
                             default:
                                 additionalLines.Add(filterName, matches[0].Value);
@@ -106,7 +106,7 @@ namespace OpenLoganalyzerLib.Core.Loader
         /// </summary>
         /// <param name="matchCollection"></param>
         /// <returns></returns>
-        private string getMatch(MatchCollection matchCollection)
+        private string GetMatch(MatchCollection matchCollection)
         {
             string returnString = "";
 
