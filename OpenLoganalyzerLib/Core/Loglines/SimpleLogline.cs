@@ -26,6 +26,14 @@ namespace OpenLoganalyzerLib.Core.Loglines
         private readonly List<string> additionalFilters;
         public List<string> AdditionalFilters => additionalFilters;
 
+        /// <summary>
+        /// Constructor of the class
+        /// </summary>
+        /// <param name="newThrownBy">The name of the class which did throw the logline</param>
+        /// <param name="newLogTime">The time the logline was throwen</param>
+        /// <param name="newMessage">The message of the logline</param>
+        /// <param name="newSeverity">The severity of the logline</param>
+        /// <param name="newAdditionalContent">Additional content of the logline</param>
         public SimpleLogline(string newThrownBy, DateTime newLogTime, string newMessage, string newSeverity, Dictionary<string, string> newAdditionalContent)
         {
             thrownBy = newThrownBy;
