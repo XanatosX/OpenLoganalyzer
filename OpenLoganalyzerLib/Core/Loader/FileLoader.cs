@@ -16,11 +16,19 @@ namespace OpenLoganalyzerLib.Core.Loader
     {
         private ILoaderConfiguration configuration;
 
+        /// <summary>
+        /// Set the configuration
+        /// </summary>
+        /// <param name="configuration">The configuration to set</param>
         public void SetConfiguration(ILoaderConfiguration newConfiguration)
         {
             configuration = newConfiguration;
         }
 
+        /// <summary>
+        /// Load the data
+        /// </summary>
+        /// <returns>A list with the log lines</returns>
         public List<ILogLine> Load()
         {
             List<ILogLine> logLines = new List<ILogLine>();
@@ -93,6 +101,11 @@ namespace OpenLoganalyzerLib.Core.Loader
             return logLines;
         }
 
+        /// <summary>
+        /// This method will get all the matches and return the string
+        /// </summary>
+        /// <param name="matchCollection"></param>
+        /// <returns></returns>
         private string getMatch(MatchCollection matchCollection)
         {
             string returnString = "";
