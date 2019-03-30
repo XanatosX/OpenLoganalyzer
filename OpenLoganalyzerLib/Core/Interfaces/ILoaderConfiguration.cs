@@ -25,6 +25,12 @@ namespace OpenLoganalyzerLib.Core.Interfaces
         List<string> FilterNames { get; }
 
         /// <summary>
+        /// This function will return you a object which can be saved
+        /// </summary>
+        /// <returns></returns>
+        IJsonLoaderConfiguration GetSaveableObject();
+
+        /// <summary>
         /// Get an addition setting by name
         /// </summary>
         /// <param name="settingName">The name of the setting to load</param>
@@ -35,7 +41,7 @@ namespace OpenLoganalyzerLib.Core.Interfaces
         /// Get an additional setting by enum
         /// </summary>
         /// <param name="additionalSettings"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         string GetAdditionalSetting(AdditionalSettingsEnum additionalSettings);
     }
 }
