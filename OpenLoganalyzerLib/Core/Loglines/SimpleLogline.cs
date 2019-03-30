@@ -42,6 +42,11 @@ namespace OpenLoganalyzerLib.Core.Loglines
             additionalFilters = additionalContent.Keys.ToList();
         }
 
+        /// <summary>
+        /// Get an additional content
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public string GetAdditionalContent(string filter)
         {
             string returnValue = "";
