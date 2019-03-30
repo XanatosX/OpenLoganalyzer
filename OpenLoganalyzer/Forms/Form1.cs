@@ -31,7 +31,6 @@ namespace OpenLoganalyzer
             if (File.Exists(@"F:\Onedrive\Work share\config.json"))
             {
                 configuration = configLoader.Load(@"F:\Onedrive\Work share\config.json");
-
             }
             else
             {
@@ -43,22 +42,17 @@ namespace OpenLoganalyzer
                     { FilterTypeEnum.Message.ToString(), ": ([a-zA-Z][a-zA-Z:\\\\/ !0-9-]*)" }
                 };
 
-
                 Dictionary<string, string> additionalSettings = new Dictionary<string, string>
                 {
                     { AdditionalSettingsEnum.FilePath.ToString(), @"F:\Onedrive\Work share\output.log" },
                     { AdditionalSettingsEnum.DateTimeFormat.ToString(), "HH':'mm':'ss" }
                 };
 
-
                 configuration = new SimpleConfiguration(LoaderTypeEnum.FileLoader, filters, additionalSettings);
             }
-           
 
             ILoaderFactory loader = new LoaderFactory();
             ILoader realLoader = loader.GetLoader(configuration);
-            
-            
 
             List<ILogLine> lines = realLoader.Load();
 
