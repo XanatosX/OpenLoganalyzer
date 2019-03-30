@@ -28,7 +28,8 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
             try
             {
                 string content = File.ReadAllText(pathToFile);
-                returnConfiguration = JsonConvert.DeserializeObject<SimpleConfiguration>(content);
+                JsonSimpleConfiguration container = JsonConvert.DeserializeObject<JsonSimpleConfiguration>(content);
+                returnConfiguration = container.GetLoaderConfiguration();
             }
             catch (Exception ex)
             {
@@ -47,7 +48,7 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
             JsonSerializer jsonSerializer = new JsonSerializer();
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                jsonSerializer.Serialize(writer, configuration);
+                jsonSerializer.Serialize(writer, configuration.GetSaveableObject());
             }
             return true;
         }
