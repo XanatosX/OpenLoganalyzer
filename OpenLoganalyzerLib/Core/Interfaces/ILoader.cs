@@ -17,8 +17,7 @@ namespace OpenLoganalyzerLib.Core.Interfaces
         /// <summary>
         /// Load the data
         /// </summary>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
+        /// <returns>A list with the log lines</returns>
         List<ILogLine> Load();
     }
 }
