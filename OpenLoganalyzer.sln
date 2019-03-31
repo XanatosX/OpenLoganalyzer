@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLoganalyzerTests", "Ope
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLoganalyzerLib", "OpenLoganalyzerLib\OpenLoganalyzerLib.csproj", "{38D17D38-7326-4E84-85FF-8FE239CF2879}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLoganalyzer", "OpenLoganalyzer\OpenLoganalyzer.csproj", "{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,26 @@ Global
 		{38D17D38-7326-4E84-85FF-8FE239CF2879}.Release|x64.Build.0 = Release|Any CPU
 		{38D17D38-7326-4E84-85FF-8FE239CF2879}.Release|x86.ActiveCfg = Release|Any CPU
 		{38D17D38-7326-4E84-85FF-8FE239CF2879}.Release|x86.Build.0 = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|x64.Build.0 = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Debug|x86.Build.0 = Debug|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|ARM.Build.0 = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|ARM64.Build.0 = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|x64.ActiveCfg = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|x64.Build.0 = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D05FB51C-E12B-4170-8B87-F97B1A3CF61B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
