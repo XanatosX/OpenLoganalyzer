@@ -24,7 +24,7 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
         public Dictionary<string, string> Filters => filters;
 
         /// <summary>
-        /// The 
+        /// The names of the filters
         /// </summary>
         private readonly List<string> filterNames;
         public List<string> FilterNames => filterNames;
