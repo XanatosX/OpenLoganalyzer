@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using OpenLoganalyzer.Core.Extensions;
 using OpenLoganalyzer.Windows;
 using System;
 using System.Collections.Generic;
@@ -29,11 +30,9 @@ namespace OpenLoganalyzer
             defaultTheme = "DarkTheme";
             InitializeComponent();
 
-            ChangeStyle(defaultTheme);
+            this.ChangeStyle(defaultTheme);
             Style = Resources["WindowStyle"] as Style;
         }
-
-
 
         private void MI_Open_Click(object sender, RoutedEventArgs e)
         {
