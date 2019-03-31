@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using OpenLoganalyzer.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,19 +33,7 @@ namespace OpenLoganalyzer
             Style = Resources["WindowStyle"] as Style;
         }
 
-        private void ChangeStyle(string themeName)
-        {
-            Resources.MergedDictionaries.Clear();
-            try
-            {
-                Uri uri = new Uri("/OpenLoganalyzer;component/Styles/" + themeName + ".xaml", UriKind.Relative);
-                Resources.MergedDictionaries.Add(new ResourceDictionary { Source = uri });
-            }
-            catch (Exception)
-            {
-                ChangeStyle(defaultTheme);
-            }
-        }
+
 
         private void MI_Open_Click(object sender, RoutedEventArgs e)
         {
@@ -73,6 +62,12 @@ namespace OpenLoganalyzer
             
             box.Visibility = Visibility.Visible;
             L_Filter.Visibility = Visibility.Visible;
+        }
+
+        private void MI_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settingsWindow = new Settings();
+            settingsWindow.ShowDialog();
         }
     }
 }
