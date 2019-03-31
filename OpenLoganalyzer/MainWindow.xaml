@@ -39,7 +39,7 @@
         </DockPanel>
         <ListBox x:Name="LB_LogLines" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
         </ListBox>
-        <Label x:Name="L_Filter" Content="{x:Static p:Resources.Filter}" HorizontalAlignment="Left" Margin="0,19,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Width="141"/>
-        <ComboBox x:Name="CB_FilterBox" Grid.Row="1" VerticalAlignment="Top" Margin="0,25,0,0" Style="{StaticResource InvisibleComboBox}" Background="#00000000"/>
+        <Label x:Name="L_Filter" Content="{x:Static p:Resources.Filter}" HorizontalAlignment="Left" Margin="0,19,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Width="141" Visibility="Hidden"/>
+        <ComboBox x:Name="CB_FilterBox" Grid.Row="1" VerticalAlignment="Top" Margin="0,25,0,0" Style="{StaticResource InvisibleComboBox}" Background="#00000000" DataContextChanged="CB_FilterBox_DataContextChanged" Visibility="Hidden"/>
     </Grid>
 </Window>
