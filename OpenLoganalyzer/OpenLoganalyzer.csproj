@@ -78,9 +78,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\DefaultTheme.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Styles\LightTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Settings.xaml">
       <SubType>Designer</SubType>
