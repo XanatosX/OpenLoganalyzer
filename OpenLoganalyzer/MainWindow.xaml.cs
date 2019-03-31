@@ -38,5 +38,23 @@ namespace OpenLoganalyzer
         {
             Close();
         }
+
+        private void CB_FilterBox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (sender.GetType() != typeof(ComboBox))
+            {
+                return;
+            }
+            ComboBox box = (ComboBox)sender;
+            if (box.Items.Count == 0)
+            {
+                box.Visibility = Visibility.Hidden;
+                L_Filter.Visibility = Visibility.Visible;
+                return;
+            }
+            
+            box.Visibility = Visibility.Visible;
+            L_Filter.Visibility = Visibility.Visible;
+        }
     }
 }
