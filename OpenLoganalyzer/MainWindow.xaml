@@ -8,6 +8,7 @@
         xmlns:p="clr-namespace:OpenLoganalyzer.Properties"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Title}" Height="450" Width="800">
+    <!-- Style="{StaticResource WindowStyle}"-->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,7 +19,8 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="399*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -26,20 +28,20 @@
             <ColumnDefinition Width="27*"/>
             <ColumnDefinition Width="190*"/>
         </Grid.ColumnDefinitions>
-        <DockPanel x:Name="MainMenu" LastChildFill="False" VerticalAlignment="Top" Margin="0,2,-86,0" Grid.ColumnSpan="3" MinHeight="18" Height="18">
-            <Menu VerticalAlignment="Top" Style="{StaticResource InvisibleMenu}">
-                <MenuItem x:Name="MI_File" Header="{x:Static p:Resources.File}" Style="{StaticResource MenuItem}">
-                    <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}" Style="{StaticResource MenuItem}" Click="MI_Open_Click"/>
+        <DockPanel x:Name="MainMenu" LastChildFill="False" VerticalAlignment="Top" Margin="0,2,-86,0" Grid.ColumnSpan="3" MinHeight="18" Height="18" Grid.RowSpan="2">
+            <Menu VerticalAlignment="Top" Style="{DynamicResource InvisibleMenu}">
+                <MenuItem x:Name="MI_File" Header="{x:Static p:Resources.File}" Style="{DynamicResource MenuItem}">
+                    <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}" Style="{DynamicResource MenuItem}" Click="MI_Open_Click"/>
                     <Separator/>
-                    <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}"/>
+                    <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}" Style="{DynamicResource MenuItem}"/>
                     <Separator/>
-                    <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click"/>
+                    <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click" Style="{DynamicResource MenuItem}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <ListBox x:Name="LB_LogLines" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        <ListBox x:Name="LB_LogLines" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource ListBoxStyle}">
         </ListBox>
-        <Label x:Name="L_Filter" Content="{x:Static p:Resources.Filter}" HorizontalAlignment="Left" Margin="0,19,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Width="141" Visibility="Hidden"/>
-        <ComboBox x:Name="CB_FilterBox" Grid.Row="1" VerticalAlignment="Top" Margin="0,25,0,0" Style="{StaticResource InvisibleComboBox}" Background="#00000000" DataContextChanged="CB_FilterBox_DataContextChanged" Visibility="Hidden"/>
+        <Label x:Name="L_Filter" Content="{x:Static p:Resources.Filter}" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Width="141" Visibility="Hidden" Grid.Row="1"/>
+        <ComboBox x:Name="CB_FilterBox" Grid.Row="2" VerticalAlignment="Top" Margin="0,25,0,0" Style="{DynamicResource InvisibleComboBox}" Background="#00000000" DataContextChanged="CB_FilterBox_DataContextChanged" Visibility="Hidden"/>
     </Grid>
 </Window>
