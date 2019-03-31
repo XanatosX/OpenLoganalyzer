@@ -123,6 +123,9 @@
   <data name="File" xml:space="preserve">
     <value>Datei</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
   <data name="Open" xml:space="preserve">
     <value>Öffnen</value>
   </data>

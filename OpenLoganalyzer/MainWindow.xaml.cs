@@ -24,6 +24,8 @@ namespace OpenLoganalyzer
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Style = Resources["WindowStyle"] as Style;
         }
 
         private void MI_Open_Click(object sender, RoutedEventArgs e)
