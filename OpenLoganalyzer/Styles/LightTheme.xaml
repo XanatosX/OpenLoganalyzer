@@ -18,8 +18,14 @@
     </Style>
     <Style x:Key="MenuItem" TargetType="MenuItem">
     </Style>
+    <Style x:Key="SubMenuItem" TargetType="MenuItem">
+    </Style>
 
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
         <Setter Property="Background" Value="#FFFFFFFF"></Setter>
+    </Style>
+
+    <Style x:Key="ContextMenuStyle" TargetType="ContextMenu">
+        <Setter Property="Background" Value="#FF232323"></Setter>
     </Style>
 </ResourceDictionary>
