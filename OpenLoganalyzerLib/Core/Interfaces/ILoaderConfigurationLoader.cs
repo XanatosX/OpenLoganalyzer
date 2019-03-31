@@ -21,11 +21,11 @@ namespace OpenLoganalyzerLib.Core.Interfaces
         ILoaderConfiguration Load(string pathToFile);
 
         /// <summary>
-        /// This class will allow you to save the configuration
+        /// This method will allow you to save the configuration
         /// </summary>
         /// <param name="configuration">The configuration interface to save</param>
         /// <param name="filePath">The path to save the file to</param>
-        /// <returns></returns>
+        /// <returns>Saving was successful or not</returns>
         bool Save(ILoaderConfiguration configuration, string filePath);
     }
 }
