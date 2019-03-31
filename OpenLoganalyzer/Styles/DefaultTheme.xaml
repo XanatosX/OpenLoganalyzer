@@ -19,9 +19,6 @@
     <Style x:Key="MenuItem" TargetType="MenuItem">
     </Style>
 
-    <Style x:Key="MenuItem" TargetType="MenuItem">
-    </Style>
-
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
         <Setter Property="Background" Value="#FFFFFFFF"></Setter>
     </Style>
