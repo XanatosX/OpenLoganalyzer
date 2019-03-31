@@ -21,11 +21,29 @@ namespace OpenLoganalyzer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly string defaultTheme;
+
         public MainWindow()
         {
+            defaultTheme = "DarkTheme";
             InitializeComponent();
 
-            this.Style = Resources["WindowStyle"] as Style;
+            ChangeStyle(defaultTheme);
+            Style = Resources["WindowStyle"] as Style;
+        }
+
+        private void ChangeStyle(string themeName)
+        {
+            Resources.MergedDictionaries.Clear();
+            try
+            {
+                Uri uri = new Uri("/OpenLoganalyzer;component/Styles/" + themeName + ".xaml", UriKind.Relative);
+                Resources.MergedDictionaries.Add(new ResourceDictionary { Source = uri });
+            }
+            catch (Exception)
+            {
+                ChangeStyle(defaultTheme);
+            }
         }
 
         private void MI_Open_Click(object sender, RoutedEventArgs e)
