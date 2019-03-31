@@ -19,13 +19,11 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="18*"/>
             <RowDefinition Height="399*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="47*"/>
-            <ColumnDefinition Width="27*"/>
             <ColumnDefinition Width="190*"/>
         </Grid.ColumnDefinitions>
         <DockPanel x:Name="MainMenu" LastChildFill="False" VerticalAlignment="Top" Margin="0,2,-86,0" Grid.ColumnSpan="3" MinHeight="18" Height="18" Grid.RowSpan="2">
