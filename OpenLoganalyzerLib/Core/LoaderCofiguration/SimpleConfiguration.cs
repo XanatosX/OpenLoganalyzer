@@ -19,8 +19,6 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
         public Dictionary<string, string> Filters => filters;
 
         private readonly List<string> filterNames;
-
-        [JsonIgnore]
         public List<string> FilterNames => filterNames;
 
         private readonly Dictionary<string, string> additionalSettingContainer;
