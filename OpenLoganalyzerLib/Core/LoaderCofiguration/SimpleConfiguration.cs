@@ -1,11 +1,7 @@
-﻿using Newtonsoft.Json;
-using OpenLoganalyzerLib.Core.Enum;
-using OpenLoganalyzerLib.Core.Interfaces;
-using System;
+﻿using OpenLoganalyzerLib.Core.Enum;
+using OpenLoganalyzerLib.Core.Interfaces.Loader;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenLoganalyzerLib.Core.LoaderCofiguration
 {

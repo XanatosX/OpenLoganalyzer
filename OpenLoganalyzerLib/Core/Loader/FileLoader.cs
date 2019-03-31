@@ -1,14 +1,12 @@
 ﻿using OpenLoganalyzerLib.Core.Enum;
-using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.Interfaces.Loader;
+using OpenLoganalyzerLib.Core.Interfaces.Loglines;
 using OpenLoganalyzerLib.Core.Loglines;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace OpenLoganalyzerLib.Core.Loader
 {
@@ -33,7 +31,7 @@ namespace OpenLoganalyzerLib.Core.Loader
         {
             List<ILogLine> logLines = new List<ILogLine>();
 
-            if (configuration.LoaderType != Enum.LoaderTypeEnum.FileLoader)
+            if (configuration.LoaderType != LoaderTypeEnum.FileLoader)
             {
                 return logLines;
             }
@@ -42,8 +40,6 @@ namespace OpenLoganalyzerLib.Core.Loader
             {
                 return logLines;
             }
-
-
 
             foreach (string line in File.ReadAllLines(configuration.GetAdditionalSetting(AdditionalSettingsEnum.FilePath)))
             {
@@ -96,7 +92,6 @@ namespace OpenLoganalyzerLib.Core.Loader
                 ILogLine logLine = new SimpleLogline(thrownBy, time, message, severity, additionalLines);
                 logLines.Add(logLine);
             }
-
 
             return logLines;
         }

@@ -1,10 +1,7 @@
-﻿using System;
+﻿using OpenLoganalyzerLib.Core.Interfaces.Loglines;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenLoganalyzerLib.Core.Interfaces
+namespace OpenLoganalyzerLib.Core.Interfaces.Loader
 {
     public interface ILoader
     {
