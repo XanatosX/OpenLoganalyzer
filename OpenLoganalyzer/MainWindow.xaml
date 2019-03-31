@@ -8,13 +8,35 @@
         xmlns:p="clr-namespace:OpenLoganalyzer.Properties"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Title}" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OpenLoganalyzer;component/Styles/DefaultTheme.xaml">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <DockPanel x:Name="MainMenu" Height="19" LastChildFill="False" VerticalAlignment="Top" Margin="10,10,10,0" Grid.ColumnSpan="2">
-            <Menu Height="19" VerticalAlignment="Top" Width="771">
-                <MenuItem x:Name="MI_File" Header="{x:Static p:Resources.File}">
-                    <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="399*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="353*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel x:Name="MainMenu" LastChildFill="False" VerticalAlignment="Top" Margin="0,2,-86,0" Grid.ColumnSpan="2" MinHeight="18">
+            <Menu VerticalAlignment="Top" Style="{StaticResource InvisibleMenu}">
+                <MenuItem x:Name="MI_File" Header="{x:Static p:Resources.File}" Style="{StaticResource MenuItem}">
+                    <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}" Style="{StaticResource MenuItem}" Click="MI_Open_Click"/>
+                    <Separator/>
+                    <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}"/>
+                    <Separator/>
+                    <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
+        <ListBox x:Name="LB_LogLines" Grid.Column="1" Grid.Row="1">
+        </ListBox>
     </Grid>
 </Window>

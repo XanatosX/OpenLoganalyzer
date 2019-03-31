@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace OpenLoganalyzer
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MI_Open_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+        }
+
+        private void MI_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
