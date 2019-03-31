@@ -20,6 +20,8 @@
     </Style>
     <Style x:Key="SubMenuItem" TargetType="MenuItem">
     </Style>
+    <Style x:Key="SperatorStyle" TargetType="Separator">
+    </Style>
 
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
         <Setter Property="Background" Value="#FFFFFFFF"></Setter>

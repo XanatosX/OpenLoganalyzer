@@ -31,6 +31,11 @@
         <Setter Property="ContextMenu.BorderBrush" Value="Black"></Setter>
     </Style>
 
+    <Style x:Key="SperatorStyle" TargetType="Separator">
+        <Setter Property="Background" Value="#FF232323"></Setter>
+        <Setter Property="Foreground" Value="LightGray"></Setter>
+    </Style>
+
 
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
         <Setter Property="Background" Value="#FF232323"></Setter>
