@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenLoganalyzerLib.Core.Enum
 {
+    /// <summary>
+    /// Enums to store additional settings in the loader configuration
+    /// </summary>
     public enum AdditionalSettingsEnum
     {
         FilePath,
