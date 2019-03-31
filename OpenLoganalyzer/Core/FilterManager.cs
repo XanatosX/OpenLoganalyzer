@@ -36,7 +36,7 @@ namespace OpenLoganalyzer.Core
 
         public void AddFilter(string filterFile)
         {
-            loaderConfigurationLoader
+            //loaderConfigurationLoader
         }
 
 
