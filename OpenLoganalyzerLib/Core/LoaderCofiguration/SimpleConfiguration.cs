@@ -11,16 +11,27 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
 {
     public class SimpleConfiguration : ILoaderConfiguration
     {
-
+        /// <summary>
+        /// The type of the loader to use
+        /// </summary>
         private readonly LoaderTypeEnum loaderType;
         public LoaderTypeEnum LoaderType => loaderType;
 
+        /// <summary>
+        /// All the filters for the logfile to check
+        /// </summary>
         private readonly Dictionary<string, string> filters;
         public Dictionary<string, string> Filters => filters;
 
+        /// <summary>
+        /// The 
+        /// </summary>
         private readonly List<string> filterNames;
         public List<string> FilterNames => filterNames;
 
+        /// <summary>
+        /// All the additional settings for the container
+        /// </summary>
         private readonly Dictionary<string, string> additionalSettingContainer;
 
         public SimpleConfiguration(LoaderTypeEnum loaderTypeEnum,
