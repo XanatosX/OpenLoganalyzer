@@ -12,7 +12,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/OpenLoganalyzer;component/Styles/DefaultTheme.xaml">
+                <ResourceDictionary Source="/OpenLoganalyzer;component/Styles/LightTheme.xaml">
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -29,11 +29,11 @@
         <DockPanel x:Name="MainMenu" LastChildFill="False" VerticalAlignment="Top" Margin="0,2,-86,0" Grid.ColumnSpan="3" MinHeight="18" Height="18" Grid.RowSpan="2">
             <Menu VerticalAlignment="Top" Style="{DynamicResource InvisibleMenu}">
                 <MenuItem x:Name="MI_File" Header="{x:Static p:Resources.File}" Style="{DynamicResource MenuItem}">
-                    <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}" Style="{DynamicResource MenuItem}" Click="MI_Open_Click"/>
+                    <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}" Style="{DynamicResource SubMenuItem}" Click="MI_Open_Click"/>
                     <Separator/>
-                    <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}" Style="{DynamicResource MenuItem}"/>
+                    <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}" Style="{DynamicResource SubMenuItem}"/>
                     <Separator/>
-                    <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click" Style="{DynamicResource MenuItem}"/>
+                    <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click" Style="{DynamicResource SubMenuItem}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
