@@ -9,20 +9,38 @@ namespace OpenLoganalyzerLib.Core.Loglines
 {
     public class SimpleLogline : ILogLine
     {
+        /// <summary>
+        /// The variable to save the additional content in
+        /// </summary>
         private readonly Dictionary<string, string> additionalContent;
 
+        /// <summary>
+        /// Line got thrown by
+        /// </summary>
         private readonly string thrownBy;
         public string ThrownBy => thrownBy;
 
+        /// <summary>
+        /// Severity of the logline
+        /// </summary>
         private readonly DateTime logTime;
         public DateTime LogTime => logTime;
 
+        /// <summary>
+        /// The message of the logline
+        /// </summary>
         private readonly string message;
         public string Message => message;
 
+        /// <summary>
+        /// The severity of the message
+        /// </summary>
         private readonly string severity;
         public string Severity => severity;
 
+        /// <summary>
+        /// Get additional filters
+        /// </summary>
         private readonly List<string> additionalFilters;
         public List<string> AdditionalFilters => additionalFilters;
 
