@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenLoganalyzerLib.Core.Interfaces
+namespace OpenLoganalyzerLib.Core.Interfaces.Loglines
 {
     public interface ILogLine
     {

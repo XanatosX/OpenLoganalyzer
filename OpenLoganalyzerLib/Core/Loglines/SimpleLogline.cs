@@ -1,9 +1,7 @@
-﻿using OpenLoganalyzerLib.Core.Interfaces;
+﻿using OpenLoganalyzerLib.Core.Interfaces.Loglines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenLoganalyzerLib.Core.Loglines
 {

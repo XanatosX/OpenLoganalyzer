@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.Interfaces.Loader;
 using OpenLoganalyzerLib.Core.LoaderCofiguration;
 using OpenLoganalyzerTests.Helper;
 

@@ -1,11 +1,7 @@
 ﻿using OpenLoganalyzerLib.Core.Enum;
-using OpenLoganalyzerLib.Core.Interfaces;
+using OpenLoganalyzerLib.Core.Interfaces.Loader;
 using OpenLoganalyzerLib.Core.Loader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OpenLoganalyzerLib.Core.Factories
 {

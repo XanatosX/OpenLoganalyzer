@@ -1,13 +1,8 @@
-﻿using OpenLoganalyzerLib.Core.Interfaces;
-using OpenLoganalyzerLib.Core.Events;
+﻿using OpenLoganalyzerLib.Core.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
-
+using OpenLoganalyzerLib.Core.Interfaces.Loader;
 
 namespace OpenLoganalyzerLib.Core.LoaderCofiguration
 {
@@ -47,6 +42,7 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
                     handler.Invoke(this, loadingError);
                 }
             }
+
             return returnConfiguration;
         }
 
@@ -63,6 +59,7 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
             {
                 jsonSerializer.Serialize(writer, configuration.GetSaveableObject());
             }
+
             return true;
         }
     }
