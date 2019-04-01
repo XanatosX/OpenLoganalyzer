@@ -132,4 +132,7 @@
   <data name="Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="Styles" xml:space="preserve">
+    <value>Style</value>
+  </data>
 </root>

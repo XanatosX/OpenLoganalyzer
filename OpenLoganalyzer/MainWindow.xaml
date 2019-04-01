@@ -35,6 +35,8 @@
                     <Separator Style="{DynamicResource SperatorStyle}"/>
                     <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click" Style="{DynamicResource SubMenuItem}"/>
                 </MenuItem>
+                <MenuItem x:Name="MI_Style" Header="{x:Static p:Resources.Styles}" Style="{DynamicResource MenuItem}">
+                </MenuItem>
             </Menu>
         </DockPanel>
         <ListBox x:Name="LB_LogLines" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource ListBoxStyle}">
