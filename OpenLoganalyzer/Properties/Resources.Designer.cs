@@ -106,6 +106,15 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Theme ähnelt.
+        /// </summary>
+        public static string Styles {
+            get {
+                return ResourceManager.GetString("Styles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Open Loganalyzer ähnelt.
         /// </summary>
         public static string Title {
