@@ -17,6 +17,22 @@ namespace OpenLoganalyzer.Core.Extensions
             {
                 Uri uri = new Uri("/OpenLoganalyzer;component/Styles/" + themeName + ".xaml", UriKind.Relative);
                 currentWindow.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = uri });
+                currentWindow.Style = currentWindow.Resources["WindowStyle"] as System.Windows.Style;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool ChangeStyle(this Window currentWindow, ResourceDictionary resourceDictionary)
+        {
+            currentWindow.Resources.MergedDictionaries.Clear();
+            try
+            {
+                currentWindow.Resources.MergedDictionaries.Add(resourceDictionary);
+                currentWindow.Style = currentWindow.Resources["WindowStyle"] as System.Windows.Style;
             }
             catch (Exception)
             {
