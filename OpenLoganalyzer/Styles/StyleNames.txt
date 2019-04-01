@@ -1,0 +1,2 @@
+﻿/OpenLoganalyzer;component/Styles/DarkTheme.xaml
+/OpenLoganalyzer;component/Styles/LightTheme.xaml
