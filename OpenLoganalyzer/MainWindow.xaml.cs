@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using OpenLoganalyzer.Core.Extensions;
+using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
 using System;
 using System.Collections.Generic;
@@ -25,13 +26,51 @@ namespace OpenLoganalyzer
     {
         private readonly string defaultTheme;
 
+        private readonly StyleManager styleManager;
+
         public MainWindow()
         {
+            
             defaultTheme = "DarkTheme";
             InitializeComponent();
 
+            
             this.ChangeStyle(defaultTheme);
-            Style = Resources["WindowStyle"] as Style;
+            styleManager = new StyleManager();
+            BuildMenu();
+        }
+
+        private void BuildMenu()
+        {
+            MI_Style.Items.Clear();
+            foreach (StyleDict style in styleManager.Styles)
+            {
+                MenuItem item = new MenuItem()
+                {
+                    Style = Resources["MenuItem"] as Style,
+                    Header = style.Name,
+                    Tag = style
+                };
+                item.Click += Style_Click;
+                MI_Style.Items.Add(item);
+            }
+        }
+
+        private void Style_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender.GetType() != typeof(MenuItem))
+            {
+                return;
+            }
+            MenuItem item = (MenuItem)sender;
+            if (item.Tag == null || item.Tag.GetType() != typeof(StyleDict))
+            {
+                return;
+            }
+
+            StyleDict style = (StyleDict)item.Tag;
+            this.ChangeStyle(style.GetDictionary());
+            BuildMenu();
         }
 
         private void MI_Open_Click(object sender, RoutedEventArgs e)
