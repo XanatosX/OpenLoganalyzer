@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:OpenLoganalyzer.Styles">
 
-    <!--<Color x:Key="BackgroundColor">#FF232323</Color>-->
+    <SolidColorBrush x:Key="BackgroundBrush"  Color="#FF232323"/>
 
 
     <Style x:Key="WindowStyle" TargetType="Window">
-        <Setter Property="Background" Value="#FF232323"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
         <Setter Property="MinHeight" Value="450"></Setter>
         <Setter Property="MinWidth" Value="800"></Setter>
         <Setter Property="SizeToContent" Value="WidthAndHeight"></Setter>
@@ -32,16 +32,16 @@
     </Style>
 
     <Style x:Key="SperatorStyle" TargetType="Separator">
-        <Setter Property="Background" Value="#FF232323"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
         <Setter Property="Foreground" Value="LightGray"></Setter>
     </Style>
 
 
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
-        <Setter Property="Background" Value="#FF232323"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
     </Style>
 
     <Style x:Key="ContextMenuStyle" TargetType="ContextMenu">
-        <Setter Property="Background" Value="#FF232323"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
     </Style>
 </ResourceDictionary>
