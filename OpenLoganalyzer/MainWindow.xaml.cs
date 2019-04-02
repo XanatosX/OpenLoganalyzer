@@ -47,7 +47,7 @@ namespace OpenLoganalyzer
             {
                 MenuItem item = new MenuItem()
                 {
-                    Style = Resources["MenuItem"] as Style,
+                    Style = Resources["SubMenuItem"] as Style,
                     Header = style.Name,
                     Tag = style
                 };
