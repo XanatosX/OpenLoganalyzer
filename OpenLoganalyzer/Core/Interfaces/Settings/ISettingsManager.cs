@@ -8,8 +8,8 @@ namespace OpenLoganalyzer.Core.Interfaces
 {
     public interface ISettingsManager
     {
-        ISettings LoadSettings();
+        ISettings LoadSettings(string filePath);
 
-        bool SaveSettings(ISettings settings);
+        bool SaveSettings(string filePath, ISettings settings);
     }
 }
