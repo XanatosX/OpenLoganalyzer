@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using OpenLoganalyzer.Core.Extensions;
+using OpenLoganalyzer.Core.Settings;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
 using System;
@@ -28,13 +29,14 @@ namespace OpenLoganalyzer
 
         private readonly StyleManager styleManager;
 
+        private readonly Settings settings;
+
         public MainWindow()
         {
-            
+            settings = new Settings();
             defaultTheme = "DarkTheme";
             InitializeComponent();
 
-            
             this.ChangeStyle(defaultTheme);
             styleManager = new StyleManager();
             BuildMenu();
@@ -104,7 +106,7 @@ namespace OpenLoganalyzer
 
         private void MI_Settings_Click(object sender, RoutedEventArgs e)
         {
-            Settings settingsWindow = new Settings();
+            SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.ShowDialog();
         }
     }
