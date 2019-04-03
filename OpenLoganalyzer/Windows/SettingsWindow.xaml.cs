@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OpenLoganalyzer.Core.Extensions;
+using OpenLoganalyzer.Core.Interfaces;
+using OpenLoganalyzer.Core.Style;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +22,20 @@ namespace OpenLoganalyzer.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow()
+        private readonly ISettingsManager settingsManager;
+
+        private ISettings settings;
+
+        private readonly ThemeManager themeManager;
+
+        public SettingsWindow(ISettingsManager settingsManager, ISettings settings, ThemeManager themeManager)
         {
+            this.settingsManager = settingsManager;
+            this.settings = settings;
+            this.themeManager = themeManager;
+
+            this.ChangeStyle(settings, themeManager);
+
             InitializeComponent();
         }
     }

@@ -26,7 +26,7 @@ namespace OpenLoganalyzer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ThemeManager styleManager;
+        private readonly ThemeManager themeManager;
 
         private readonly ISettingsManager settingsManager;
 
@@ -42,21 +42,8 @@ namespace OpenLoganalyzer
             
             InitializeComponent();
 
-            styleManager = new ThemeManager();
-            string theme = settings.GetSetting("theme");
-            StyleDict styleToUse = null;
-            if (string.IsNullOrEmpty(theme))
-            {
-                styleToUse = styleManager.Styles.First();
-                theme = styleToUse.Name;
-                settings.AddSetting("theme", styleToUse.Name);
-            }
-            if (styleToUse == null)
-            {
-                styleToUse = styleManager.GetThemeByName(theme);
-            }
-            
-            this.ChangeStyle(styleToUse.GetDictionary());
+            themeManager = new ThemeManager();
+            this.ChangeStyle(settings, themeManager);
 
             settingsManager.Save(settings);
 
@@ -77,7 +64,7 @@ namespace OpenLoganalyzer
         private void BuildMenu()
         {
             MI_Style.Items.Clear();
-            foreach (StyleDict style in styleManager.Styles)
+            foreach (StyleDict style in themeManager.Styles)
             {
                 MenuItem item = new MenuItem()
                 {
@@ -140,7 +127,7 @@ namespace OpenLoganalyzer
 
         private void MI_Settings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
+            SettingsWindow settingsWindow = new SettingsWindow(settingsManager, settings, themeManager);
             settingsWindow.ShowDialog();
         }
     }

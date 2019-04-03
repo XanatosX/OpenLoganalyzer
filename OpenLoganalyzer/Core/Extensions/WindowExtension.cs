@@ -1,4 +1,6 @@
-﻿using OpenLoganalyzer.Properties;
+﻿using OpenLoganalyzer.Core.Interfaces;
+using OpenLoganalyzer.Core.Style;
+using OpenLoganalyzer.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +41,24 @@ namespace OpenLoganalyzer.Core.Extensions
                 return false;
             }
             return true;
+        }
+
+        public static bool ChangeStyle(this Window currentWindow, ISettings settings, ThemeManager styleManager)
+        {
+            string theme = settings.GetSetting("theme");
+            StyleDict styleToUse = null;
+            if (string.IsNullOrEmpty(theme))
+            {
+                styleToUse = styleManager.Styles.First();
+                theme = styleToUse.Name;
+                settings.AddSetting("theme", styleToUse.Name);
+            }
+            if (styleToUse == null)
+            {
+                styleToUse = styleManager.GetThemeByName(theme);
+            }
+
+            return currentWindow.ChangeStyle(styleToUse.GetDictionary());
         }
     }
 }
