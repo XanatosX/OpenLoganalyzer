@@ -34,11 +34,13 @@ namespace OpenLoganalyzer
         public MainWindow()
         {
             settings = new Settings();
-            defaultTheme = "DarkTheme";
             InitializeComponent();
 
-            this.ChangeStyle(defaultTheme);
             styleManager = new StyleManager();
+            StyleDict styleToUse = styleManager.Styles.First();
+            this.ChangeStyle(styleToUse.GetDictionary());
+            
+            
             BuildMenu();
         }
 
