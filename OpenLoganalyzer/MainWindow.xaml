@@ -31,7 +31,7 @@
                 <MenuItem x:Name="MI_File" Header="{x:Static p:Resources.File}" Style="{DynamicResource MenuItem}">
                     <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}" Style="{DynamicResource SubMenuItem}" Click="MI_Open_Click"/>
                     <Separator Style="{DynamicResource SperatorStyle}"/>
-                    <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}" Style="{DynamicResource SubMenuItem}"/>
+                    <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}" Style="{DynamicResource SubMenuItem}" Click="MI_Settings_Click"/>
                     <Separator Style="{DynamicResource SperatorStyle}"/>
                     <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click" Style="{DynamicResource SubMenuItem}"/>
                 </MenuItem>
