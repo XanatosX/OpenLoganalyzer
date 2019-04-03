@@ -8,7 +8,7 @@ namespace OpenLoganalyzer.Core.Interfaces
 {
     public interface ISettings
     {
-        Dictionary<string, string> Settings { get; }
+        Dictionary<string, string> SettingsDict { get; }
 
         void AddSetting(string settingName, string settingValue);
 

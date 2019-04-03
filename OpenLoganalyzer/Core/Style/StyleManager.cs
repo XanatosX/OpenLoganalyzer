@@ -10,12 +10,12 @@ using System.Windows;
 
 namespace OpenLoganalyzer.Core.Style
 {
-    public class StyleManager
+    public class ThemeManager
     {
         private readonly List<StyleDict> styles;
         public List<StyleDict> Styles => styles;
 
-        public StyleManager()
+        public ThemeManager()
         {
             styles = new List<StyleDict>();
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -39,6 +39,15 @@ namespace OpenLoganalyzer.Core.Style
         public void ScanFolder(string FolderPath)
         {
 
+        }
+
+        public StyleDict GetThemeByName(string Name)
+        {
+            StyleDict dict = null;
+
+            dict = styles.Find(obj => obj.Name == Name);
+
+            return dict;
         }
     }
 }

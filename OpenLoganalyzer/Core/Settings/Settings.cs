@@ -10,7 +10,7 @@ namespace OpenLoganalyzer.Core.Settings
     public class Settings : ISettings
     {
         private readonly Dictionary<string, string> settings;
-        Dictionary<string, string> ISettings.Settings => settings;
+        public Dictionary<string, string> SettingsDict => settings;
 
         public Settings()
         {
@@ -19,13 +19,19 @@ namespace OpenLoganalyzer.Core.Settings
 
         public void AddSetting(string settingName, string settingValue)
         {
+            if (settings.ContainsKey(settingName))
+            {
+                settings[settingName] = settingValue;
+                return;
+            }
+
             settings.Add(settingName, settingValue);
         }
 
         public string GetSetting(string settingsName)
         {
             string returnValue = String.Empty;
-            if (settings.ContainsValue(settingsName)) {
+            if (settings.ContainsKey(settingsName)) {
                 returnValue = settings[settingsName];
             }
 

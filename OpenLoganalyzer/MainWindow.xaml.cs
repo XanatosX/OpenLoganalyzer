@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using OpenLoganalyzer.Core.Extensions;
+using OpenLoganalyzer.Core.Interfaces;
 using OpenLoganalyzer.Core.Settings;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
@@ -25,22 +26,52 @@ namespace OpenLoganalyzer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly string defaultTheme;
+        private readonly ThemeManager styleManager;
 
-        private readonly StyleManager styleManager;
+        private readonly ISettingsManager settingsManager;
 
-        private readonly Settings settings;
+        private ISettings settings;
 
         public MainWindow()
         {
-            settings = new Settings();
+            string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            appdata += @"\OpenLoganalyzer\settings.json";
+            settingsManager = new SettingsManager(appdata);
+
+            LoadSettings();
+            
             InitializeComponent();
 
-            styleManager = new StyleManager();
-            StyleDict styleToUse = styleManager.Styles.First();
-            this.ChangeStyle(styleToUse.GetDictionary());
+            styleManager = new ThemeManager();
+            string theme = settings.GetSetting("theme");
+            StyleDict styleToUse = null;
+            if (string.IsNullOrEmpty(theme))
+            {
+                styleToUse = styleManager.Styles.First();
+                theme = styleToUse.Name;
+                settings.AddSetting("theme", styleToUse.Name);
+            }
+            if (styleToUse == null)
+            {
+                styleToUse = styleManager.GetThemeByName(theme);
+            }
             
+            this.ChangeStyle(styleToUse.GetDictionary());
+
+            settingsManager.Save(settings);
+
             BuildMenu();
+        }
+
+        private void LoadSettings()
+        {
+            ISettings newSettings = settingsManager.Load();
+            if (newSettings == null)
+            {
+                newSettings = new Settings();
+            }
+            settings = newSettings;
+            
         }
 
         private void BuildMenu()
@@ -73,6 +104,8 @@ namespace OpenLoganalyzer
 
             StyleDict style = (StyleDict)item.Tag;
             this.ChangeStyle(style.GetDictionary());
+            settings.AddSetting("theme", style.Name);
+            settingsManager.Save(settings);
             BuildMenu();
         }
 
