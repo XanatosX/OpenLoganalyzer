@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace OpenLoganalyzer.Core.Settings
 {
-    public class Settings : SettingsInterface
+    public class Settings : ISettingsInterface
     {
         private readonly Dictionary<string, string> settings;
-        Dictionary<string, string> SettingsInterface.Settings => settings;
+        Dictionary<string, string> ISettingsInterface.Settings => settings;
 
         public Settings()
         {

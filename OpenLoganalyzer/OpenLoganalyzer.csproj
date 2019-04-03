@@ -57,6 +57,8 @@
     </ApplicationDefinition>
     <Compile Include="Core\Enum\StyleEnum.cs" />
     <Compile Include="Core\Extensions\WindowExtension.cs" />
+    <Compile Include="Core\Interfaces\ISettingsManagerInterface.cs" />
+    <Compile Include="Core\Settings\SettingsManager.cs" />
     <Compile Include="Core\Style\StyleDict.cs" />
     <Compile Include="Core\Style\StyleManager.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
@@ -71,7 +73,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\FilterManager.cs" />
-    <Compile Include="Core\Interfaces\SettingsInterface.cs" />
+    <Compile Include="Core\Interfaces\ISettingsInterface.cs" />
     <Compile Include="Core\Settings\Settings.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -16,11 +16,11 @@ namespace OpenLoganalyzer.Core
         private readonly List<string> filterFiles;
         public List<string> Filters => filterFiles;
 
-        private readonly SettingsInterface settings;
+        private readonly ISettings settings;
 
         private readonly ILoaderConfigurationLoader loaderConfigurationLoader;
 
-        public FilterManager(SettingsInterface settingsManager)
+        public FilterManager(ISettings settingsManager)
         {
             filterFiles = new List<string>();
             settings = settingsManager;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenLoganalyzer.Core.Interfaces
 {
-    public interface SettingsInterface
+    public interface ISettingsInterface
     {
         Dictionary<string, string> Settings { get; }
 
