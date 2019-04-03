@@ -40,7 +40,6 @@ namespace OpenLoganalyzer
             StyleDict styleToUse = styleManager.Styles.First();
             this.ChangeStyle(styleToUse.GetDictionary());
             
-            
             BuildMenu();
         }
 
