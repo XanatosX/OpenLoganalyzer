@@ -35,6 +35,7 @@ namespace OpenLoganalyzer
         public MainWindow()
         {
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string themeFolder = appdata + @"\OpenLoganalyzer\Themes\";
             appdata += @"\OpenLoganalyzer\settings.json";
             settingsManager = new SettingsManager(appdata);
 
@@ -43,6 +44,7 @@ namespace OpenLoganalyzer
             InitializeComponent();
 
             themeManager = new ThemeManager();
+            themeManager.ScanFolder(themeFolder);
             this.ChangeStyle(settings, themeManager);
 
             settingsManager.Save(settings);
@@ -69,9 +71,15 @@ namespace OpenLoganalyzer
                 MenuItem item = new MenuItem()
                 {
                     Style = Resources["SubMenuItem"] as Style,
+                    Name = "MI_"+style.Name,
                     Header = style.Name,
+                    IsCheckable = true,
                     Tag = style
                 };
+                if (item.Header.ToString() == settings.GetSetting("theme"))
+                {
+                    item.IsChecked = true;
+                }
                 item.Click += Style_Click;
                 MI_Style.Items.Add(item);
             }

@@ -57,6 +57,11 @@ namespace OpenLoganalyzer.Core.Extensions
             {
                 styleToUse = styleManager.GetThemeByName(theme);
             }
+            if (styleToUse == null)
+            {
+                styleToUse = styleManager.Styles.First();
+                settings.AddSetting("theme", styleToUse.Name);
+            }
 
             return currentWindow.ChangeStyle(styleToUse.GetDictionary());
         }

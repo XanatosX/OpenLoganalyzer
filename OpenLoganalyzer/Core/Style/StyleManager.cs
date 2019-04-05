@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Markup;
+using System.Xml;
 
 namespace OpenLoganalyzer.Core.Style
 {
@@ -38,7 +40,20 @@ namespace OpenLoganalyzer.Core.Style
 
         public void ScanFolder(string FolderPath)
         {
+            if (!Directory.Exists(FolderPath))
+            {
+                return;
+            }
 
+            string[] files = Directory.GetFiles(FolderPath);
+            foreach (string file in files)
+            {
+                FileInfo info = new FileInfo(file);
+                if (info.Extension == ".xaml")
+                {
+                    styles.Add(new StyleDict(Enum.StyleEnum.file, info.FullName));
+                }
+            }
         }
 
         public StyleDict GetThemeByName(string Name)
