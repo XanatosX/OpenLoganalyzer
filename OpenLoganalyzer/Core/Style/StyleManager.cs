@@ -1,4 +1,5 @@
-﻿using OpenLoganalyzer.Properties;
+﻿using OpenLoganalyzer.Core.Interfaces.Style;
+using OpenLoganalyzer.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,14 +13,14 @@ using System.Xml;
 
 namespace OpenLoganalyzer.Core.Style
 {
-    public class ThemeManager
+    public class ThemeManager : IThemeManager
     {
-        private readonly List<StyleDict> styles;
-        public List<StyleDict> Styles => styles;
+        private readonly List<IStyleDict> styles;
+        public List<IStyleDict> Styles => styles;
 
         public ThemeManager()
         {
-            styles = new List<StyleDict>();
+            styles = new List<IStyleDict>();
             Assembly assembly = Assembly.GetExecutingAssembly();
             string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("StyleNames.txt"));
 
@@ -27,15 +28,37 @@ namespace OpenLoganalyzer.Core.Style
             {
                 using (StreamReader reader = new StreamReader(stream))
                 {
-                    while (reader.Peek() >0)
+                    while (reader.Peek() > 0)
                     {
                         string currentLine = reader.ReadLine();
-                        StyleDict style = new StyleDict(Enum.StyleEnum.buildin, currentLine);
-                        styles.Add(style);
+                        Uri uri = new Uri(currentLine, UriKind.Relative);
+                        ResourceDictionary dict = new ResourceDictionary() { Source = uri };
+                        if (dict != null)
+                        {
+                            string name = GetName(currentLine);
+                            if (InList(name))
+                            {
+                                continue;
+                            }
+                            StyleDict style = new StyleDict(name, dict);
+                            styles.Add(style);
+                        }
                     }
-                    
+
                 }
             }
+        }
+
+        private bool InList(string name)
+        {
+            return GetThemeByName(name) == null ? false : true;
+        }
+
+        private string GetName(string fullPath)
+        {
+            FileInfo info = new FileInfo(fullPath);
+            string name = info.Name.Replace(info.Extension, "");
+            return name;
         }
 
         public void ScanFolder(string FolderPath)
@@ -51,18 +74,45 @@ namespace OpenLoganalyzer.Core.Style
                 FileInfo info = new FileInfo(file);
                 if (info.Extension == ".xaml")
                 {
-                    styles.Add(new StyleDict(Enum.StyleEnum.file, info.FullName));
+                    ResourceDictionary dict = LoadFromDisc(file);
+                    if (dict != null)
+                    {
+                        string name = GetName(file);
+                        if (InList(name))
+                        {
+                            continue;
+                        }
+                        styles.Add(new StyleDict(name, dict));
+                    }
+
                 }
             }
         }
 
-        public StyleDict GetThemeByName(string Name)
+        private ResourceDictionary LoadFromDisc(string filePath)
         {
-            StyleDict dict = null;
+            ResourceDictionary returnDict = null;
 
-            dict = styles.Find(obj => obj.Name == Name);
+            FileInfo info = new FileInfo(filePath);
+            using (StreamReader reader = new StreamReader(info.FullName))
+            {
+                XmlReader xmlReader = XmlReader.Create(reader);
+                try
+                {
+                    returnDict = (ResourceDictionary)XamlReader.Load(xmlReader);
+                }
+                catch (Exception)
+                {
+                    //@TODO some error handling!
+                }
+            }
 
-            return dict;
+            return returnDict;
+        }
+
+        public IStyleDict GetThemeByName(string Name)
+        {
+            return styles.Find(obj => obj.Name == Name);
         }
     }
 }

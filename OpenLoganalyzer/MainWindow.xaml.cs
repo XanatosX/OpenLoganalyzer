@@ -87,7 +87,7 @@ namespace OpenLoganalyzer
             }
 
             StyleDict style = (StyleDict)item.Tag;
-            this.ChangeStyle(style.GetDictionary());
+            this.ChangeStyle(style.Dictionary);
             settings.AddSetting("theme", style.Name);
             settingsManager.Save(settings);
             BuildMenu();

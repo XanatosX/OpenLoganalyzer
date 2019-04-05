@@ -1,4 +1,5 @@
 ﻿using OpenLoganalyzer.Core.Interfaces;
+using OpenLoganalyzer.Core.Interfaces.Style;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Properties;
 using System;
@@ -46,7 +47,7 @@ namespace OpenLoganalyzer.Core.Extensions
         public static bool ChangeStyle(this Window currentWindow, ISettings settings, ThemeManager styleManager)
         {
             string theme = settings.GetSetting("theme");
-            StyleDict styleToUse = null;
+            IStyleDict styleToUse = null;
             if (string.IsNullOrEmpty(theme))
             {
                 styleToUse = styleManager.Styles.First();
@@ -63,7 +64,7 @@ namespace OpenLoganalyzer.Core.Extensions
                 settings.AddSetting("theme", styleToUse.Name);
             }
 
-            return currentWindow.ChangeStyle(styleToUse.GetDictionary());
+            return currentWindow.ChangeStyle(styleToUse.Dictionary);
         }
     }
 }

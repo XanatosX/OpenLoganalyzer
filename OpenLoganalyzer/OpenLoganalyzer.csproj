@@ -65,6 +65,8 @@
     <Compile Include="Core\Interfaces\ErrorManagment\IError.cs" />
     <Compile Include="Core\Interfaces\Settings\ISettingsManager.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
+    <Compile Include="Core\Interfaces\Style\IThemeManager.cs" />
+    <Compile Include="Core\Interfaces\Style\IStyleDict.cs" />
     <Compile Include="Core\Style\StyleDict.cs" />
     <Compile Include="Core\Style\StyleManager.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
