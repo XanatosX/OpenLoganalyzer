@@ -77,7 +77,7 @@
     <Style x:Key="Button" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource InvisibleBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorder}"></Setter>
-        <Setter Property="Width" Value="75"></Setter>
+        <Setter Property="Width" Value="Auto"></Setter>
         <Setter Property="Height" Value="20"></Setter>
     </Style>
 

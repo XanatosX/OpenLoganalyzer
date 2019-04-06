@@ -136,7 +136,7 @@
         <Setter Property="Background" Value="{StaticResource ElementBackgroundBrush}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorder}"></Setter>
-        <Setter Property="Width" Value="75"></Setter>
+        <Setter Property="Width" Value="Auto"></Setter>
         <Setter Property="Height" Value="20"></Setter>
     </Style>
 
