@@ -43,8 +43,6 @@ namespace OpenLoganalyzer.Windows
             FillComboBox();
             InitialStyleSetup(TB_Description);
             InitialStyleSetup(TB_Subject);
-
-            
         }
 
         private void FillComboBox()
@@ -61,7 +59,7 @@ namespace OpenLoganalyzer.Windows
                 CB_Labels.Items.Add(comboBoxItem);
             }
 
-            CB_Labels.SelectedItem = 0;
+            CB_Labels.SelectedIndex = 0;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
