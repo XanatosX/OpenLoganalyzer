@@ -19,10 +19,21 @@
     <Style x:Key="InvisibleMenu" TargetType="Menu">
         <Setter Property="Background" Value="#00000000"></Setter>
         <Setter Property="Foreground" Value="LightGray"></Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch" LastChildFill="True"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style x:Key="MenuItem" TargetType="MenuItem">
         <Setter Property="Background" Value="#00000000"></Setter>
         <Setter Property="Foreground" Value="LightGray"></Setter>
+    </Style>
+    <Style x:Key="MenuItemRight" BasedOn="{StaticResource MenuItem}" TargetType="MenuItem">
+        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        <Setter Property="DockPanel.Dock" Value="Right"></Setter>
     </Style>
     <Style x:Key="SubMenuItem" TargetType="MenuItem">
         <Setter Property="FontWeight" Value="Bold" />

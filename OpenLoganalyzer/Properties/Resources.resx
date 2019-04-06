@@ -129,6 +129,9 @@
   <data name="Open" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="ReportBug" xml:space="preserve">
+    <value>Report bug</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>

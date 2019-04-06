@@ -37,6 +37,7 @@
                 </MenuItem>
                 <MenuItem x:Name="MI_Style" Header="{x:Static p:Resources.Styles}" Style="{DynamicResource MenuItem}">
                 </MenuItem>
+                <MenuItem Name="MI_ReportBug" Header="{x:Static p:Resources.ReportBug}" Style="{DynamicResource MenuItemRight}"/>
             </Menu>
         </DockPanel>
         <ListBox x:Name="LB_LogLines" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource ListBoxStyle}">
