@@ -117,17 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bug" xml:space="preserve">
+    <value>Bug</value>
+  </data>
   <data name="BugReportWindow" xml:space="preserve">
     <value>Report bug</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="FeatureRequest" xml:space="preserve">
+    <value>Feature request</value>
+  </data>
   <data name="File" xml:space="preserve">
     <value>File</value>
   </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Unkown</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
