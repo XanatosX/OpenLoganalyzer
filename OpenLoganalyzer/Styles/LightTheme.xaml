@@ -37,7 +37,7 @@
         <Setter Property="MinWidth" Value="800"></Setter>
         <Setter Property="SizeToContent" Value="WidthAndHeight"></Setter>
     </Style>
-    
+
     <Style x:Key="InvisibleComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="{StaticResource InvisibleBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource InvisibleBrush}"></Setter>
