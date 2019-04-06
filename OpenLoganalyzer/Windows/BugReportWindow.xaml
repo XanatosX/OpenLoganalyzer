@@ -16,7 +16,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="TB_Subject" HorizontalAlignment="Left" Height="58" TextWrapping="Wrap" Text="Default test" VerticalAlignment="Top" Width="772" Margin="10,0,0,0" Style="{DynamicResource DefaultTextBox}" GotFocus="TextBox_GotFocus"/>
+        <TextBox x:Name="TB_Subject" HorizontalAlignment="Left" Height="58" TextWrapping="Wrap" Text="Default test" VerticalAlignment="Top" Width="772" Margin="10,0,0,0" Style="{DynamicResource DefaultTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
         <TextBox x:Name="TB_Description" HorizontalAlignment="Left" Height="317.333" Margin="10,63,0,0" TextWrapping="Wrap" Text="Placeholder test" VerticalAlignment="Top" Width="772" Style="{DynamicResource PlaceholderTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
         <Button Content="Send" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Style="{DynamicResource SuccessButton}"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="707,389,0,0" VerticalAlignment="Top" Style="{DynamicResource FailButton}"/>

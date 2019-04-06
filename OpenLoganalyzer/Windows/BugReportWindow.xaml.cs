@@ -23,13 +23,9 @@ namespace OpenLoganalyzer.Windows
         public BugReportWindow()
         {
             InitializeComponent();
-            TB_Description.Tag = false;
-            TB_Description.Text = string.Empty;
-            TB_Subject.Tag = false;
-            TB_Subject.Text = string.Empty;
 
-            CorrectStyle(TB_Subject, false);
-            CorrectStyle(TB_Description, false);
+            InitialStyleSetup(TB_Description);
+            InitialStyleSetup(TB_Subject);
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -39,7 +35,17 @@ namespace OpenLoganalyzer.Windows
                 return;
             }
             TextBox textBox = (TextBox)sender;
-            CorrectStyle(textBox, true);
+
+            Style styleToUse = Resources["DefaultTextBox"] as Style;
+            bool placeholder = (bool)textBox.Tag;
+
+            if (placeholder)
+            {
+                textBox.Tag = false;
+                textBox.Text = string.Empty;
+            }
+
+            textBox.Style = styleToUse;
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -49,37 +55,32 @@ namespace OpenLoganalyzer.Windows
                 return;
             }
             TextBox textBox = (TextBox)sender;
-            CorrectStyle(textBox, false);
+
+            
+            string type = textBox.Name.Replace("TB_", "");
+            bool placeholder = (bool)textBox.Tag;
+            string text = textBox.Text;
+
+            if (!placeholder && string.IsNullOrEmpty(text))
+            {
+                textBox.Text = text.GetTranslated("ReportBug" + type);
+                textBox.Tag = true;
+                textBox.Style = Resources["PlaceholderTextBox"] as Style;
+            }
+
+            
         }
 
-        private void CorrectStyle(TextBox textBox, bool gotFocus)
+        private void InitialStyleSetup(TextBox textBox)
         {
-            Style styleToUse = Resources["DefaultTextBox"] as Style;
-            if (textBox.Tag == null || textBox.Tag.GetType() != typeof(bool))
-            {
-                return;
-            }
-
-            bool placeholder = (bool)textBox.Tag;
+            Style styleToUse = Resources["PlaceholderTextBox"] as Style;
             string type = textBox.Name.Replace("TB_", "");
             string text = string.Empty;
+            text = text.GetTranslated("ReportBug" + type);
 
-            if (placeholder && gotFocus && textBox.Text != text.GetTranslated("ReportBug" + type))
-            {
-                textBox.Tag = false;
-            }
-
-            if (!placeholder && !gotFocus && string.IsNullOrEmpty(textBox.Text))
-            {
-                textBox.Tag = true;
-                
-                text = text.GetTranslated("ReportBug" + type);
-                styleToUse = Resources["PlaceholderTextBox"] as Style;
-            }
-
+            textBox.Tag = true;
             textBox.Text = text;
             textBox.Style = styleToUse;
-            
         }
     }
 }
