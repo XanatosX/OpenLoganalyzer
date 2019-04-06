@@ -79,6 +79,15 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string DefaultCancel {
+            get {
+                return ResourceManager.GetString("DefaultCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string Exit {
@@ -156,6 +165,15 @@ namespace OpenLoganalyzer.Properties {
         public static string ReportBugSubject {
             get {
                 return ResourceManager.GetString("ReportBugSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send report.
+        /// </summary>
+        public static string SendReport {
+            get {
+                return ResourceManager.GetString("SendReport", resourceCulture);
             }
         }
         

@@ -123,6 +123,9 @@
   <data name="BugReportWindow" xml:space="preserve">
     <value>Report bug</value>
   </data>
+  <data name="DefaultCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="ReportBugSubject" xml:space="preserve">
     <value>Enter your subject of the bug report</value>
+  </data>
+  <data name="SendReport" xml:space="preserve">
+    <value>Send report</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
