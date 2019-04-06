@@ -61,6 +61,15 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Report bug ähnelt.
+        /// </summary>
+        public static string BugReportWindow {
+            get {
+                return ResourceManager.GetString("BugReportWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Exit ähnelt.
         /// </summary>
         public static string Exit {
@@ -102,6 +111,24 @@ namespace OpenLoganalyzer.Properties {
         public static string ReportBug {
             get {
                 return ResourceManager.GetString("ReportBug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter your description of the bug report ... ähnelt.
+        /// </summary>
+        public static string ReportBugDescription {
+            get {
+                return ResourceManager.GetString("ReportBugDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter your subject of the bug report ähnelt.
+        /// </summary>
+        public static string ReportBugSubject {
+            get {
+                return ResourceManager.GetString("ReportBugSubject", resourceCulture);
             }
         }
         
