@@ -127,5 +127,11 @@ namespace OpenLoganalyzer
             SettingsWindow settingsWindow = new SettingsWindow(settingsManager, settings, themeManager);
             settingsWindow.ShowDialog();
         }
+
+        private void MI_ReportBug_Click(object sender, RoutedEventArgs e)
+        {
+            BugReportWindow bugReportWindow = new BugReportWindow();
+            bugReportWindow.ShowDialog();
+        }
     }
 }
