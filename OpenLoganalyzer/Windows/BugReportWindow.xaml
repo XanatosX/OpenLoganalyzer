@@ -20,7 +20,7 @@
         <TextBox x:Name="TB_Description" HorizontalAlignment="Left" Height="317.333" Margin="10,63,0,0" TextWrapping="Wrap" Text="Placeholder test" VerticalAlignment="Top" Width="772" Style="{DynamicResource PlaceholderTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
         <Button Content="{x:Static p:Resources.SendReport}" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Style="{DynamicResource SuccessButton}" Click="Button_Click"/>
         <Button Content="{x:Static p:Resources.DefaultCancel}" HorizontalAlignment="Left" Margin="707,389,0,0" VerticalAlignment="Top" Style="{DynamicResource FailButton}" Click="Button_Click_1"/>
-        <ComboBox Name="CB_Labels" HorizontalAlignment="Left" Margin="90,389,0,0" VerticalAlignment="Top" Width="120" Height="20" Style="{DynamicResource InvisibleComboBox}">
-        </ComboBox>
+        <ComboBox Name="CB_Labels" HorizontalAlignment="Left" Margin="161,389,0,0" VerticalAlignment="Top" Width="120" Height="20" Style="{DynamicResource InvisibleComboBox}"/>
+
     </Grid>
 </Window>
