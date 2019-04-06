@@ -61,13 +61,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\Commands\SendBugReportCommand.cs" />
     <Compile Include="Core\Enum\Severity.cs" />
     <Compile Include="Core\Enum\StyleEnum.cs" />
     <Compile Include="Core\Events\ErrorEvent.cs" />
     <Compile Include="Core\Extensions\StringExtension.cs" />
     <Compile Include="Core\Extensions\WindowExtension.cs" />
+    <Compile Include="Core\Interfaces\Command\ICommand.cs" />
     <Compile Include="Core\Interfaces\ErrorManagment\IError.cs" />
     <Compile Include="Core\Interfaces\Settings\ISettingsManager.cs" />
+    <Compile Include="Core\Receiever\BugReportRecevier.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
     <Compile Include="Core\Interfaces\Style\IThemeManager.cs" />
     <Compile Include="Core\Interfaces\Style\IStyleDict.cs" />
@@ -156,5 +159,6 @@
       <Name>OpenLoganalyzerLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
