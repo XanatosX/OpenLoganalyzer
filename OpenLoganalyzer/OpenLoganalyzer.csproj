@@ -64,6 +64,7 @@
     <Compile Include="Core\Enum\Severity.cs" />
     <Compile Include="Core\Enum\StyleEnum.cs" />
     <Compile Include="Core\Events\ErrorEvent.cs" />
+    <Compile Include="Core\Extensions\StringExtension.cs" />
     <Compile Include="Core\Extensions\WindowExtension.cs" />
     <Compile Include="Core\Interfaces\ErrorManagment\IError.cs" />
     <Compile Include="Core\Interfaces\Settings\ISettingsManager.cs" />
@@ -72,6 +73,9 @@
     <Compile Include="Core\Interfaces\Style\IStyleDict.cs" />
     <Compile Include="Core\Style\StyleDict.cs" />
     <Compile Include="Core\Style\StyleManager.cs" />
+    <Compile Include="Windows\BugReportWindow.xaml.cs">
+      <DependentUpon>BugReportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -95,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\LightTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\BugReportWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
