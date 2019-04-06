@@ -130,7 +130,7 @@ namespace OpenLoganalyzer
 
         private void MI_ReportBug_Click(object sender, RoutedEventArgs e)
         {
-            BugReportWindow bugReportWindow = new BugReportWindow();
+            BugReportWindow bugReportWindow = new BugReportWindow(settings, themeManager);
             bugReportWindow.ShowDialog();
         }
     }

@@ -11,11 +11,11 @@ namespace OpenLoganalyzer.Core.Extensions
 {
     public static class StringExtension
     {
-        public static string GetTranslated(this string target, string key)
+        public static string GetTranslated(this string target)
         {
             try
             {
-                target = Properties.Resources.ResourceManager.GetString(key);
+                target = Properties.Resources.ResourceManager.GetString(target);
             }
             catch (Exception)
             {

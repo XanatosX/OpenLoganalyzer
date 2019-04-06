@@ -1,9 +1,13 @@
 ﻿using OpenLoganalyzer.Core.Commands;
+using OpenLoganalyzer.Core.Enum;
 using OpenLoganalyzer.Core.Extensions;
+using OpenLoganalyzer.Core.Interfaces;
+using OpenLoganalyzer.Core.Style;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,12 +28,40 @@ namespace OpenLoganalyzer.Windows
         private delegate void UpdateEnabledCallback(Control control, bool state);
         private delegate void CloseWindowCallback();
 
-        public BugReportWindow()
+        private readonly ThemeManager themeManager;
+        private readonly ISettings settings;
+
+        public BugReportWindow(ISettings settings, ThemeManager themeManager)
         {
+            this.themeManager = themeManager;
+            this.settings = settings;
+            
             InitializeComponent();
 
+            this.ChangeStyle(settings, themeManager);
+
+            FillComboBox();
             InitialStyleSetup(TB_Description);
             InitialStyleSetup(TB_Subject);
+
+            
+        }
+
+        private void FillComboBox()
+        {
+            foreach (LabelsEnum value in Enum.GetValues(typeof(LabelsEnum)))
+            {
+                string[] split = Regex.Split(value.ToString(), @"(?<!^)(?=[A-Z])");
+                string labelName = string.Join(" ", split);
+                ComboBoxItem comboBoxItem = new ComboBoxItem(){
+                    Tag = labelName,
+                    Content = value.ToString().GetTranslated()
+                };
+
+                CB_Labels.Items.Add(comboBoxItem);
+            }
+
+            CB_Labels.SelectedItem = 0;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -67,7 +99,8 @@ namespace OpenLoganalyzer.Windows
 
             if (!placeholder && string.IsNullOrEmpty(text))
             {
-                textBox.Text = text.GetTranslated("ReportBug" + type);
+                text = "ReportBug" + type;
+                textBox.Text = text.GetTranslated();
                 textBox.Tag = true;
                 textBox.Style = Resources["PlaceholderTextBox"] as Style;
             }
@@ -79,8 +112,8 @@ namespace OpenLoganalyzer.Windows
         {
             Style styleToUse = Resources["PlaceholderTextBox"] as Style;
             string type = textBox.Name.Replace("TB_", "");
-            string text = string.Empty;
-            text = text.GetTranslated("ReportBug" + type);
+            string text = "ReportBug" + type; ; 
+            text = text.GetTranslated();
 
             textBox.Tag = true;
             textBox.Text = text;
@@ -89,7 +122,10 @@ namespace OpenLoganalyzer.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SendBugReportCommand command = new SendBugReportCommand("", TB_Subject.Text, TB_Description.Text);
+            ComboBoxItem item = (ComboBoxItem)CB_Labels.SelectedItem;
+            string label = item.Tag.ToString();
+            label = label.ToLower() == "none" ? "" : label;
+            SendBugReportCommand command = new SendBugReportCommand("", label, TB_Subject.Text, TB_Description.Text);
             Task<bool> task = command.AsyncExecute();
             task.ContinueWith(CreateIssueCompleted);
 
@@ -99,9 +135,6 @@ namespace OpenLoganalyzer.Windows
 
         private void CreateIssueCompleted(Task<bool> obj)
         {
-            this.Dispatcher.Invoke(new CloseWindowCallback(
-                    delegate { this.Close(); }
-                    ));
             if (obj.Result)
             {
                 this.Dispatcher.Invoke( new CloseWindowCallback( 

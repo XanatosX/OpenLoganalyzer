@@ -13,20 +13,23 @@ namespace OpenLoganalyzer.Core.Commands
     {
         private readonly BugReportRecevier bugReportRecevier;
 
+        private readonly string label;
+
         private readonly string subject;
 
         private readonly string description;
 
-        public SendBugReportCommand(string token, string subject, string description)
+        public SendBugReportCommand(string token, string label, string subject, string description)
         {
             bugReportRecevier = new BugReportRecevier(token);
+            this.label = label;
             this.subject = subject;
             this.description = description;
         }
 
         public async Task<bool> AsyncExecute()
         {
-            Issue issue = await bugReportRecevier.CreateAsync(subject, description);
+            Issue issue = await bugReportRecevier.CreateAsync(label, subject, description);
             return false;
         }
 

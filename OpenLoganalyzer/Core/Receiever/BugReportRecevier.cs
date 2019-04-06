@@ -23,7 +23,7 @@ namespace OpenLoganalyzer.Core.Receiever
             github.Credentials = tokenAuth;
         }
 
-        public async Task<Issue> CreateAsync(string subject, string description)
+        public async Task<Issue> CreateAsync(string label, string subject, string description)
         {
             Issue returnIssue = null;
             if (string.IsNullOrEmpty(subject) || string.IsNullOrEmpty(description))
@@ -32,6 +32,10 @@ namespace OpenLoganalyzer.Core.Receiever
             }
 
             NewIssue createIssue = new NewIssue(subject);
+            if (!string.IsNullOrEmpty(label))
+            {
+                createIssue.Labels.Add(label);
+            }
             createIssue.Body = description;
             try
             {

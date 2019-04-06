@@ -8,6 +8,7 @@ namespace OpenLoganalyzer.Core.Enum
 {
     public enum LabelsEnum
     {
+        None,
         Bug,
         FeatureRequest
     }
