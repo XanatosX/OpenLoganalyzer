@@ -1,4 +1,5 @@
-﻿using OpenLoganalyzer.Core.Extensions;
+﻿using OpenLoganalyzer.Core.Commands;
+using OpenLoganalyzer.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace OpenLoganalyzer.Windows
     /// </summary>
     public partial class BugReportWindow : Window
     {
+        private delegate void UpdateEnabledCallback(Control control, bool state);
+        private delegate void CloseWindowCallback();
+
         public BugReportWindow()
         {
             InitializeComponent();
@@ -81,6 +85,45 @@ namespace OpenLoganalyzer.Windows
             textBox.Tag = true;
             textBox.Text = text;
             textBox.Style = styleToUse;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SendBugReportCommand command = new SendBugReportCommand("", TB_Subject.Text, TB_Description.Text);
+            Task<bool> task = command.AsyncExecute();
+            task.ContinueWith(CreateIssueCompleted);
+
+            TB_Description.IsEnabled = false;
+            TB_Subject.IsEnabled = false;
+        }
+
+        private void CreateIssueCompleted(Task<bool> obj)
+        {
+            this.Dispatcher.Invoke(new CloseWindowCallback(
+                    delegate { this.Close(); }
+                    ));
+            if (obj.Result)
+            {
+                this.Dispatcher.Invoke( new CloseWindowCallback( 
+                    delegate { this.Close(); }
+                    ));
+            }
+            else
+            {
+                TB_Description.Dispatcher.Invoke(
+                    new UpdateEnabledCallback(UpdateIsEnabled),
+                    new Object[] { TB_Description, true }
+                    );
+                TB_Subject.Dispatcher.Invoke(
+                    new UpdateEnabledCallback(UpdateIsEnabled),
+                    new Object[] { TB_Subject, true }
+                    );
+            }
+        }
+
+        private void UpdateIsEnabled(Control control, bool state)
+        {
+            control.IsEnabled = state;
         }
     }
 }
