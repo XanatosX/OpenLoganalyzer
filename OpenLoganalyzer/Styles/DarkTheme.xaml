@@ -2,8 +2,40 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:OpenLoganalyzer.Styles">
 
-    <SolidColorBrush x:Key="BackgroundBrush"  Color="#FF232323"/>
+    <Color x:Key="InvisibleColor">#00000000</Color>
+    <Color x:Key="BackgroundColor">#FF232323</Color>
+    <Color x:Key="ElementBackgroundColor">#4F4F4F</Color>
+    <Color x:Key="ForegroundColor">#f7f7f7</Color> 
+    <Color x:Key="PlaceholderColor">#d3d3d3</Color>
+    <Color x:Key="SuccessColor">#5cb85c</Color>
+    <Color x:Key="WarningColor">#FFA500</Color>
+    <Color x:Key="FailColor">#d9534f</Color>
 
+    <Color x:Key="HoverColor">#D3D3D3</Color>
+    <Color x:Key="PressedColor">#D3D3D3</Color>
+
+    <Color x:Key="SuccessBorderColor">#00000000</Color>
+    <Color x:Key="WarningBorderColor">#00000000</Color>
+    <Color x:Key="FailBorderColor">#00000000</Color>
+    <Color x:Key="HoverBorderColor">#D3D3D3</Color>
+    <Color x:Key="PressedBorderColor">#D3D3D3</Color>
+
+    <SolidColorBrush x:Key="InvisibleBrush"  Color="{StaticResource InvisibleColor}"/>
+    <SolidColorBrush x:Key="BackgroundBrush"  Color="{StaticResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="ElementBackgroundBrush"  Color="{StaticResource ElementBackgroundColor}"/>
+    <SolidColorBrush x:Key="ForegroundBrush"  Color="{StaticResource ForegroundColor}"/>
+    <SolidColorBrush x:Key="PlaceholderBrush"  Color="{StaticResource PlaceholderColor}"/>
+
+    <SolidColorBrush x:Key="SuccessBrush"  Color="{StaticResource SuccessColor}"/>
+    <SolidColorBrush x:Key="WarningBrush"  Color="{StaticResource WarningColor}"/>
+    <SolidColorBrush x:Key="FailBrush"  Color="{StaticResource FailColor}"/>
+    <SolidColorBrush x:Key="HoverBrush"  Color="Gray"/>
+    <SolidColorBrush x:Key="PressedBrush"  Color="{StaticResource PressedColor}"/>
+
+    <SolidColorBrush x:Key="DefaultBorder"  Color="{StaticResource HoverColor}"/>
+    <SolidColorBrush x:Key="SuccessBorder"  Color="{StaticResource SuccessBorderColor}"/>
+    <SolidColorBrush x:Key="WarningBorder"  Color="{StaticResource WarningBorderColor}"/>
+    <SolidColorBrush x:Key="FailBorder"  Color="{StaticResource FailBorderColor}"/>
 
     <Style x:Key="WindowStyle" TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
@@ -13,12 +45,56 @@
     </Style>
 
     <Style x:Key="InvisibleComboBox" TargetType="ComboBox">
-        <Setter Property="Background" Value="#00000000"></Setter>
-        <Setter Property="BorderBrush" Value="#00000000"></Setter>
+        <Setter Property="Background" Value="{StaticResource InvisibleBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource InvisibleBrush}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="Border" 
+                                Grid.ColumnSpan="2"
+                                Background="{StaticResource ElementBackgroundBrush}"
+                                BorderBrush="{StaticResource DefaultBorder}"
+                                BorderThickness="1" />
+                        <Border 
+                              Grid.Column="0"
+                              Margin="1" 
+                              Background="{StaticResource ElementBackgroundBrush}" 
+                              BorderBrush="{StaticResource ElementBackgroundBrush}"
+                              BorderThickness="0,0,1,0" />
+                        <Path x:Name="Arrow"
+                              Grid.Column="1"
+                              Fill="{StaticResource ForegroundBrush}"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Data="M 0 0 L 4 4 L 8 0 Z"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource DefaultBorder}" />
+                            <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource ElementBackgroundBrush}" />
+                        </Trigger>
+                        <Trigger Property="ToggleButton.IsChecked" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="Blue" />
+                        </Trigger>
+                        <!--<Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                            <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource DisabledForegroundBrush}" />
+                        </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style x:Key="InvisibleMenu" TargetType="Menu">
-        <Setter Property="Background" Value="#00000000"></Setter>
-        <Setter Property="Foreground" Value="LightGray"></Setter>
+        <Setter Property="Background" Value="{StaticResource InvisibleBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -29,7 +105,7 @@
     </Style>
     <Style x:Key="MenuItem" TargetType="MenuItem">
         <Setter Property="Background" Value="#00000000"></Setter>
-        <Setter Property="Foreground" Value="LightGray"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
     <Style x:Key="MenuItemRight" BasedOn="{StaticResource MenuItem}" TargetType="MenuItem">
         <Setter Property="HorizontalAlignment" Value="Right"></Setter>
@@ -38,7 +114,7 @@
     <Style x:Key="SubMenuItem" TargetType="MenuItem">
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Foreground" Value="LightGray"></Setter>
-        <Setter Property="ContextMenu.Background" Value="#FF232323"></Setter>
+        <Setter Property="ContextMenu.Background" Value="{StaticResource BackgroundBrush}"></Setter>
         <Setter Property="ContextMenu.BorderBrush" Value="Black"></Setter>
     </Style>
 
@@ -55,4 +131,30 @@
     <Style x:Key="ContextMenuStyle" TargetType="ContextMenu">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
     </Style>
+
+    <Style x:Key="Button" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ElementBackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource DefaultBorder}"></Setter>
+        <Setter Property="Width" Value="75"></Setter>
+        <Setter Property="Height" Value="20"></Setter>
+    </Style>
+
+    <Style x:Key="SuccessButton" TargetType="Button" BasedOn="{StaticResource Button}">
+    </Style>
+    <Style x:Key="WarningButton" TargetType="Button" BasedOn="{StaticResource Button}">
+    </Style>
+    <Style x:Key="FailButton" TargetType="Button" BasedOn="{StaticResource Button}">
+    </Style>
+
+    <Style x:Key="DefaultTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="PlaceholderTextBox" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource PlaceholderBrush}"></Setter>
+    </Style>
+
 </ResourceDictionary>
