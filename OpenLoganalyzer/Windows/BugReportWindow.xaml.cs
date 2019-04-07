@@ -129,6 +129,9 @@ namespace OpenLoganalyzer.Windows
 
             TB_Description.IsEnabled = false;
             TB_Subject.IsEnabled = false;
+            B_Send.IsEnabled = false;
+            B_Cancel.IsEnabled = false;
+            CB_Labels.IsEnabled = false;
         }
 
         private void CreateIssueCompleted(Task<bool> obj)
@@ -149,6 +152,18 @@ namespace OpenLoganalyzer.Windows
                     new UpdateEnabledCallback(UpdateIsEnabled),
                     new Object[] { TB_Subject, true }
                     );
+                B_Send.Dispatcher.Invoke(
+                    new UpdateEnabledCallback(UpdateIsEnabled),
+                    new Object[] { B_Send, true }
+                    );
+                B_Cancel.Dispatcher.Invoke(
+                     new UpdateEnabledCallback(UpdateIsEnabled),
+                     new Object[] { B_Cancel, true }
+                     );
+                CB_Labels.Dispatcher.Invoke(
+                     new UpdateEnabledCallback(UpdateIsEnabled),
+                     new Object[] { CB_Labels, true }
+                     );
             }
         }
 
