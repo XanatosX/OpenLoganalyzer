@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
+using OpenLoganalyzer.Core.Commands;
 using OpenLoganalyzer.Core.Extensions;
 using OpenLoganalyzer.Core.Interfaces;
+using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Settings;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
@@ -39,6 +41,9 @@ namespace OpenLoganalyzer
             settingsManager.Save(settings);
 
             BuildMenu();
+
+            ShowPopupWindow test = new ShowPopupWindow(settings, themeManager, new PopupData("test", "TestContent", 1000));
+            test.Execute();
         }
 
         private void LoadSettings()

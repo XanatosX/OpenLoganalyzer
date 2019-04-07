@@ -65,6 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\Commands\SendBugReportCommand.cs" />
+    <Compile Include="Core\Commands\ShowPopupWindow.cs" />
     <Compile Include="Core\Enum\LabelsEnum.cs" />
     <Compile Include="Core\Enum\Severity.cs" />
     <Compile Include="Core\Enum\StyleEnum.cs" />
@@ -74,7 +75,9 @@
     <Compile Include="Core\Interfaces\Command\ICommand.cs" />
     <Compile Include="Core\Interfaces\ErrorManagment\IError.cs" />
     <Compile Include="Core\Interfaces\Settings\ISettingsManager.cs" />
+    <Compile Include="Core\Notification\PopupData.cs" />
     <Compile Include="Core\Receiever\BugReportRecevier.cs" />
+    <Compile Include="Core\Receiever\PopupReceiever.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
     <Compile Include="Core\Interfaces\Style\IThemeManager.cs" />
     <Compile Include="Core\Interfaces\Style\IStyleDict.cs" />
@@ -83,8 +86,8 @@
     <Compile Include="Windows\BugReportWindow.xaml.cs">
       <DependentUpon>BugReportWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Popup.xaml.cs">
-      <DependentUpon>Popup.xaml</DependentUpon>
+    <Compile Include="Windows\PopupWindow.xaml.cs">
+      <DependentUpon>PopupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -116,7 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Popup.xaml">
+    <Page Include="Windows\PopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
