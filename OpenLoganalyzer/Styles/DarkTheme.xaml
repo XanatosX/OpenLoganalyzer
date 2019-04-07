@@ -4,6 +4,8 @@
 
     <Color x:Key="InvisibleColor">#00000000</Color>
     <Color x:Key="BackgroundColor">#FF232323</Color>
+    <Color x:Key="DisabledBackgroundColor">#f7f7f7</Color>
+    <Color x:Key="DisabledForegroundColor">#FF232323</Color>
     <Color x:Key="ElementBackgroundColor">#4F4F4F</Color>
     <Color x:Key="ForegroundColor">#f7f7f7</Color>
     <Color x:Key="PlaceholderColor">#d3d3d3</Color>
@@ -22,6 +24,8 @@
 
     <SolidColorBrush x:Key="InvisibleBrush"  Color="{StaticResource InvisibleColor}"/>
     <SolidColorBrush x:Key="BackgroundBrush"  Color="{StaticResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush"  Color="{StaticResource DisabledBackgroundColor}"/>
+    <SolidColorBrush x:Key="DisabledForegroundBrush"  Color="{StaticResource DisabledForegroundColor}"/>
     <SolidColorBrush x:Key="ElementBackgroundBrush"  Color="{StaticResource ElementBackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush"  Color="{StaticResource ForegroundColor}"/>
     <SolidColorBrush x:Key="PlaceholderBrush"  Color="{StaticResource PlaceholderColor}"/>
@@ -55,7 +59,7 @@
                                 Background="{StaticResource ElementBackgroundBrush}"
                                 BorderBrush="{StaticResource DefaultBorder}"
                                 BorderThickness="1" />
-            <Border 
+            <Border x:Name="Border2"
                               Grid.Column="0"
                               Margin="1" 
                               Background="{StaticResource ElementBackgroundBrush}" 
@@ -76,12 +80,14 @@
             <Trigger Property="ToggleButton.IsChecked" Value="true">
                 <Setter TargetName="Border" Property="Background" Value="{StaticResource DefaultBorder}" />
             </Trigger>
-            <!--<Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
-                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
-                            <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource DisabledForegroundBrush}" />
-                        </Trigger>-->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ForegroundBrush}" />
+                <Setter TargetName="Border2" Property="Background" Value="{StaticResource ForegroundBrush}" />
+                <Setter TargetName="Border2" Property="BorderBrush" Value="{StaticResource ForegroundBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledForegroundBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource DisabledForegroundBrush}" />
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -157,7 +163,7 @@
                             <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="Red"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
@@ -218,13 +224,140 @@
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
     </Style>
 
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle Margin="2"
+                                   StrokeThickness="1"
+                                   Stroke="#60000000"
+                                   StrokeDashArray="1 2" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="Button" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="FocusVisualStyle"
+                Value="{StaticResource ButtonFocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border  TextBlock.Foreground="{TemplateBinding Foreground}"
+                            x:Name="Border"
+                            BorderThickness="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{StaticResource HoverColor}"></SolidColorBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource ElementBackgroundColor}"></SolidColorBrush>
+                        </Border.Background>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.5" />
+                                    <VisualTransition GeneratedDuration="0"
+                                  To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="{StaticResource ControlMouseOverColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlPressedColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="{StaticResource PressedBorderDarkColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource PressedBorderLightColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="{StaticResource DisabledControlDarkColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                                Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource DisabledForegroundColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="{StaticResource DisabledBorderDarkColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Margin="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Border" Value="{StaticResource DisabledBackgroundBrush}"></Setter>
+                            <Setter Property="BorderBrush" TargetName="Border" Value="{StaticResource DisabledForegroundBrush}"></Setter>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsDefault"
+                                 Value="true">
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="0,1">
+                                        <GradientBrush.GradientStops>
+                                            <GradientStopCollection>
+                                                <GradientStop Color="DarkBlue"
+                                                              Offset="0.0" />
+                                                <GradientStop Color="Cyan"
+                                                              Offset="1.0" />
+                                            </GradientStopCollection>
+                                        </GradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--<Style x:Key="Button" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource ElementBackgroundBrush}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorder}"></Setter>
         <Setter Property="Width" Value="Auto"></Setter>
         <Setter Property="Height" Value="Auto"></Setter>
-    </Style>
+    </Style>-->
 
     <Style x:Key="SuccessButton" TargetType="Button" BasedOn="{StaticResource Button}">
     </Style>
