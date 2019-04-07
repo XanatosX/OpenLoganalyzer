@@ -78,7 +78,7 @@
         <Setter Property="Background" Value="{StaticResource InvisibleBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorder}"></Setter>
         <Setter Property="Width" Value="Auto"></Setter>
-        <Setter Property="Height" Value="20"></Setter>
+        <Setter Property="Height" Value="Auto"></Setter>
     </Style>
 
     <Style x:Key="SuccessButton" TargetType="Button" BasedOn="{StaticResource Button}">

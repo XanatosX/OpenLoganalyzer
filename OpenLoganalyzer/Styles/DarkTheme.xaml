@@ -74,7 +74,7 @@
                 <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource ElementBackgroundBrush}" />
             </Trigger>
             <Trigger Property="ToggleButton.IsChecked" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="Blue" />
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource DefaultBorder}" />
             </Trigger>
             <!--<Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
@@ -223,7 +223,7 @@
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource DefaultBorder}"></Setter>
         <Setter Property="Width" Value="Auto"></Setter>
-        <Setter Property="Height" Value="20"></Setter>
+        <Setter Property="Height" Value="Auto"></Setter>
     </Style>
 
     <Style x:Key="SuccessButton" TargetType="Button" BasedOn="{StaticResource Button}">

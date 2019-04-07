@@ -16,11 +16,25 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="TB_Subject" HorizontalAlignment="Left" Height="58" TextWrapping="Wrap" Text="Default test" VerticalAlignment="Top" Width="772" Margin="10,0,0,0" Style="{DynamicResource DefaultTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-        <TextBox x:Name="TB_Description" HorizontalAlignment="Left" Height="317.333" Margin="10,63,0,0" TextWrapping="Wrap" Text="Placeholder test" VerticalAlignment="Top" Width="772" Style="{DynamicResource PlaceholderTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-        <Button Content="{x:Static p:Resources.SendReport}" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Style="{DynamicResource SuccessButton}" Click="Button_Click"/>
-        <Button Content="{x:Static p:Resources.DefaultCancel}" HorizontalAlignment="Left" Margin="707,389,0,0" VerticalAlignment="Top" Style="{DynamicResource FailButton}" Click="Button_Click_1"/>
-        <ComboBox Name="CB_Labels" HorizontalAlignment="Left" Margin="161,389,0,0" VerticalAlignment="Top" Width="120" Height="20" Style="{DynamicResource InvisibleComboBox}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="46*"/>
+            <RowDefinition Height="343*"/>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="TB_Subject" TextWrapping="NoWrap" Text="Default test" Margin="10,10,10,5" Style="{DynamicResource DefaultTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+        <TextBox x:Name="TB_Description" TextWrapping="Wrap" Margin="10,10,10,5" Text="Placeholder test" Style="{DynamicResource PlaceholderTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" Grid.Row="1" AcceptsReturn="True"/>
+
+        <Grid Margin="10,0" Grid.Row="2" VerticalAlignment="Top" Height="22">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="A"/>
+                <ColumnDefinition SharedSizeGroup="A"/>
+                <ColumnDefinition SharedSizeGroup="A"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="B_Send" Content="{x:Static p:Resources.SendReport}" HorizontalAlignment="Left" Style="{DynamicResource SuccessButton}" Click="Button_Click" Grid.Column="0" Margin="0,0,5,0"/>
+            <ComboBox x:Name="CB_Labels" HorizontalAlignment="Left" Width="AUto" Height="Auto" Style="{DynamicResource InvisibleComboBox}" Grid.Column="1" Margin="5,0,0,0"/>
+            <Button x:Name="B_Cancel" Content="{x:Static p:Resources.DefaultCancel}" HorizontalAlignment="Right" Style="{DynamicResource FailButton}" Click="Button_Click_1" Grid.Column="2"/>
+        </Grid>
 
     </Grid>
 </Window>
