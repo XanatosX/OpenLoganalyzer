@@ -32,7 +32,7 @@
                 <ColumnDefinition SharedSizeGroup="A"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="B_Send" Content="{x:Static p:Resources.SendReport}" HorizontalAlignment="Left" Style="{DynamicResource SuccessButton}" Click="Button_Click" Grid.Column="0" Margin="0,0,5,0"/>
-            <ComboBox x:Name="CB_Labels" HorizontalAlignment="Left" Width="AUto" Height="Auto" Style="{DynamicResource InvisibleComboBox}" Grid.Column="1" Margin="5,0,0,0" IsEnabled="False"/>
+            <ComboBox x:Name="CB_Labels" HorizontalAlignment="Left" Width="AUto" Height="Auto" Style="{DynamicResource InvisibleComboBox}" Grid.Column="1" Margin="5,0,0,0"/>
             <Button x:Name="B_Cancel" Content="{x:Static p:Resources.DefaultCancel}" HorizontalAlignment="Right" Style="{DynamicResource FailButton}" Click="Button_Click_1" Grid.Column="2"/>
         </Grid>
 
