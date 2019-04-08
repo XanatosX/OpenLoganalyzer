@@ -21,3 +21,11 @@ This part of the project will provide you with a application ready to use. The a
 [DevBlog]: DevelopmentBlog/Home.md
 
 [LibraryWiki]: Wiki/Library/Home.md
+
+## License
+
+Current license scan for the whole project
+
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FXanatosX%2FOpenLoganalyzer.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FXanatosX%2FOpenLoganalyzer?ref=badge_large)
