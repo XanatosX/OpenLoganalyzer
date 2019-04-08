@@ -4,8 +4,6 @@
 
 The target of this project is to provide you with an open source application to analyze log files based on regex filters. You can load filters provided by other people or create them on your own, those filters will help the application to show the logs in a readable well structured way.
 
-
-
 [Development blog][DevBlog]
 
 ## Parts of this project
