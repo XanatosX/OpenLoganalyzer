@@ -1,5 +1,5 @@
 # Development blog
 
-* [Sneakpeak 1 04/08/2019][Sneakpeak1]
+* [04/08/2019 - Themes and bug reporting][ThemesAndBugReporting]
 
-[Sneakpeak1]: Entries/SneakPeak1.md
+[ThemesAndBugReporting]: Entries/ThemesAndBugReporting.md
