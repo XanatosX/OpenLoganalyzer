@@ -14,7 +14,7 @@ The target of this project is to provide you with an open source application to 
 
 The project will containt two different projects, one is the library itself, if you want to include the regex filter based log loading into your application, you can take a look at this library. 
 
-You can find the wiki for the library [here]
+You can find the wiki for the library [here][LibraryWiki]
 
 ### WPF application
 
