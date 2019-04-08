@@ -1,6 +1,7 @@
 # Open Loganalyzer
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4582dd295e6c475e9b89ccede7a9060f)](https://app.codacy.com/app/simonaberle/OpenLoganalyzer?utm_source=github.com&utm_medium=referral&utm_content=XanatosX/OpenLoganalyzer&utm_campaign=Badge_Grade_Dashboard)
 [![Build status](https://ci.appveyor.com/api/projects/status/92919rwl3k8q0ah1/branch/master?svg=true)](https://ci.appveyor.com/project/XanatosX/openloganalyzer/branch/master)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FXanatosX%2FOpenLoganalyzer.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FXanatosX%2FOpenLoganalyzer?ref=badge_shield)
 
 ## General information
 ### Project folder structure
@@ -36,3 +37,5 @@ We use SemVer for versioning. For the versions available, see the [tags on this 
 
 ## License
 This project is licensed under the GNU v3  License - For more information check the [License file](LICENSE) on this repository
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FXanatosX%2FOpenLoganalyzer.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FXanatosX%2FOpenLoganalyzer?ref=badge_large)
