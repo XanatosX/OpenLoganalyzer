@@ -1,3 +1,3 @@
 theme: jekyll-theme-slate
 title: Open Loganalyzer
-description: Some text
+description: This project wants to build a library to analyze log files based on custom regex entries. In a later stage, I'm planning to add a wpf application ready to use for windows users.
