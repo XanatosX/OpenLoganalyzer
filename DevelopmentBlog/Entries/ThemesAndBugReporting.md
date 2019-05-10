@@ -1,6 +1,6 @@
 # 04/08/2019 - Themes and bug reporting
 
-This is the first look at the german translation for the light and dark theme. Please keep in mind that not all controls are in place and ready to use yet.
+This is the first look at the German translation for the light and dark theme. Please keep in mind that not all controls are in place and ready to use yet.
 
 [![DarkImage]]()
 
