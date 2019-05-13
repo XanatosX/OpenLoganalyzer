@@ -1,4 +1,5 @@
 ﻿using OpenLoganalyzer.Core.Extensions;
+using OpenLoganalyzer.Core.Helper;
 using OpenLoganalyzer.Core.Interfaces;
 using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Style;
@@ -31,15 +32,16 @@ namespace OpenLoganalyzer.Windows
 
         public PopupWindow(ISettings settings, ThemeManager themeManager, PopupData popupData)
         {
-            this.Left = 10;
-            this.Top = 10;
+            Screen screen = new Screen();
+
+            InitializeComponent();
+
+            this.Left = screen.Width - this.Width;
+            this.Top = screen.Height - this.Height;
             this.autoReset = new AutoResetEvent(false);
             this.showTimer = new Timer(CallbackMethod, autoReset, popupData.TimeToShow, 1);
 
 
-            InitializeComponent();
-
-            
             this.ChangeStyle(settings, themeManager);
         }
 
