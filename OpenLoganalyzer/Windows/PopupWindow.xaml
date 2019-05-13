@@ -10,14 +10,14 @@
     <Grid FlowDirection="RightToLeft">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" FrameworkElement.FlowDirection="LeftToRight"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" FrameworkElement.FlowDirection="RightToLeft"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" FrameworkElement.FlowDirection="LeftToRight"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Hello" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalContentAlignment="Stretch"/>
-        <Button Content="X" Height="Auto" Width="Auto" Grid.Row="0" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" />
+        <Button Content="X" Height="Auto" Width="24" Grid.Row="0" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" />
 
     </Grid>
 </Window>
