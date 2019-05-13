@@ -30,19 +30,34 @@ namespace OpenLoganalyzer.Windows
         private readonly Timer showTimer;
         private readonly AutoResetEvent autoReset;
 
+        private readonly FontSize fontSize;
+        private readonly Screen screen;
+
         public PopupWindow(ISettings settings, ThemeManager themeManager, PopupData popupData)
         {
-            Screen screen = new Screen();
+            screen = new Screen();
 
             InitializeComponent();
 
-            this.Left = screen.Width - this.Width;
-            this.Top = screen.Height - this.Height;
+            this.ChangeStyle(settings, themeManager);
+
             this.autoReset = new AutoResetEvent(false);
             this.showTimer = new Timer(CallbackMethod, autoReset, popupData.TimeToShow, 1);
-
-            this.ChangeStyle(settings, themeManager);
+           
             this.L_Headline.Content = popupData.Title;
+            this.TB_Body.Text = popupData.Content;
+
+            fontSize = new FontSize(TB_Body, popupData.Content);
+            CorrectSize();
+        }
+
+        public void CorrectSize()
+        {
+            this.Width = fontSize.Width;
+            this.Height = fontSize.Height;
+
+            this.Left = screen.Width - this.Width;
+            this.Top = screen.Height - this.Height;
         }
 
         private void CallbackMethod(object state)
