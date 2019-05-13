@@ -7,6 +7,7 @@
         xmlns:p="clr-namespace:OpenLoganalyzer.Properties"
         mc:Ignorable="d"
         Title="Popup" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None" Topmost="True" WindowStartupLocation="Manual">
+
     <Grid FlowDirection="RightToLeft">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" FrameworkElement.FlowDirection="LeftToRight"/>
@@ -16,7 +17,7 @@
             <RowDefinition Height="Auto" FrameworkElement.FlowDirection="LeftToRight"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label x:Name="L_Headline" Style="{DynamicResource DefaltLabel}" Content="Hello" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalContentAlignment="Stretch"/>
+        <Label x:Name="L_Headline" Style="{DynamicResource DefaultLabel}" Content="Hello" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalContentAlignment="Stretch"/>
         <Button x:Name="B_Close" Style="{DynamicResource Button}" Content="X" Height="Auto" Width="24" Grid.Row="0" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Click="B_Close_Click" />
 
     </Grid>
