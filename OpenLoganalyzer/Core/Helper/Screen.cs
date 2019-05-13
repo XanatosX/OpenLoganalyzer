@@ -8,10 +8,10 @@ namespace OpenLoganalyzer.Core.Helper
 {
     public class Screen
     {
-        readonly int width;
+        private readonly int width;
         public int Width => width;
 
-        readonly int height;
+        private readonly int height;
         public int Height => height;
 
         public Screen()
