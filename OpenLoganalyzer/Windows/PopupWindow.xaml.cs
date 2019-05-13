@@ -41,8 +41,8 @@ namespace OpenLoganalyzer.Windows
             this.autoReset = new AutoResetEvent(false);
             this.showTimer = new Timer(CallbackMethod, autoReset, popupData.TimeToShow, 1);
 
-
             this.ChangeStyle(settings, themeManager);
+            this.L_Headline.Content = popupData.Title;
         }
 
         private void CallbackMethod(object state)
@@ -51,6 +51,11 @@ namespace OpenLoganalyzer.Windows
             this.Dispatcher.Invoke(new CloseWindowCallback(
                  delegate { this.Close(); }
                  ));
+        }
+
+        private void B_Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
