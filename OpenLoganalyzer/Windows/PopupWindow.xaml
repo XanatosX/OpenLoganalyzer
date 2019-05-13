@@ -19,6 +19,7 @@
         </Grid.RowDefinitions>
         <Label x:Name="L_Headline" Style="{DynamicResource DefaultLabel}" Content="Hello" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalContentAlignment="Stretch"/>
         <Button x:Name="B_Close" Style="{DynamicResource Button}" Content="X" Height="Auto" Width="24" Grid.Row="0" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Click="B_Close_Click" />
+        <TextBox x:Name="TB_Body" BorderThickness="0" IsEnabled="False" Style="{DynamicResource DefaultTextBox}" Height="423" Margin="24,0,-734,-420" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" Width="776" Grid.ColumnSpan="2" FlowDirection="LeftToRight" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>
