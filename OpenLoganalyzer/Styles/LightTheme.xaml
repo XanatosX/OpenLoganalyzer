@@ -101,4 +101,9 @@
     <Style x:Key="PlaceholderTextBox" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}">
         <Setter Property="Foreground" Value="{StaticResource PlaceholderBrush}"></Setter>
     </Style>
+
+    <Style x:Key="DefaultLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -364,4 +364,8 @@
         <Setter Property="Foreground" Value="{StaticResource PlaceholderBrush}"></Setter>
     </Style>
 
+    <Style x:Key="DefaultLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
+    </Style>
+
 </ResourceDictionary>
