@@ -2,6 +2,7 @@
 using OpenLoganalyzer.Core.Enum;
 using OpenLoganalyzer.Core.Extensions;
 using OpenLoganalyzer.Core.Interfaces;
+using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Style;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace OpenLoganalyzer.Windows
     /// </summary>
     public partial class BugReportWindow : Window
     {
+        private delegate void CreatePopUpCallback(PopupData data);
+        private delegate string GetTextBoxValueCallback(TextBox textBox);
         private delegate void UpdateEnabledCallback(Control control, bool state);
         private delegate void CloseWindowCallback();
 
@@ -136,11 +139,28 @@ namespace OpenLoganalyzer.Windows
 
         private void CreateIssueCompleted(Task<bool> obj)
         {
+            string popupHeadline = "ReportBug_Headline_Error";
+            string content = "ReportBug_Content_Error";
             if (obj.Result)
             {
+                popupHeadline = "ReportBug_Headline_Success";
+                content = "ReportBug_Content_Success";
+                content = content.GetTranslated();
+                string subject = string.Empty;
+                string description = string.Empty;
+                this.Dispatcher.Invoke(
+                    new Action(() => subject = GetTextBoxValue(TB_Subject))
+                );
+                this.Dispatcher.Invoke(
+                    new Action(() => subject = GetTextBoxValue(TB_Description))
+                );
+                content = content.Replace("%subject%", subject);
+                content = content.Replace("%content%", description);
+
                 this.Dispatcher.Invoke( new CloseWindowCallback( 
                     delegate { this.Close(); }
                     ));
+                
             }
             else
             {
@@ -164,7 +184,29 @@ namespace OpenLoganalyzer.Windows
                      new UpdateEnabledCallback(UpdateIsEnabled),
                      new Object[] { CB_Labels, true }
                      );
+
+                content = content.GetTranslated();
             }
+            PopupData data = new PopupData(popupHeadline.GetTranslated(), content, 10000);
+            this.Dispatcher.Invoke(
+                new CreatePopUpCallback(CreatePopUp),
+                new Object[] { data }
+            );
+        }
+
+        private string GetTextBoxValue(TextBox textBox)
+        {
+            return textBox.Text;
+        }
+
+        private void CreatePopUp(PopupData data)
+        {
+            ShowPopupWindow issueCreated = new ShowPopupWindow(
+                settings,
+                themeManager,
+                data
+                );
+            issueCreated.Execute();
         }
 
         private void UpdateIsEnabled(Control control, bool state)
