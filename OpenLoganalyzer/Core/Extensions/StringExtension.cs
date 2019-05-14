@@ -27,6 +27,8 @@ namespace OpenLoganalyzer.Core.Extensions
                 target = string.Empty;
             }
 
+            target = target.Replace("\\n", "\n");
+            target = target.Replace("\\r", "\r");
             return target;
         }
     }
