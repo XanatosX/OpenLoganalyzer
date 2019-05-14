@@ -72,7 +72,6 @@
     <Compile Include="Core\Events\ErrorEvent.cs" />
     <Compile Include="Core\Extensions\StringExtension.cs" />
     <Compile Include="Core\Extensions\WindowExtension.cs" />
-    <Compile Include="Core\Helper\FontSize.cs" />
     <Compile Include="Core\Helper\Screen.cs" />
     <Compile Include="Core\Interfaces\Command\ICommand.cs" />
     <Compile Include="Core\Interfaces\ErrorManagment\IError.cs" />
