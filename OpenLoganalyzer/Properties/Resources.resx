@@ -153,6 +153,18 @@
   <data name="ReportBugSubject" xml:space="preserve">
     <value>Enter your subject of the bug report</value>
   </data>
+  <data name="ReportBug_Content_Error" xml:space="preserve">
+    <value>Failed to create the issue!\r\n\r\nPlease check your internet connection and if all the fields are filled with data!</value>
+  </data>
+  <data name="ReportBug_Content_Success" xml:space="preserve">
+    <value>A new issue got created\r\n\r\nSubject: %subject%\r\n\r\nContent: %content%</value>
+  </data>
+  <data name="ReportBug_Headline_Error" xml:space="preserve">
+    <value>Failed to create issue</value>
+  </data>
+  <data name="ReportBug_Headline_Success" xml:space="preserve">
+    <value>Issue created successfully</value>
+  </data>
   <data name="SendReport" xml:space="preserve">
     <value>Send report</value>
   </data>

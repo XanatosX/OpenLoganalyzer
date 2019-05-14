@@ -151,6 +151,42 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to create the issue!\r\n\r\nPlease check your internet connection and if all the fields are filled with data!.
+        /// </summary>
+        public static string ReportBug_Content_Error {
+            get {
+                return ResourceManager.GetString("ReportBug_Content_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new issue got created\r\n\r\nSubject: %subject%\r\n\r\nContent: %content%.
+        /// </summary>
+        public static string ReportBug_Content_Success {
+            get {
+                return ResourceManager.GetString("ReportBug_Content_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create issue.
+        /// </summary>
+        public static string ReportBug_Headline_Error {
+            get {
+                return ResourceManager.GetString("ReportBug_Headline_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue created successfully.
+        /// </summary>
+        public static string ReportBug_Headline_Success {
+            get {
+                return ResourceManager.GetString("ReportBug_Headline_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your description of the bug report ....
         /// </summary>
         public static string ReportBugDescription {
