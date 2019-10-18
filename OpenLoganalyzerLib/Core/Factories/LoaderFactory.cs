@@ -24,13 +24,13 @@ namespace OpenLoganalyzerLib.Core.Factories
             switch (configuration.LoaderType)
             {
                 case LoaderTypeEnum.FileLoader:
-                    returnValue = new FileLoader();
+                    //returnValue = new FileLoader();
                     break;
                 default:
                     break;
             }
 
-            returnValue.SetConfiguration(configuration);
+            //returnValue.SetConfiguration(configuration);
 
             return returnValue;
         }

@@ -1,20 +1,23 @@
-﻿using OpenLoganalyzerLib.Core.Interfaces.Loglines;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenLoganalyzerLib.Core.Interfaces.Loader
 {
     public interface ILoader
     {
         /// <summary>
-        /// Set the configuration
+        /// This method is used to initialize the loader and get him the needed data
         /// </summary>
-        /// <param name="configuration"></param>
-        void SetConfiguration(ILoaderConfiguration newConfiguration);
+        /// <param name="loaderInformation">The data needed for loading</param>
+        void Init(string loaderInformation);
 
         /// <summary>
-        /// Load the data
+        /// This method will load the file content 
         /// </summary>
-        /// <returns>A list with the log lines</returns>
-        List<ILogLine> Load();
+        /// <returns>WIll return a list of strings</returns>
+        IEnumerable<string> Load();
     }
 }
