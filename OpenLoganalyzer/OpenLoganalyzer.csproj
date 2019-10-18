@@ -101,7 +101,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\FilterManager.cs" />
+    <Compile Include="Core\Filter\FilterManager.cs" />
     <Compile Include="Core\Interfaces\Settings\ISettings.cs" />
     <Compile Include="Core\Settings\Settings.cs" />
     <Compile Include="MainWindow.xaml.cs">
