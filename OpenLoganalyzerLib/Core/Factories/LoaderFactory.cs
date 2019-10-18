@@ -21,14 +21,14 @@ namespace OpenLoganalyzerLib.Core.Factories
                 return returnValue;
             }
 
-            switch (configuration.LoaderType)
-            {
-                case LoaderTypeEnum.FileLoader:
-                    //returnValue = new FileLoader();
-                    break;
-                default:
-                    break;
-            }
+            //switch (configuration.LoaderType)
+            //{
+            //    case LoaderTypeEnum.FileLoader:
+            //        //returnValue = new FileLoader();
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             //returnValue.SetConfiguration(configuration);
 

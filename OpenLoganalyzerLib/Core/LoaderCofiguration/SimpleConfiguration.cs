@@ -8,12 +8,6 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
     public class SimpleConfiguration : ILoaderConfiguration
     {
         /// <summary>
-        /// The type of the loader to use
-        /// </summary>
-        private readonly LoaderTypeEnum loaderType;
-        public LoaderTypeEnum LoaderType => loaderType;
-
-        /// <summary>
         /// All the filters for the logfile to check
         /// </summary>
         private readonly Dictionary<string, string> filters;
@@ -30,11 +24,10 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
         /// </summary>
         private readonly Dictionary<string, string> additionalSettingContainer;
 
-        public SimpleConfiguration(LoaderTypeEnum loaderTypeEnum,
+        public SimpleConfiguration(
             Dictionary<string, string> newFilters,
             Dictionary<string, string> additionalSettings)
         {
-            loaderType = loaderTypeEnum;
             filters = newFilters;
             filterNames = filters.Keys.ToList();
             additionalSettingContainer = additionalSettings;
@@ -73,7 +66,7 @@ namespace OpenLoganalyzerLib.Core.LoaderCofiguration
         /// <returns></returns>
         public IJsonLoaderConfiguration GetSaveableObject()
         {
-            return new JsonSimpleConfiguration(LoaderType, filters, additionalSettingContainer);
+            return new JsonSimpleConfiguration(filters, additionalSettingContainer);
         }
     }
 }

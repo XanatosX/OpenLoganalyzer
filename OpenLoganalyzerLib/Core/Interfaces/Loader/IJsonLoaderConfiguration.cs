@@ -6,11 +6,6 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Loader
     public interface IJsonLoaderConfiguration
     {
         /// <summary>
-        /// Get the base type of this configuration
-        /// </summary>
-        LoaderTypeEnum LoaderType { get; }
-
-        /// <summary>
         /// All the filters of this configuration
         /// </summary>
         Dictionary<string, string> Filters { get; }

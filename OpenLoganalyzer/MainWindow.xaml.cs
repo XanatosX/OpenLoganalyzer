@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
+using OpenLoganalyzer.Core;
 using OpenLoganalyzer.Core.Commands;
 using OpenLoganalyzer.Core.Extensions;
+using OpenLoganalyzer.Core.Filter;
 using OpenLoganalyzer.Core.Interfaces;
 using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Settings;
@@ -8,8 +10,11 @@ using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
 using OpenLoganalyzerLib.Core.Loader;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace OpenLoganalyzer
 {
@@ -22,14 +27,20 @@ namespace OpenLoganalyzer
 
         private readonly ISettingsManager settingsManager;
 
+        private readonly FilterManager filterManager;
+
         private ISettings settings;
 
         public MainWindow()
         {
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string themeFolder = appdata + @"\OpenLoganalyzer\Themes\";
+            string filterFolder = appdata + @"\OpenLoganalyzer\Filters\";
+
             appdata += @"\OpenLoganalyzer\settings.json";
             settingsManager = new SettingsManager(appdata);
+
+            filterManager = new FilterManager(settings, filterFolder);
 
             LoadSettings();
 
@@ -41,8 +52,21 @@ namespace OpenLoganalyzer
 
             settingsManager.Save(settings);
             this.SizeToContent = SizeToContent.Manual;
+            
+            CB_FilterBox.DisplayMemberPath = "Name";
 
             BuildMenu();
+            SetupFilters();
+        }
+
+        private void SetupFilters()
+        {
+            List<FileInfo> filters = filterManager.getAvailableFilters();
+            CB_FilterBox.Items.Clear();
+            foreach (FileInfo filter in filters)
+            {
+                CB_FilterBox.Items.Add(filter);
+            }
         }
 
         private void LoadSettings()
@@ -140,6 +164,21 @@ namespace OpenLoganalyzer
         {
             BugReportWindow bugReportWindow = new BugReportWindow(settings, themeManager);
             bugReportWindow.ShowDialog();
+        }
+
+        private void CB_FilterBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender.GetType() != typeof(ComboBox))
+            {
+                return;
+            }
+            ComboBox box = (ComboBox)sender;
+            var test = box.SelectedItem;
+        }
+
+        private void ApplyLogLineConfiguration(FileInfo fileInfo)
+        {
+            //filterManager.
         }
     }
 }

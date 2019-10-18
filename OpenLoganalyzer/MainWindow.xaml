@@ -42,6 +42,6 @@
         </DockPanel>
         <ListView x:Name="LV_LogLines" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource ListBoxStyle}"/>
         <Label x:Name="L_Filter" Content="{x:Static p:Resources.Filter}" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Width="141" Visibility="Hidden" Grid.Row="1"/>
-        <ComboBox x:Name="CB_FilterBox" Grid.Row="2" VerticalAlignment="Top" Margin="0,25,0,0" Style="{DynamicResource InvisibleComboBox}" Background="#00000000" DataContextChanged="CB_FilterBox_DataContextChanged" Visibility="Hidden"/>
+        <ComboBox x:Name="CB_FilterBox" Grid.Row="2" VerticalAlignment="Top" Margin="0,25,0,0" Style="{DynamicResource InvisibleComboBox}" Background="#00000000" DataContextChanged="CB_FilterBox_DataContextChanged" Visibility="Visible" SelectionChanged="CB_FilterBox_SelectionChanged"/>
     </Grid>
 </Window>
