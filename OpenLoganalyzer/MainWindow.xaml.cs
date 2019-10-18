@@ -6,6 +6,7 @@ using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Settings;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
+using OpenLoganalyzerLib.Core.Loader;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -100,6 +101,10 @@ namespace OpenLoganalyzer
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
+            string fileName = openFileDialog.FileName;
+            StreamFileLoader loader = new StreamFileLoader();
+            loader.Init(fileName);
+            LV_LogLines.ItemsSource = loader.Load();
         }
 
         private void MI_Exit_Click(object sender, RoutedEventArgs e)
