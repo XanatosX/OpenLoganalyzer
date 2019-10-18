@@ -31,7 +31,7 @@ namespace OpenLoganalyzer
             settingsManager = new SettingsManager(appdata);
 
             LoadSettings();
-            
+
             InitializeComponent();
 
             themeManager = new ThemeManager();
@@ -39,6 +39,7 @@ namespace OpenLoganalyzer
             this.ChangeStyle(settings, themeManager);
 
             settingsManager.Save(settings);
+            this.SizeToContent = SizeToContent.Manual;
 
             BuildMenu();
         }
