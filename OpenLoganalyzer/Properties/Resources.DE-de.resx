@@ -135,6 +135,9 @@
   <data name="File" xml:space="preserve">
     <value>Datei</value>
   </data>
+  <data name="FileName" xml:space="preserve">
+    <value>Dateiname:</value>
+  </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
