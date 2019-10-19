@@ -1,12 +1,8 @@
-﻿using OpenLoganalyzerLib.Core.Interfaces.Loader;
-using System;
+﻿using OpenLoganalyzerLib.Core.Interfaces.Data;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenLoganalyzerLib.Core.Loader
+namespace OpenLoganalyzerLib.Core.Loader.Data
 {
     public class StreamFileLoader : ILoader
     {
