@@ -60,7 +60,11 @@
     <Compile Include="Core\Interfaces\Configuration\IFilterSaver.cs" />
     <Compile Include="Core\Interfaces\Configuration\ILogLineFilter.cs" />
     <Compile Include="Core\Interfaces\Data\ILoader.cs" />
+    <Compile Include="Core\Interfaces\LogAnalyzing\ILogLine.cs" />
+    <Compile Include="Core\Interfaces\LogAnalyzing\ILogManager.cs" />
     <Compile Include="Core\Loader\Data\StreamFileLoader.cs" />
+    <Compile Include="Core\LogAnalyzing\LogManager.cs" />
+    <Compile Include="Core\LogAnalyzing\SimpleLogLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
