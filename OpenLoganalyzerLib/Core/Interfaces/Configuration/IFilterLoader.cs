@@ -9,5 +9,7 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
     public interface IFilterLoader
     {
         IFilter LoadFilterByName(string name);
+
+        List<string> GetAvailableFilterNames();
     }
 }

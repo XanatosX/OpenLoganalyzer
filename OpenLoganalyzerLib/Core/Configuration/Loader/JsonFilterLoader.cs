@@ -47,6 +47,39 @@ namespace OpenLoganalyzerLib.Core.Configuration.Loader
 
             return returnValue;
         }
+
+        public List<string> GetAvailableFilterNames()
+        {
+            List<string> returnFiterNames = new List<string>();
+            if (!Directory.Exists(folderPath))
+            {
+                return returnFiterNames;
+            }
+            List<string> fileNames = Directory.GetFiles(folderPath).ToList<string>();
+
+            fileNames = fileNames.FindAll(name =>
+                {
+                    FileInfo fi = new FileInfo(name);
+                    return fi.Extension == ".json";
+                }
+            );
+            foreach (string fileName in fileNames)
+            {
+                FileInfo fi = new FileInfo(fileName);
+                string realName = fi.Name.Replace(fi.Extension, "");
+                IFilter filter = LoadFilterByName(realName);
+                if (filter != null)
+                {
+                    if (filter.Name != "")
+                    {
+                        returnFiterNames.Add(filter.Name);
+                    }
+                }
+                
+            }
+
+            return returnFiterNames;
+        }
     }
 }
 

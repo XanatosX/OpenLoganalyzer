@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
 {
-    public interface IFilterManager
+    public interface IFilterManager : IFilterSaver, IFilterLoader
     {
         void Init(IFilterLoader filterLoader, IFilterSaver filterSaver);
+
+        List<string> GetAvailableFilterNames();
     }
 }

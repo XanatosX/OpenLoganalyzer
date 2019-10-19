@@ -9,7 +9,9 @@ using OpenLoganalyzer.Core.Settings;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
 using OpenLoganalyzerLib.Core.Configuration;
+using OpenLoganalyzerLib.Core.Configuration.Loader;
 using OpenLoganalyzerLib.Core.Configuration.Saver;
+using OpenLoganalyzerLib.Core.Factories;
 using OpenLoganalyzerLib.Core.Interfaces.Configuration;
 using OpenLoganalyzerLib.Core.Loader;
 using OpenLoganalyzerLib.Core.Loader.Data;
@@ -31,7 +33,7 @@ namespace OpenLoganalyzer
 
         private readonly ISettingsManager settingsManager;
 
-        private readonly FilterManager filterManager;
+        private readonly IFilterManager filterManager;
 
         private ISettings settings;
 
@@ -44,7 +46,8 @@ namespace OpenLoganalyzer
             appdata += @"\OpenLoganalyzer\settings.json";
             settingsManager = new SettingsManager(appdata);
 
-            filterManager = new FilterManager(settings, filterFolder);
+            IFilterFactory factory = new JsonFilterManagerFactory(filterFolder);
+            filterManager = factory.GetFilterManager();
 
             LoadSettings();
 
@@ -56,8 +59,6 @@ namespace OpenLoganalyzer
 
             settingsManager.Save(settings);
             this.SizeToContent = SizeToContent.Manual;
-            
-            CB_FilterBox.DisplayMemberPath = "Name";
 
             InitzialSetup();
             BuildMenu();
@@ -72,11 +73,11 @@ namespace OpenLoganalyzer
 
         private void SetupFilters()
         {
-            List<FileInfo> filters = filterManager.getAvailableFilters();
+            List<string> filterNames = filterManager.GetAvailableFilterNames();
             CB_FilterBox.Items.Clear();
-            foreach (FileInfo filter in filters)
+            foreach (string filterName in filterNames)
             {
-                CB_FilterBox.Items.Add(filter);
+                CB_FilterBox.Items.Add(filterName);
             }
         }
 
