@@ -4,38 +4,30 @@
 
     <Color x:Key="InvisibleColor">#00000000</Color>
     <Color x:Key="PlaceholderColor">#b3b3b3</Color>
-    <Color x:Key="SuccessColor">#5cb85c</Color>
-    <Color x:Key="WarningColor">#FFA500</Color>
-    <Color x:Key="FailColor">#d9534f</Color>
+
+    <Color x:Key="DefaultInputBackgroundColor">#FFFFFF</Color>
     
     <Color x:Key="HoverColor">#D3D3D3</Color>
     <Color x:Key="PressedColor">#D3D3D3</Color>
 
-    <Color x:Key="SuccessBorderColor">#00000000</Color>
-    <Color x:Key="WarningBorderColor">#00000000</Color>
-    <Color x:Key="FailBorderColor">#00000000</Color>
     <Color x:Key="HoverBorderColor">#D3D3D3</Color>
     <Color x:Key="PressedBorderColor">#D3D3D3</Color>
 
     <SolidColorBrush x:Key="InvisibleBrush"  Color="{StaticResource InvisibleColor}"/>
     <SolidColorBrush x:Key="PlaceholderBrush"  Color="{StaticResource PlaceholderColor}"/>
     
-    <SolidColorBrush x:Key="SuccessBrush"  Color="{StaticResource SuccessColor}"/>
-    <SolidColorBrush x:Key="WarningBrush"  Color="{StaticResource WarningColor}"/>
-    <SolidColorBrush x:Key="FailBrush"  Color="{StaticResource FailColor}"/>
     <SolidColorBrush x:Key="HoverBrush"  Color="Gray"/>
     <SolidColorBrush x:Key="PressedBrush"  Color="{StaticResource PressedColor}"/>
-    
+
+    <SolidColorBrush x:Key="DefaultInputBackgroundBrush" Color="{StaticResource DefaultInputBackgroundColor}"/>
+
     <SolidColorBrush x:Key="DefaultBorder"  Color="{StaticResource HoverColor}"/>
-    <SolidColorBrush x:Key="SuccessBorder"  Color="{StaticResource SuccessBorderColor}"/>
-    <SolidColorBrush x:Key="WarningBorder"  Color="{StaticResource WarningBorderColor}"/>
-    <SolidColorBrush x:Key="FailBorder"  Color="{StaticResource FailBorderColor}"/>
 
 
     <Style x:Key="WindowStyle" TargetType="Window">
         <Setter Property="MinHeight" Value="450"></Setter>
         <Setter Property="MinWidth" Value="800"></Setter>
-        <Setter Property="SizeToContent" Value="WidthAndHeight"></Setter>
+        <Setter Property="SizeToContent" Value="Manual"></Setter>
     </Style>
 
     <Style x:Key="InvisibleComboBox" TargetType="ComboBox">
@@ -82,16 +74,10 @@
     </Style>
 
     <Style x:Key="SuccessButton" TargetType="Button" BasedOn="{StaticResource Button}">
-        <Setter Property="Background" Value="{StaticResource SuccessBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource SuccessBorder}"></Setter>
     </Style>
     <Style x:Key="WarningButton" TargetType="Button" BasedOn="{StaticResource Button}">
-        <Setter Property="Background" Value="{StaticResource WarningBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource WarningBorder}"></Setter>
     </Style>
     <Style x:Key="FailButton" TargetType="Button" BasedOn="{StaticResource Button}">
-        <Setter Property="Background" Value="{StaticResource FailBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource FailBorder}"></Setter>
     </Style>
 
     <Style x:Key="DefaultTextBox" TargetType="TextBox">
@@ -104,6 +90,10 @@
 
     <Style x:Key="DefaultLabel" TargetType="Label">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="FileNameButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource DefaultInputBackgroundBrush}"></Setter>
     </Style>
 
 </ResourceDictionary>

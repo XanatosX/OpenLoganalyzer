@@ -45,7 +45,7 @@
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
         <Setter Property="MinHeight" Value="450"></Setter>
         <Setter Property="MinWidth" Value="800"></Setter>
-        <Setter Property="SizeToContent" Value="WidthAndHeight"></Setter>
+        <Setter Property="SizeToContent" Value="Manual"></Setter>
     </Style>
 
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
