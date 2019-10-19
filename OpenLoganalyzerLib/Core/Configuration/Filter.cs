@@ -9,7 +9,6 @@ namespace OpenLoganalyzerLib.Core.Configuration
 {
     public class Filter : IFilter
     {
-
         public string Name => name;
         private readonly string name;
 
