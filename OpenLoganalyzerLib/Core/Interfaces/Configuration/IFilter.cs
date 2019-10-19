@@ -16,7 +16,7 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
 
         bool AddFilter(ILogLineFilter logLineFilter, bool overwrite);
 
-        bool RemoveFilterByName(string name);
+        bool RemoveFilterLineByName(string name);
 
 
     }

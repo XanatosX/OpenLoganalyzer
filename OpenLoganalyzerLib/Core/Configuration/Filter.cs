@@ -38,7 +38,7 @@ namespace OpenLoganalyzerLib.Core.Configuration
             return false;
         }
 
-        public bool RemoveFilterByName(string name)
+        public bool RemoveFilterLineByName(string name)
         {
             ILogLineFilter filterToRemove = logLineTypes.Find(filter => filter.Name == name);
             if (filterToRemove != null)
