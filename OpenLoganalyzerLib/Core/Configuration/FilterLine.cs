@@ -12,17 +12,36 @@ namespace OpenLoganalyzerLib.Core.Configuration
         public string Name => name;
         private readonly string name;
 
-        public string Regex => regex;
-        private readonly string regex;
+        public List<IFilterColumn> FilterColumns => filterColumns;
+        private List<IFilterColumn> filterColumns;
 
-        public string Type => type;
-        private readonly string type;
-
-        public FilterLine(string name, string regex, string type)
+        public FilterLine(string name)
         {
+            filterColumns = new List<IFilterColumn>();
             this.name = name;
-            this.regex = regex;
-            this.type = type;
+        }
+
+        public void AddColumn(IFilterColumn columnToAdd)
+        {
+            IFilterColumn filterExists = filterColumns.Find(filter => filter.Type == columnToAdd.Type);
+            if (filterExists != null)
+            {
+                return;
+            }
+
+            filterColumns.Add(columnToAdd);
+        }
+
+        public bool IsValid(string logLine)
+        {
+            foreach (IFilterColumn column in filterColumns)
+            {
+                if (!column.IsValid(logLine))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
