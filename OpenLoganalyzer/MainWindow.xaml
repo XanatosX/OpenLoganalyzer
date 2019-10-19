@@ -41,7 +41,10 @@
             </Menu>
         </DockPanel>
         <ListView x:Name="LV_LogLines" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource ListBoxStyle}"/>
-        <Label x:Name="L_Filter" Content="{x:Static p:Resources.Filter}" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Width="141" Visibility="Hidden" Grid.Row="1"/>
-        <ComboBox x:Name="CB_FilterBox" Grid.Row="2" VerticalAlignment="Top" Margin="0,25,0,0" Style="{DynamicResource InvisibleComboBox}" Background="#00000000" DataContextChanged="CB_FilterBox_DataContextChanged" Visibility="Visible" SelectionChanged="CB_FilterBox_SelectionChanged"/>
+        <Label x:Name="L_Filter" Content="{x:Static p:Resources.Filter}" Margin="10,99,10,0" VerticalAlignment="Top" Visibility="Visible" Grid.Row="1"/>
+        <ComboBox x:Name="CB_FilterBox" Grid.Row="1" VerticalAlignment="Top" Margin="10,130,10,0" Style="{DynamicResource InvisibleComboBox}" Background="#00000000" DataContextChanged="CB_FilterBox_DataContextChanged" Visibility="Visible" SelectionChanged="CB_FilterBox_SelectionChanged"/>
+        <TextBox x:Name="TB_FileName" Height="23" Margin="10,71,35,0" Grid.Row="1" VerticalAlignment="Top" MaxLines="1" TextChanged="TB_FileName_TextChanged"/>
+        <Label x:Name="L_FileName" Content="{x:Static p:Resources.FileName}" Margin="10,40,10,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button x:Name="B_OpenFile" Content="{x:Static p:Resources.OpenFile}" HorizontalAlignment="Right" Margin="0,71,10,0" Style="{DynamicResource FileNameButton}" Grid.Row="1" VerticalAlignment="Top" Width="25" Height="23" Click="B_OpenFile_Click"/>
     </Grid>
 </Window>

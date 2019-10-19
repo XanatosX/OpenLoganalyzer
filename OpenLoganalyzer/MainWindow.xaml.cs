@@ -8,7 +8,11 @@ using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Settings;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
+using OpenLoganalyzerLib.Core.Configuration;
+using OpenLoganalyzerLib.Core.Configuration.Saver;
+using OpenLoganalyzerLib.Core.Interfaces.Configuration;
 using OpenLoganalyzerLib.Core.Loader;
+using OpenLoganalyzerLib.Core.Loader.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,8 +59,15 @@ namespace OpenLoganalyzer
             
             CB_FilterBox.DisplayMemberPath = "Name";
 
+            InitzialSetup();
             BuildMenu();
             SetupFilters();
+        }
+
+        private void InitzialSetup()
+        {
+            L_Filter.Visibility = Visibility.Hidden;
+            CB_FilterBox.Visibility = Visibility.Hidden;
         }
 
         private void SetupFilters()
@@ -123,12 +134,7 @@ namespace OpenLoganalyzer
 
         private void MI_Open_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.ShowDialog();
-            string fileName = openFileDialog.FileName;
-            StreamFileLoader loader = new StreamFileLoader();
-            loader.Init(fileName);
-            LV_LogLines.ItemsSource = loader.Load();
+
         }
 
         private void MI_Exit_Click(object sender, RoutedEventArgs e)
@@ -173,12 +179,48 @@ namespace OpenLoganalyzer
                 return;
             }
             ComboBox box = (ComboBox)sender;
-            var test = box.SelectedItem;
+            if (box.SelectedItem.GetType() == typeof(FileInfo))
+            {
+                FileInfo fileInfo = (FileInfo)box.SelectedItem;
+
+                StreamFileLoader loader = new StreamFileLoader();
+                string fileName = TB_FileName.Text;
+                loader.Init(fileName);
+                LV_LogLines.ItemsSource = loader.Load();
+            }
+
         }
 
         private void ApplyLogLineConfiguration(FileInfo fileInfo)
         {
             //filterManager.
+        }
+
+        private void B_OpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            string fileName = openFileDialog.FileName;
+            TB_FileName.Text = fileName;
+        }
+
+        private void TB_FileName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender.GetType() != typeof(TextBox))
+            {
+                return;
+            }
+
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == String.Empty)
+            {
+                L_Filter.Visibility = Visibility.Hidden;
+                CB_FilterBox.Visibility = Visibility.Hidden;
+                return;
+            }
+
+            L_Filter.Visibility = Visibility.Visible;
+            CB_FilterBox.Visibility = Visibility.Visible;
         }
     }
 }
