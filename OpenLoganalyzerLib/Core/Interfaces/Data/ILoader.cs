@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenLoganalyzerLib.Core.Interfaces.Loader
+namespace OpenLoganalyzerLib.Core.Interfaces.Data
 {
     public interface ILoader
     {
