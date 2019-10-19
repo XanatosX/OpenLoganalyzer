@@ -13,6 +13,6 @@ namespace OpenLoganalyzerLib.Core.Interfaces.LogAnalyzing
 
         ILogLine GetLogLine(string logLine);
 
-        Enumerable<ILogLine> GetLogLines(Enumerable<string> logLines);
+        IEnumerable<ILogLine> GetLogLines(IEnumerable<string> logLines);
     }
 }

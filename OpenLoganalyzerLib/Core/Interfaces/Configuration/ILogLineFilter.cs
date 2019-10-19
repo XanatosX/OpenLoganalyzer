@@ -10,8 +10,10 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
     {
         string Name { get; }
 
-        string Regex { get; }
+        List<IFilterColumn> FilterColumns { get; }
 
-        string Type { get;  }
+        void AddColumn(IFilterColumn columnToAdd);
+
+        bool IsValid(string logLine);
     }
 }

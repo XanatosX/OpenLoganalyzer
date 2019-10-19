@@ -9,8 +9,10 @@ namespace OpenLoganalyzerLib.Core.Interfaces.LogAnalyzing
 {
     public interface ILogLine
     {
-        Dictionary<ILogLineFilter, string> FilteredLogLine { get; }
+        string Type { get; }
 
-        void Init(string logLine, IFilter filter);
+        Dictionary<string, string> FilteredLogLine { get; }
+
+        string GetTextForColumn(string columnName);
     }
 }
