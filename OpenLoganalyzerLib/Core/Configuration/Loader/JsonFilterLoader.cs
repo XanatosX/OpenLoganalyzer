@@ -1,4 +1,5 @@
-﻿using OpenLoganalyzerLib.Core.Interfaces.Configuration;
+﻿using Newtonsoft.Json;
+using OpenLoganalyzerLib.Core.Interfaces.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,14 +24,28 @@ namespace OpenLoganalyzerLib.Core.Configuration.Loader
 
         public IFilter LoadFilterByName(string name)
         {
+            IFilter returnValue = default;
             string fileName = folderPath + name + ".json";
+            fileName = fileName.Replace(" ", "_");
             if (!File.Exists(fileName))
             {
-                return default;
+                return returnValue;
+            }
+            JsonSerializer jsonSerializer = new JsonSerializer();
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                try
+                {
+                    JsonFilterContainer jsonFilterContainer = (JsonFilterContainer)jsonSerializer.Deserialize(reader, typeof(JsonFilterContainer));
+                    returnValue = jsonFilterContainer.GetFilter();
+                }
+                catch (Exception)
+                {
+                    return returnValue;
+                }
             }
 
-            //@TODO: Write the logic to load the filters again after saving them!!!
-            return default;
+            return returnValue;
         }
     }
 }
