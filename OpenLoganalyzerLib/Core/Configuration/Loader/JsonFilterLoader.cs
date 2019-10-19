@@ -39,7 +39,7 @@ namespace OpenLoganalyzerLib.Core.Configuration.Loader
                     JsonFilterContainer jsonFilterContainer = (JsonFilterContainer)jsonSerializer.Deserialize(reader, typeof(JsonFilterContainer));
                     returnValue = jsonFilterContainer.GetFilter();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return returnValue;
                 }

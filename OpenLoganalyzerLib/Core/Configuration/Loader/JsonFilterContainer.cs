@@ -11,20 +11,20 @@ namespace OpenLoganalyzerLib.Core.Configuration.Loader
     {
         public string Name;
 
-        public List<FilterLine> LogLineTypes;
+        public List<JsonFilterLine> LogLineTypes;
 
         public JsonFilterContainer()
         {
             Name = "";
-            LogLineTypes = new List<FilterLine>();
+            LogLineTypes = new List<JsonFilterLine>();
         }
 
         public virtual IFilter GetFilter()
         {
             IFilter filter = new Filter(Name);
-            foreach (ILogLineFilter logLineFilter in LogLineTypes)
+            foreach (JsonFilterLine logLineFilter in LogLineTypes)
             {
-                filter.AddFilter(logLineFilter);
+                filter.AddFilter(logLineFilter.GetLogLineFilter());
             }
             return filter;
         }

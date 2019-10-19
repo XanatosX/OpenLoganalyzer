@@ -47,7 +47,9 @@
     <Compile Include="Core\Configuration\Filter.cs" />
     <Compile Include="Core\Configuration\FilterColumn.cs" />
     <Compile Include="Core\Configuration\FilterLine.cs" />
+    <Compile Include="Core\Configuration\Loader\JsonFilterColumn.cs" />
     <Compile Include="Core\Configuration\Loader\JsonFilterContainer.cs" />
+    <Compile Include="Core\Configuration\Loader\JsonFilterLine.cs" />
     <Compile Include="Core\Configuration\Loader\JsonFilterLoader.cs" />
     <Compile Include="Core\Configuration\Saver\JsonFilterSaver.cs" />
     <Compile Include="Core\Events\BaseEvent.cs" />
