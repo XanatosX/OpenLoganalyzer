@@ -2,7 +2,6 @@
 using OpenLoganalyzer.Core;
 using OpenLoganalyzer.Core.Commands;
 using OpenLoganalyzer.Core.Extensions;
-using OpenLoganalyzer.Core.Filter;
 using OpenLoganalyzer.Core.Interfaces;
 using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Settings;
@@ -13,10 +12,13 @@ using OpenLoganalyzerLib.Core.Configuration.Loader;
 using OpenLoganalyzerLib.Core.Configuration.Saver;
 using OpenLoganalyzerLib.Core.Factories;
 using OpenLoganalyzerLib.Core.Interfaces.Configuration;
+using OpenLoganalyzerLib.Core.Interfaces.LogAnalyzing;
 using OpenLoganalyzerLib.Core.Loader;
 using OpenLoganalyzerLib.Core.Loader.Data;
+using OpenLoganalyzerLib.Core.LogAnalyzing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,8 +39,16 @@ namespace OpenLoganalyzer
 
         private ISettings settings;
 
+        private readonly List<string> bindingMapping;
+
+        GridViewColumnHeader _lastHeaderClicked = null;
+        ListSortDirection _lastDirection = ListSortDirection.Ascending;
+
         public MainWindow()
         {
+            bindingMapping = new List<string>();
+
+
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string themeFolder = appdata + @"\OpenLoganalyzer\Themes\";
             string filterFolder = appdata + @"\OpenLoganalyzer\Filters\";
@@ -49,6 +59,29 @@ namespace OpenLoganalyzer
             IFilterFactory factory = new JsonFilterManagerFactory(filterFolder);
             filterManager = factory.GetFilterManager();
 
+            ILogManager logManager = new LogManager();
+
+            IFilter testFilter = new Filter("mmBit");
+            ILogLineFilter warningLine = new FilterLine("Warning");
+            IFilterColumn severity = new FilterColumn("Severity");
+            severity.addNewRegex("^.*\\[(WARNING)\\]");
+            IFilterColumn caller = new FilterColumn("Caller");
+            caller.addNewRegex("^(.*)\\[WARNING\\]");
+            IFilterColumn time = new FilterColumn("Time");
+            time.addNewRegex(".*\\[WARNING\\].*([0-9]{2}:[0-9]{2}:[0-9]{2})");
+            IFilterColumn message = new FilterColumn("Message");
+            message.addNewRegex(".*\\[WARNING\\].*[0-9]{2}:[0-9]{2}:[0-9]{2}:(.*)");
+            
+            warningLine.AddColumn(caller);
+            warningLine.AddColumn(severity);
+            warningLine.AddColumn(time);
+            warningLine.AddColumn(message);
+
+            testFilter.AddFilter(warningLine);
+
+            logManager.Init(testFilter);
+            filterManager.Save(testFilter);
+           
             LoadSettings();
 
             InitializeComponent();
@@ -58,14 +91,98 @@ namespace OpenLoganalyzer
             this.ChangeStyle(settings, themeManager);
 
             settingsManager.Save(settings);
-            this.SizeToContent = SizeToContent.Manual;
 
             InitzialSetup();
             BuildMenu();
             SetupFilters();
         }
 
-        private void InitzialSetup()
+        private void BuildViewGrid(IFilter filter)
+        {
+            List<string> columnNames = new List<string>();
+            foreach (ILogLineFilter logLineFilter in filter.LogLineTypes)
+            {
+                foreach (IFilterColumn column in logLineFilter.FilterColumns)
+                {
+                    if (!columnNames.Contains(column.Type))
+                    {
+                        columnNames.Add(column.Type);
+                    }
+                }
+            }
+
+            LV_LogLines.Items.Clear();
+            LV_LogLines.View = null;
+            bindingMapping.Clear();
+            GridView view = new GridView();
+            view.AllowsColumnReorder = true;
+            int counter = 0;
+            foreach (string columnName in columnNames)
+            {
+                GridViewColumn column = new GridViewColumn();
+                GridViewColumnHeader header = new GridViewColumnHeader();
+                header.Click += Header_Click;
+                header.Content = columnName;
+                column.Header = header;
+                column.DisplayMemberBinding = new Binding("[" + counter.ToString() + "]");
+                view.Columns.Add(column);
+                bindingMapping.Add(columnName);
+                counter++;
+            }
+            LV_LogLines.View = view;
+        }
+
+        private void Header_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            ListSortDirection direction;
+
+            if (headerClicked != null)
+            {
+                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
+                {
+                    if (headerClicked != _lastHeaderClicked)
+                    {
+                        direction = ListSortDirection.Ascending;
+                    }
+                    else
+                    {
+                        if (_lastDirection == ListSortDirection.Ascending)
+                        {
+                            direction = ListSortDirection.Descending;
+                        }
+                        else
+                        {
+                            direction = ListSortDirection.Ascending;
+                        }
+                    }
+
+                    GridViewColumnHeader realHeader = headerClicked.Column.Header as GridViewColumnHeader;
+                    string headerName = realHeader.Content as string;
+
+                    string sortBy = bindingMapping.FindIndex(item => item == headerName).ToString();
+                    sortBy = "[" + sortBy + "]";
+
+                    Sort(sortBy, direction);
+
+                    _lastHeaderClicked = headerClicked;
+                    _lastDirection = direction;
+                }
+            }
+        }
+
+        private void Sort(string sortBy, ListSortDirection direction)
+        {
+            ICollectionView dataView =
+              CollectionViewSource.GetDefaultView(LV_LogLines.Items);
+
+            dataView.SortDescriptions.Clear();
+            SortDescription sd = new SortDescription(sortBy, direction);
+            dataView.SortDescriptions.Add(sd);
+            dataView.Refresh();
+        }
+
+            private void InitzialSetup()
         {
             L_Filter.Visibility = Visibility.Hidden;
             CB_FilterBox.Visibility = Visibility.Hidden;
@@ -180,21 +297,61 @@ namespace OpenLoganalyzer
                 return;
             }
             ComboBox box = (ComboBox)sender;
-            if (box.SelectedItem.GetType() == typeof(FileInfo))
+
+            IFilter filter = filterManager.LoadFilterByName(box.SelectedItem.ToString());
+            if (filter != null)
             {
-                FileInfo fileInfo = (FileInfo)box.SelectedItem;
-
+                BuildViewGrid(filter);
                 StreamFileLoader loader = new StreamFileLoader();
-                string fileName = TB_FileName.Text;
-                loader.Init(fileName);
-                LV_LogLines.ItemsSource = loader.Load();
+                loader.Init(TB_FileName.Text);
+                ILogManager logManager = new LogManager();
+                logManager.Init(filter);
+
+                LV_LogLines.Items.Clear();
+                ViewBase view = LV_LogLines.View;
+                GridView realView = (GridView)view;
+                foreach (ILogLine line in logManager.GetLogLines(loader.Load()))
+                {
+
+                    if (line == null)
+                    {
+                        foreach (GridViewColumn column in realView.Columns)
+                        {
+                            List<string> currentDataSet = new List<string>();
+
+                            bool first = true;
+                            foreach (string bindingKey in bindingMapping)
+                            {
+                                string value = "";
+                                if (first)
+                                {
+                                    first = false;
+                                    value = "No filter matched!";
+                                }
+                                currentDataSet.Add(value);
+                            }
+
+
+                            LV_LogLines.Items.Add(currentDataSet);
+                            
+                        }
+                        continue;
+                    }
+
+                    foreach (GridViewColumn column in realView.Columns)
+                    {
+                        List<string> currentDataSet = new List<string>();
+
+                        foreach (string bindingKey in bindingMapping)
+                        {
+                            string value = line.FilteredLogLine[bindingKey] ?? "";
+                            currentDataSet.Add(value);
+                        }
+
+                        LV_LogLines.Items.Add(currentDataSet);
+                    }
+                }
             }
-
-        }
-
-        private void ApplyLogLineConfiguration(FileInfo fileInfo)
-        {
-            //filterManager.
         }
 
         private void B_OpenFile_Click(object sender, RoutedEventArgs e)
