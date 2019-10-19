@@ -44,13 +44,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Configuration\Filter.cs" />
+    <Compile Include="Core\Configuration\FilterLine.cs" />
+    <Compile Include="Core\Configuration\Loader\JsonFilterLoader.cs" />
+    <Compile Include="Core\Configuration\Saver\JsonFilterSaver.cs" />
     <Compile Include="Core\Enum\AdditionalSettingsEnum.cs" />
     <Compile Include="Core\Enum\FilterTypeEnum.cs" />
     <Compile Include="Core\Enum\LoaderTypeEnum.cs" />
     <Compile Include="Core\Events\BaseEvent.cs" />
     <Compile Include="Core\Events\ErrorLoadingEvent.cs" />
     <Compile Include="Core\Factories\LoaderFactory.cs" />
-    <Compile Include="Core\Interfaces\Loader\ILoader.cs" />
+    <Compile Include="Core\Interfaces\Configuration\IFilter.cs" />
+    <Compile Include="Core\Interfaces\Configuration\IFilterFactory.cs" />
+    <Compile Include="Core\Interfaces\Configuration\IFilterLoader.cs" />
+    <Compile Include="Core\Interfaces\Configuration\IFilterManager.cs" />
+    <Compile Include="Core\Interfaces\Configuration\IFilterSaver.cs" />
+    <Compile Include="Core\Interfaces\Configuration\ILogLineFilter.cs" />
+    <Compile Include="Core\Interfaces\Data\ILoader.cs" />
     <Compile Include="Core\Interfaces\Loader\ILoaderConfiguration.cs" />
     <Compile Include="Core\Interfaces\Loader\ILoaderConfigurationLoader.cs" />
     <Compile Include="Core\Interfaces\Loader\ILoaderFactory.cs" />
@@ -59,7 +69,7 @@
     <Compile Include="Core\LoaderCofiguration\JsonSimpleConfiguration.cs" />
     <Compile Include="Core\LoaderCofiguration\SimpleConfiguration.cs" />
     <Compile Include="Core\LoaderCofiguration\SimpleConfigurationLoader.cs" />
-    <Compile Include="Core\Loader\StreamFileLoader.cs" />
+    <Compile Include="Core\Loader\Data\StreamFileLoader.cs" />
     <Compile Include="Core\Loglines\SimpleLogline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

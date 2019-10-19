@@ -1,4 +1,5 @@
 ﻿using OpenLoganalyzerLib.Core.Enum;
+using OpenLoganalyzerLib.Core.Interfaces.Data;
 using OpenLoganalyzerLib.Core.Interfaces.Loader;
 using OpenLoganalyzerLib.Core.Loader;
 

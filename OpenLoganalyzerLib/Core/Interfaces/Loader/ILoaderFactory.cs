@@ -1,4 +1,6 @@
-﻿namespace OpenLoganalyzerLib.Core.Interfaces.Loader
+﻿using OpenLoganalyzerLib.Core.Interfaces.Data;
+
+namespace OpenLoganalyzerLib.Core.Interfaces.Loader
 {
     public interface ILoaderFactory
     {
