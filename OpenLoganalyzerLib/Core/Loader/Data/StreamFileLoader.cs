@@ -38,6 +38,10 @@ namespace OpenLoganalyzerLib.Core.Loader.Data
 
             while ((line = reader.ReadLine()) != null)
             {
+                if (line == "")
+                {
+                    continue;
+                }
                 yield return line;
             }
 

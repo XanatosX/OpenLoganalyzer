@@ -58,29 +58,6 @@ namespace OpenLoganalyzer
 
             IFilterFactory factory = new JsonFilterManagerFactory(filterFolder);
             filterManager = factory.GetFilterManager();
-
-            ILogManager logManager = new LogManager();
-
-            IFilter testFilter = new Filter("mmBit");
-            ILogLineFilter warningLine = new FilterLine("Warning");
-            IFilterColumn severity = new FilterColumn("Severity");
-            severity.addNewRegex("^.*\\[(WARNING)\\]");
-            IFilterColumn caller = new FilterColumn("Caller");
-            caller.addNewRegex("^(.*)\\[WARNING\\]");
-            IFilterColumn time = new FilterColumn("Time");
-            time.addNewRegex(".*\\[WARNING\\].*([0-9]{2}:[0-9]{2}:[0-9]{2})");
-            IFilterColumn message = new FilterColumn("Message");
-            message.addNewRegex(".*\\[WARNING\\].*[0-9]{2}:[0-9]{2}:[0-9]{2}:(.*)");
-            
-            warningLine.AddColumn(caller);
-            warningLine.AddColumn(severity);
-            warningLine.AddColumn(time);
-            warningLine.AddColumn(message);
-
-            testFilter.AddFilter(warningLine);
-
-            logManager.Init(testFilter);
-            filterManager.Save(testFilter);
            
             LoadSettings();
 
@@ -298,60 +275,7 @@ namespace OpenLoganalyzer
             }
             ComboBox box = (ComboBox)sender;
 
-            IFilter filter = filterManager.LoadFilterByName(box.SelectedItem.ToString());
-            if (filter != null)
-            {
-                BuildViewGrid(filter);
-                StreamFileLoader loader = new StreamFileLoader();
-                loader.Init(TB_FileName.Text);
-                ILogManager logManager = new LogManager();
-                logManager.Init(filter);
-
-                LV_LogLines.Items.Clear();
-                ViewBase view = LV_LogLines.View;
-                GridView realView = (GridView)view;
-                foreach (ILogLine line in logManager.GetLogLines(loader.Load()))
-                {
-
-                    if (line == null)
-                    {
-                        foreach (GridViewColumn column in realView.Columns)
-                        {
-                            List<string> currentDataSet = new List<string>();
-
-                            bool first = true;
-                            foreach (string bindingKey in bindingMapping)
-                            {
-                                string value = "";
-                                if (first)
-                                {
-                                    first = false;
-                                    value = "No filter matched!";
-                                }
-                                currentDataSet.Add(value);
-                            }
-
-
-                            LV_LogLines.Items.Add(currentDataSet);
-                            
-                        }
-                        continue;
-                    }
-
-                    foreach (GridViewColumn column in realView.Columns)
-                    {
-                        List<string> currentDataSet = new List<string>();
-
-                        foreach (string bindingKey in bindingMapping)
-                        {
-                            string value = line.FilteredLogLine[bindingKey] ?? "";
-                            currentDataSet.Add(value);
-                        }
-
-                        LV_LogLines.Items.Add(currentDataSet);
-                    }
-                }
-            }
+            LoadFile(box);
         }
 
         private void B_OpenFile_Click(object sender, RoutedEventArgs e)
@@ -360,6 +284,11 @@ namespace OpenLoganalyzer
             openFileDialog.ShowDialog();
             string fileName = openFileDialog.FileName;
             TB_FileName.Text = fileName;
+
+            if (CB_FilterBox.SelectedItem != null && CB_FilterBox.SelectedItem.ToString() != "" )
+            {
+                LoadFile(CB_FilterBox);
+            }
         }
 
         private void TB_FileName_TextChanged(object sender, TextChangedEventArgs e)
@@ -379,6 +308,46 @@ namespace OpenLoganalyzer
 
             L_Filter.Visibility = Visibility.Visible;
             CB_FilterBox.Visibility = Visibility.Visible;
+        }
+
+        private void LoadFile(ComboBox box)
+        {
+            IFilter filter = filterManager.LoadFilterByName(box.SelectedItem.ToString());
+            if (filter != null)
+            {
+                BuildViewGrid(filter);
+                StreamFileLoader loader = new StreamFileLoader();
+                loader.Init(TB_FileName.Text);
+                ILogManager logManager = new LogManager();
+                logManager.Init(filter);
+
+                LV_LogLines.Items.Clear();
+                ViewBase view = LV_LogLines.View;
+                GridView realView = (GridView)view;
+                foreach (ILogLine line in logManager.GetLogLines(loader.Load()))
+                {
+                    List<string> currentDataSet = new List<string>();
+                    if (line == null)
+                    {
+                        //@TODO: Think about writing an error?
+                        continue;
+                    }
+
+                    foreach (GridViewColumn column in realView.Columns)
+                    {
+                        
+
+                        foreach (string bindingKey in bindingMapping)
+                        {
+                            string value = line.FilteredLogLine[bindingKey] ?? "";
+                            currentDataSet.Add(value);
+                        }
+
+                        
+                    }
+                    LV_LogLines.Items.Add(currentDataSet);
+                }
+            }
         }
     }
 }
