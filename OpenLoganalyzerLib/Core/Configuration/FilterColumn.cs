@@ -11,7 +11,7 @@ namespace OpenLoganalyzerLib.Core.Configuration
     public class FilterColumn : IFilterColumn
     {
         public string Type => type;
-        private readonly string type;
+        private string type;
 
         public List<string> PossibleRegex => possibleRegex;
         private readonly List<string> possibleRegex;
@@ -84,6 +84,16 @@ namespace OpenLoganalyzerLib.Core.Configuration
                 }
             }
             return "";
+        }
+
+        public void RenameColumn(string newName)
+        {
+            type = newName;
+        }
+
+        public void Reset()
+        {
+            possibleRegex.Clear();
         }
     }
 }

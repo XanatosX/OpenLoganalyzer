@@ -74,9 +74,6 @@ namespace OpenLoganalyzer
             InitzialSetup();
             BuildMenu();
             SetupFilters();
-
-            AddOrEditFilterWindow addOrEditFilter = new AddOrEditFilterWindow(settings, filterManager, themeManager, null);
-            addOrEditFilter.ShowDialog();
         }
 
         private void BuildViewGrid(IFilter filter)
@@ -313,6 +310,10 @@ namespace OpenLoganalyzer
 
         private void LoadFile(ComboBox box)
         {
+            if (box.SelectedItem == null)
+            {
+                return;
+            }
             IFilter filter = filterManager.LoadFilterByName(box.SelectedItem.ToString());
             if (filter != null)
             {
@@ -340,7 +341,8 @@ namespace OpenLoganalyzer
 
                         foreach (string bindingKey in bindingMapping)
                         {
-                            string value = line.FilteredLogLine[bindingKey] ?? "";
+                            
+                            string value = line.FilteredLogLine.ContainsKey(bindingKey) ? line.FilteredLogLine[bindingKey] : "";
                             currentDataSet.Add(value);
                         }
 
@@ -413,6 +415,26 @@ namespace OpenLoganalyzer
             }
             AddOrEditFilterWindow addOrEditFilter = new AddOrEditFilterWindow(settings, filterManager, themeManager, filter);
             addOrEditFilter.ShowDialog();
+            if (IsEdit)
+            {
+                IFilter newOrEditedFilter = addOrEditFilter.Filter;
+                if (newOrEditedFilter == null)
+                {
+                    return;
+                }
+
+                BuildViewGrid(newOrEditedFilter);
+                foreach (var item in CB_FilterBox.Items)
+                {
+                    string itemName = item.ToString();
+                    if (itemName == newOrEditedFilter.Name)
+                    {
+                        CB_FilterBox.SelectedItem = item;
+                        break;
+                    }
+                }
+                LoadFile(CB_FilterBox);
+            }
         }
     }
 }

@@ -15,8 +15,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,10" Background="{x:Null}"/>
-                <TextBox Name="TB_FilterLineName" Margin="90,10,10,10" TextWrapping="Wrap"/>
-                <Button x:Name="B_Edit" Content="Edit" Grid.Row="1" Margin="10" Click="B_Edit_Click"></Button>
+                <TextBox Name="TB_FilterLineName" Margin="90,10,10,10" TextWrapping="Wrap" LostFocus="TB_FilterLineName_LostFocus"/>
+                <Button x:Name="B_Edit" Content="Edit" Grid.Row="1" Margin="10" Click="B_Edit_Click" IsEnabled="False"></Button>
                 <Button x:Name="B_Remove" Content="Remove" Grid.Row="2" Margin="10" Click="B_Remove_Click"></Button>
             </Grid>
         </GroupBox>

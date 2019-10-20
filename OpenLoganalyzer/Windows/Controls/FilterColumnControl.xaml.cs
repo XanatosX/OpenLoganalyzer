@@ -1,4 +1,5 @@
 ﻿using OpenLoganalyzer.Core.Style;
+using OpenLoganalyzerLib.Core.Configuration;
 using OpenLoganalyzerLib.Core.Interfaces.Configuration;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,15 @@ namespace OpenLoganalyzer.Windows.Controls
     /// </summary>
     public partial class FilterColumnControl : UserControl
     {
+        public string OldType => oldType;
+        private string oldType;
+
         public IFilterColumn Column => column;
-        private readonly IFilterColumn column;
+        private IFilterColumn column;
+
+        public event EventHandler<EventArgs> Created;
+
+        public event EventHandler<EventArgs> Changed;
 
         public event EventHandler<EventArgs> Edit;
 
@@ -38,6 +46,7 @@ namespace OpenLoganalyzer.Windows.Controls
             if (filterColumn != null)
             {
                 TB_ColumnName.Text = filterColumn.Type;
+                B_Edit.IsEnabled = true;
             }
         }
 
@@ -51,6 +60,36 @@ namespace OpenLoganalyzer.Windows.Controls
         {
             EventHandler<EventArgs> handler = Remove;
             handler?.Invoke(this, null);
+        }
+
+        private void TB_ColumnName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender.GetType() != typeof(TextBox))
+            {
+                return;
+            }
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "")
+            {
+                B_Edit.IsEnabled = false;
+                return;
+            }
+
+            B_Edit.IsEnabled = true;
+            EventHandler<EventArgs> handler = null;
+            if (column != null)
+            {
+                oldType = column.Type;
+                column.RenameColumn(TB_ColumnName.Text);
+                handler = Changed;
+                handler?.Invoke(this, null);
+                return;
+            }
+
+            column = new FilterColumn(TB_ColumnName.Text);
+            handler = Created;
+            handler?.Invoke(this, null);
+
         }
     }
 }

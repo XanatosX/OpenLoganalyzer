@@ -10,7 +10,7 @@ namespace OpenLoganalyzerLib.Core.Configuration
     public class FilterLine : ILogLineFilter
     {
         public string Name => name;
-        private readonly string name;
+        private string name;
 
         public List<IFilterColumn> FilterColumns => filterColumns;
         private List<IFilterColumn> filterColumns;
@@ -32,6 +32,16 @@ namespace OpenLoganalyzerLib.Core.Configuration
             filterColumns.Add(columnToAdd);
         }
 
+        public void RemoveColumnByType(string type)
+        {
+            IFilterColumn columnToRemove = filterColumns.Find(column => column.Type == type);
+            if (columnToRemove == null)
+            {
+                return;
+            }
+            filterColumns.Remove(columnToRemove);
+        }
+
         public bool IsValid(string logLine)
         {
             foreach (IFilterColumn column in filterColumns)
@@ -42,6 +52,11 @@ namespace OpenLoganalyzerLib.Core.Configuration
                 }
             }
             return true;
+        }
+
+        public void RenameColumn(string newName)
+        {
+            name = newName;
         }
     }
 }

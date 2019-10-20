@@ -12,6 +12,8 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
 
         List<ILogLineFilter> LogLineTypes { get; }
 
+        void RenameFilter(string newName);
+
         bool AddFilter(ILogLineFilter logLineFilter);
 
         bool AddFilter(ILogLineFilter logLineFilter, bool overwrite);

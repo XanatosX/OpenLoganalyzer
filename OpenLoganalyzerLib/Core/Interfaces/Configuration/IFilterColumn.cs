@@ -12,6 +12,10 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
 
         List<string> PossibleRegex { get; }
 
+        void RenameColumn(string newName);
+
+        void Reset();
+
         void addNewRegex(string regex);
 
         void addMultipleRegex(List<string> regexList);

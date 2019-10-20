@@ -10,7 +10,7 @@ namespace OpenLoganalyzerLib.Core.Configuration
     public class Filter : IFilter
     {
         public string Name => name;
-        private readonly string name;
+        private string name;
 
         public List<ILogLineFilter> LogLineTypes => logLineTypes;
         private readonly List<ILogLineFilter> logLineTypes;
@@ -48,6 +48,9 @@ namespace OpenLoganalyzerLib.Core.Configuration
             return true;
         }
 
-
+        public void RenameFilter(string newName)
+        {
+            name = newName;
+        }
     }
 }

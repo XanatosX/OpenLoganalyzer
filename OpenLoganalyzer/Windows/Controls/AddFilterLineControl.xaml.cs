@@ -1,4 +1,5 @@
 ﻿using OpenLoganalyzer.Core.Style;
+using OpenLoganalyzerLib.Core.Configuration;
 using OpenLoganalyzerLib.Core.Interfaces.Configuration;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,14 @@ namespace OpenLoganalyzer.Windows.Controls
     public partial class AddFilterLineControl : UserControl
     {
         public ILogLineFilter LogLineFilter => logLineFilter;
-        private readonly ILogLineFilter logLineFilter;
+        private ILogLineFilter logLineFilter;
+
+        public string OldName => oldName;
+        private string oldName;
+
+        public event EventHandler<EventArgs> Created;
+
+        public event EventHandler<EventArgs> Changed;
 
         public event EventHandler<EventArgs> Edit;
 
@@ -40,7 +48,9 @@ namespace OpenLoganalyzer.Windows.Controls
 
             if (logLineFilter != null)
             {
-                TB_FilterLineName.Text = logLineFilter.Name;             
+                TB_FilterLineName.Text = logLineFilter.Name;
+                oldName = logLineFilter.Name;
+                B_Edit.IsEnabled = true;
             }
 
             this.themeManager = themeManager;
@@ -55,6 +65,37 @@ namespace OpenLoganalyzer.Windows.Controls
         private void B_Remove_Click(object sender, RoutedEventArgs e)
         {
             EventHandler<EventArgs> handler = Remove;
+            handler?.Invoke(this, new EventArgs());
+        }
+
+        private void TB_FilterLineName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender.GetType() != typeof(TextBox))
+            {
+                return;
+            }
+
+            TextBox box = (TextBox)sender;
+
+            if (box.Text == "")
+            {
+                B_Edit.IsEnabled = false;
+                return;
+            }
+
+            EventHandler<EventArgs> handler = null;
+            if (logLineFilter != null)
+            {
+                oldName = logLineFilter.Name;
+                logLineFilter.RenameColumn(TB_FilterLineName.Text);
+                handler = Changed;
+                handler?.Invoke(this, new EventArgs());
+                return;
+            }
+
+            logLineFilter = new FilterLine(TB_FilterLineName.Text);
+            B_Edit.IsEnabled = true;
+            handler = Created;
             handler?.Invoke(this, new EventArgs());
         }
     }
