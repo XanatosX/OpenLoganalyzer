@@ -22,6 +22,7 @@
     <SolidColorBrush x:Key="DefaultInputBackgroundBrush" Color="{StaticResource DefaultInputBackgroundColor}"/>
 
     <SolidColorBrush x:Key="DefaultBorder"  Color="{StaticResource HoverColor}"/>
+    <SolidColorBrush x:Key="ForegroundBrush" Color="Black"></SolidColorBrush>
 
 
     <Style x:Key="WindowStyle" TargetType="Window">

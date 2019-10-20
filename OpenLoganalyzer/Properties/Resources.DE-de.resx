@@ -141,6 +141,18 @@
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
+  <data name="ImportFilter" xml:space="preserve">
+    <value>Filter importieren</value>
+  </data>
+  <data name="ImportMultipleFilter" xml:space="preserve">
+    <value>Mehrere Filter importieren</value>
+  </data>
+  <data name="MainWindow_Load_Filter_Content" xml:space="preserve">
+    <value>Der versuch den Filter %file% als neuen Filter zu laden schlug fehlt!</value>
+  </data>
+  <data name="MainWindow_Load_Filter_Headline" xml:space="preserve">
+    <value>Konnte Filter nicht laden</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>Ohne</value>
   </data>

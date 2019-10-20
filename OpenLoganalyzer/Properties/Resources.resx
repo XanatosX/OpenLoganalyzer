@@ -141,6 +141,18 @@
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
+  <data name="ImportFilter" xml:space="preserve">
+    <value>Import filter</value>
+  </data>
+  <data name="ImportMultipleFilter" xml:space="preserve">
+    <value>Import multiple filters</value>
+  </data>
+  <data name="MainWindow_Load_Filter_Content" xml:space="preserve">
+    <value>Tried to load file %file% as new filter\r\n\r\nSeems like something went wrong and the file was not loadded!</value>
+  </data>
+  <data name="MainWindow_Load_Filter_Headline" xml:space="preserve">
+    <value>Could not load filter</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>Unkown</value>
   </data>

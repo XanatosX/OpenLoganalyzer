@@ -29,7 +29,8 @@
         <DockPanel x:Name="MainMenu" LastChildFill="False" VerticalAlignment="Top" Margin="0,2,-86,0" Grid.ColumnSpan="3" MinHeight="18" Height="18" Grid.RowSpan="2">
             <Menu VerticalAlignment="Top" Style="{DynamicResource InvisibleMenu}">
                 <MenuItem x:Name="MI_File" Header="{x:Static p:Resources.File}" Style="{DynamicResource MenuItem}">
-                    <MenuItem x:Name="MI_Open" Header="{x:Static p:Resources.Open}" Style="{DynamicResource SubMenuItem}" Click="MI_Open_Click"/>
+                    <MenuItem x:Name="MI_ImportFilter" Header="{x:Static p:Resources.ImportFilter}" Style="{DynamicResource SubMenuItem}" Click="MI_ImportFilter_Click"/>
+                    <MenuItem x:Name="MI_ImportMultipleFilter" Header="{x:Static p:Resources.ImportMultipleFilter}" Style="{DynamicResource SubMenuItem}" Click="MI_ImportFilter_Click"/>
                     <Separator Style="{DynamicResource SperatorStyle}"/>
                     <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}" Style="{DynamicResource SubMenuItem}" Click="MI_Settings_Click"/>
                     <Separator Style="{DynamicResource SperatorStyle}"/>

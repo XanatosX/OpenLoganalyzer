@@ -31,6 +31,8 @@ namespace OpenLoganalyzer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private delegate void CreatePopUpCallback(PopupData data);
+
         private readonly ThemeManager themeManager;
 
         private readonly ISettingsManager settingsManager;
@@ -227,11 +229,6 @@ namespace OpenLoganalyzer
             BuildMenu();
         }
 
-        private void MI_Open_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void MI_Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -348,6 +345,52 @@ namespace OpenLoganalyzer
                     LV_LogLines.Items.Add(currentDataSet);
                 }
             }
+        }
+
+        private void MI_ImportFilter_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.ShowDialog();
+
+            ImportFilter(fileDialog.FileName);
+        }
+
+        private void ImportFilter(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                FileInfo fi = new FileInfo(fileName);
+                JsonFilterLoader loader = new JsonFilterLoader(fi.DirectoryName);
+
+                IFilter filterToImport = loader.LoadFilterByName(fi.Name.Replace(fi.Extension, ""));
+                if (filterToImport == null)
+                {
+                    string title = "MainWindow_Load_Filter_Headline";
+                    string content = "MainWindow_Load_Filter_Content";
+                    content = content.GetTranslated();
+                    content = content.Replace("%file%", fileName);
+                    PopupData data = new PopupData(title.GetTranslated(), content, 5000);
+                    ShowPopupWindow window = new ShowPopupWindow(settings, themeManager, data);
+                    this.Dispatcher.Invoke(
+                        new CreatePopUpCallback(CreatePopUp),
+                        new Object[] { data }
+                    );
+                    return;
+                }
+
+                filterManager.Save(filterToImport);
+                SetupFilters();
+            }
+        }
+
+        private void CreatePopUp(PopupData data)
+        {
+            ShowPopupWindow issueCreated = new ShowPopupWindow(
+                settings,
+                themeManager,
+                data
+                );
+            issueCreated.Execute();
         }
     }
 }

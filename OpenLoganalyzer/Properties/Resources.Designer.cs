@@ -133,6 +133,42 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import filter.
+        /// </summary>
+        public static string ImportFilter {
+            get {
+                return ResourceManager.GetString("ImportFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import multiple filters.
+        /// </summary>
+        public static string ImportMultipleFilter {
+            get {
+                return ResourceManager.GetString("ImportMultipleFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tried to load file %file% as new filter\r\n\r\nSeems like something went wrong and the file was not loadded!.
+        /// </summary>
+        public static string MainWindow_Load_Filter_Content {
+            get {
+                return ResourceManager.GetString("MainWindow_Load_Filter_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not load filter.
+        /// </summary>
+        public static string MainWindow_Load_Filter_Headline {
+            get {
+                return ResourceManager.GetString("MainWindow_Load_Filter_Headline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unkown.
         /// </summary>
         public static string None {
