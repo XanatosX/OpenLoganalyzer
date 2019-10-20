@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddFilter" xml:space="preserve">
+    <value>Add new filter</value>
+  </data>
+  <data name="AddOrEditFilterWindow" xml:space="preserve">
+    <value>Add or edit filter</value>
+  </data>
+  <data name="AddOrEditFilter_AddNewFilterLine" xml:space="preserve">
+    <value>New filter line</value>
+  </data>
+  <data name="AddOrEditFilter_FilterName" xml:space="preserve">
+    <value>Filtername:</value>
+  </data>
   <data name="Bug" xml:space="preserve">
     <value>Bug</value>
   </data>
@@ -125,6 +137,9 @@
   </data>
   <data name="DefaultCancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="EditFilter" xml:space="preserve">
+    <value>Edit filter</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>

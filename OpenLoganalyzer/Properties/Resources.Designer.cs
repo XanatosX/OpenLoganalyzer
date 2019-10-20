@@ -61,6 +61,42 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new filter.
+        /// </summary>
+        public static string AddFilter {
+            get {
+                return ResourceManager.GetString("AddFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New filter line.
+        /// </summary>
+        public static string AddOrEditFilter_AddNewFilterLine {
+            get {
+                return ResourceManager.GetString("AddOrEditFilter_AddNewFilterLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtername:.
+        /// </summary>
+        public static string AddOrEditFilter_FilterName {
+            get {
+                return ResourceManager.GetString("AddOrEditFilter_FilterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add or edit filter.
+        /// </summary>
+        public static string AddOrEditFilterWindow {
+            get {
+                return ResourceManager.GetString("AddOrEditFilterWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bug.
         /// </summary>
         public static string Bug {
@@ -84,6 +120,15 @@ namespace OpenLoganalyzer.Properties {
         public static string DefaultCancel {
             get {
                 return ResourceManager.GetString("DefaultCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit filter.
+        /// </summary>
+        public static string EditFilter {
+            get {
+                return ResourceManager.GetString("EditFilter", resourceCulture);
             }
         }
         

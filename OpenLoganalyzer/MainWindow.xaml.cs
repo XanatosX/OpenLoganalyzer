@@ -74,6 +74,9 @@ namespace OpenLoganalyzer
             InitzialSetup();
             BuildMenu();
             SetupFilters();
+
+            AddOrEditFilterWindow addOrEditFilter = new AddOrEditFilterWindow(settings, filterManager, themeManager, null);
+            addOrEditFilter.ShowDialog();
         }
 
         private void BuildViewGrid(IFilter filter)
@@ -161,10 +164,10 @@ namespace OpenLoganalyzer
             dataView.Refresh();
         }
 
-            private void InitzialSetup()
+        private void InitzialSetup()
         {
-            L_Filter.Visibility = Visibility.Hidden;
-            CB_FilterBox.Visibility = Visibility.Hidden;
+            B_EditFilter.IsEnabled = false;
+            GB_Filter.Visibility = Visibility.Hidden;
         }
 
         private void SetupFilters()
@@ -243,13 +246,11 @@ namespace OpenLoganalyzer
             ComboBox box = (ComboBox)sender;
             if (box.Items.Count == 0)
             {
-                box.Visibility = Visibility.Hidden;
-                L_Filter.Visibility = Visibility.Visible;
+                GB_Filter.Visibility = Visibility.Hidden;
                 return;
             }
-            
-            box.Visibility = Visibility.Visible;
-            L_Filter.Visibility = Visibility.Visible;
+
+            GB_Filter.Visibility = Visibility.Visible;
         }
 
         private void MI_Settings_Click(object sender, RoutedEventArgs e)
@@ -271,6 +272,11 @@ namespace OpenLoganalyzer
                 return;
             }
             ComboBox box = (ComboBox)sender;
+            if (box.SelectedItem == null)
+            {
+                B_EditFilter.IsEnabled = false;
+            }
+            B_EditFilter.IsEnabled = true;
 
             LoadFile(box);
         }
@@ -298,13 +304,11 @@ namespace OpenLoganalyzer
             TextBox textBox = (TextBox)sender;
             if (textBox.Text == String.Empty)
             {
-                L_Filter.Visibility = Visibility.Hidden;
-                CB_FilterBox.Visibility = Visibility.Hidden;
+                GB_Filter.Visibility = Visibility.Hidden;
                 return;
             }
 
-            L_Filter.Visibility = Visibility.Visible;
-            CB_FilterBox.Visibility = Visibility.Visible;
+            GB_Filter.Visibility = Visibility.Visible;
         }
 
         private void LoadFile(ComboBox box)
@@ -391,6 +395,24 @@ namespace OpenLoganalyzer
                 data
                 );
             issueCreated.Execute();
+        }
+
+        private void B_EditOrCreateFilter_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender.GetType() != typeof(Button))
+            {
+                return;
+            }
+
+            Button button = (Button)sender;
+            bool IsEdit = button.Tag.ToString().ToLower() == "true";
+            IFilter filter = null;
+            if (IsEdit)
+            {
+                filter = filterManager.LoadFilterByName(CB_FilterBox.SelectedItem.ToString());
+            }
+            AddOrEditFilterWindow addOrEditFilter = new AddOrEditFilterWindow(settings, filterManager, themeManager, filter);
+            addOrEditFilter.ShowDialog();
         }
     }
 }
