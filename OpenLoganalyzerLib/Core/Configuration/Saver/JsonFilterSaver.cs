@@ -20,6 +20,10 @@ namespace OpenLoganalyzerLib.Core.Configuration.Saver
             {
                 saveFolder += "\\";
             }
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
         }
 
         public bool Save(IFilter filterToSave)
