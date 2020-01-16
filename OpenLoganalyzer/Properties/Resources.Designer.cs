@@ -142,6 +142,15 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export filter.
+        /// </summary>
+        public static string ExportFilter {
+            get {
+                return ResourceManager.GetString("ExportFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature request.
         /// </summary>
         public static string FeatureRequest {
@@ -198,18 +207,36 @@ namespace OpenLoganalyzer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Tried to load file %file% as new filter\r\n\r\nSeems like something went wrong and the file was not loadded!.
         /// </summary>
-        public static string MainWindow_Load_Filter_Content {
+        public static string MainWindow_Load_Filter_Content_Failed {
             get {
-                return ResourceManager.GetString("MainWindow_Load_Filter_Content", resourceCulture);
+                return ResourceManager.GetString("MainWindow_Load_Filter_Content_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading the filter from file %file% was completed..
+        /// </summary>
+        public static string MainWindow_Load_Filter_Content_Success {
+            get {
+                return ResourceManager.GetString("MainWindow_Load_Filter_Content_Success", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Could not load filter.
         /// </summary>
-        public static string MainWindow_Load_Filter_Headline {
+        public static string MainWindow_Load_Filter_Headline_Failed {
             get {
-                return ResourceManager.GetString("MainWindow_Load_Filter_Headline", resourceCulture);
+                return ResourceManager.GetString("MainWindow_Load_Filter_Headline_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing filter succeded.
+        /// </summary>
+        public static string MainWindow_Load_Filter_Headline_Success {
+            get {
+                return ResourceManager.GetString("MainWindow_Load_Filter_Headline_Success", resourceCulture);
             }
         }
         

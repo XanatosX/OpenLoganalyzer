@@ -369,24 +369,37 @@ namespace OpenLoganalyzer
                 JsonFilterLoader loader = new JsonFilterLoader(fi.DirectoryName);
 
                 IFilter filterToImport = loader.LoadFilterByName(fi.Name.Replace(fi.Extension, ""));
-                if (filterToImport == null)
+                string title = "MainWindow_Load_Filter_Headline_Success";
+                string content = "MainWindow_Load_Filter_Content_Success";
+
+                bool loadingDone = true;
+                if (filterToImport == null || !filterManager.Save(filterToImport))
                 {
-                    string title = "MainWindow_Load_Filter_Headline";
-                    string content = "MainWindow_Load_Filter_Content";
-                    content = content.GetTranslated();
-                    content = content.Replace("%file%", fileName);
-                    PopupData data = new PopupData(title.GetTranslated(), content, 5000);
-                    ShowPopupWindow window = new ShowPopupWindow(settings, themeManager, data);
-                    this.Dispatcher.Invoke(
-                        new CreatePopUpCallback(CreatePopUp),
-                        new Object[] { data }
-                    );
-                    return;
+                    title = "MainWindow_Load_Filter_Headline_Failed";
+                    content = "MainWindow_Load_Filter_Content_Failed";
+                    loadingDone = false;
                 }
 
-                filterManager.Save(filterToImport);
-                SetupFilters();
+                content = content.GetTranslated();
+                content = content.Replace("%file%", fileName);
+                PopupData data = new PopupData(title.GetTranslated(), content, 5000);
+                ShowPopupWindow window = new ShowPopupWindow(settings, themeManager, data);
+                this.Dispatcher.Invoke(
+                    new CreatePopUpCallback(CreatePopUp),
+                    new Object[] { data }
+                );
+
+                if (loadingDone)
+                {
+                    SetupFilters();
+                }
             }
+        }
+
+        private void MI_ExportFilter_Click(object sender, RoutedEventArgs e)
+        {
+            //SaveFileDialog fileDialog = new SaveFileDialog();
+            //fileDialog.ShowDialog();
         }
 
         private void CreatePopUp(PopupData data)

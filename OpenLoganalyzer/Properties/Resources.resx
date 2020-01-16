@@ -144,6 +144,9 @@
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="ExportFilter" xml:space="preserve">
+    <value>Export filter</value>
+  </data>
   <data name="FeatureRequest" xml:space="preserve">
     <value>Feature request</value>
   </data>
@@ -162,11 +165,17 @@
   <data name="ImportMultipleFilter" xml:space="preserve">
     <value>Import multiple filters</value>
   </data>
-  <data name="MainWindow_Load_Filter_Content" xml:space="preserve">
+  <data name="MainWindow_Load_Filter_Content_Failed" xml:space="preserve">
     <value>Tried to load file %file% as new filter\r\n\r\nSeems like something went wrong and the file was not loadded!</value>
   </data>
-  <data name="MainWindow_Load_Filter_Headline" xml:space="preserve">
+  <data name="MainWindow_Load_Filter_Content_Success" xml:space="preserve">
+    <value>Loading the filter from file %file% was completed.</value>
+  </data>
+  <data name="MainWindow_Load_Filter_Headline_Failed" xml:space="preserve">
     <value>Could not load filter</value>
+  </data>
+  <data name="MainWindow_Load_Filter_Headline_Success" xml:space="preserve">
+    <value>Importing filter succeded</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Unkown</value>
