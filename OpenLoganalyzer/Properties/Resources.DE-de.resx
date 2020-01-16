@@ -123,6 +123,9 @@
   <data name="AddOrEditFilterWindow" xml:space="preserve">
     <value>Hinzufügen oder editieren von Filter</value>
   </data>
+  <data name="AddOrEditFilter_AddNewFilterLine" xml:space="preserve">
+    <value>Neue filter Linie</value>
+  </data>
   <data name="Bug" xml:space="preserve">
     <value>Fehler</value>
   </data>
@@ -159,11 +162,23 @@
   <data name="ImportMultipleFilter" xml:space="preserve">
     <value>Mehrere Filter importieren</value>
   </data>
+  <data name="MainWindow_Import_Filter_Message_Content" xml:space="preserve">
+    <value>Wollen Sie den Filter "%name%" wirklich überschreiben?</value>
+  </data>
+  <data name="MainWindow_Import_Filter_Message_Title" xml:space="preserve">
+    <value>Filter existiert bereits</value>
+  </data>
   <data name="MainWindow_Load_Filter_Content_Failed" xml:space="preserve">
     <value>Der versuch den Filter %file% als neuen Filter zu laden schlug fehlt!</value>
   </data>
+  <data name="MainWindow_Load_Filter_Content_Success" xml:space="preserve">
+    <value>Laden des filters aus Datei %file% war erfolgreich</value>
+  </data>
   <data name="MainWindow_Load_Filter_Headline_Failed" xml:space="preserve">
     <value>Konnte Filter nicht laden</value>
+  </data>
+  <data name="MainWindow_Load_Filter_Headline_Success" xml:space="preserve">
+    <value>Filter import erfolgreich</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Ohne</value>

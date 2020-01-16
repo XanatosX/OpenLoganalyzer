@@ -368,7 +368,30 @@ namespace OpenLoganalyzer
                 FileInfo fi = new FileInfo(fileName);
                 JsonFilterLoader loader = new JsonFilterLoader(fi.DirectoryName);
 
-                IFilter filterToImport = loader.LoadFilterByName(fi.Name.Replace(fi.Extension, ""));
+                string filterName = fi.Name.Replace(fi.Extension, "");
+
+                string messageBoxTitle = "MainWindow_Import_Filter_Message_Title";
+                string messageBoxContent = "MainWindow_Import_Filter_Message_Content";
+
+                messageBoxContent = messageBoxContent.GetTranslated();
+                messageBoxContent = messageBoxContent.Replace("%name%", filterName);
+
+                if (filterManager.LoadFilterByName(filterName) != null)
+                {
+                    MessageBoxResult result = MessageBox.Show(
+                        messageBoxContent,
+                        messageBoxTitle.GetTranslated(),
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning
+                        );
+
+                    if (result != MessageBoxResult.Yes)
+                    {
+                        return;
+                    }
+                }
+
+                IFilter filterToImport = loader.LoadFilterByName(filterName);
                 string title = "MainWindow_Load_Filter_Headline_Success";
                 string content = "MainWindow_Load_Filter_Content_Success";
 

@@ -205,6 +205,24 @@ namespace OpenLoganalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to overwrite the filter: &quot;%name%&quot;.
+        /// </summary>
+        public static string MainWindow_Import_Filter_Message_Content {
+            get {
+                return ResourceManager.GetString("MainWindow_Import_Filter_Message_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter already existing.
+        /// </summary>
+        public static string MainWindow_Import_Filter_Message_Title {
+            get {
+                return ResourceManager.GetString("MainWindow_Import_Filter_Message_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tried to load file %file% as new filter\r\n\r\nSeems like something went wrong and the file was not loadded!.
         /// </summary>
         public static string MainWindow_Load_Filter_Content_Failed {
