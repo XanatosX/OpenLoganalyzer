@@ -74,6 +74,8 @@ namespace OpenLoganalyzer
             InitzialSetup();
             BuildMenu();
             SetupFilters();
+
+            DisableLockedFeatures();
         }
 
         private void BuildViewGrid(IFilter filter)
@@ -175,6 +177,13 @@ namespace OpenLoganalyzer
             {
                 CB_FilterBox.Items.Add(filterName);
             }
+        }
+
+        private void DisableLockedFeatures()
+        {
+            MI_Style.IsEnabled = false;
+            MI_Settings.IsEnabled = false;
+            MI_ReportBug.IsEnabled = false;
         }
 
         private void LoadSettings()
