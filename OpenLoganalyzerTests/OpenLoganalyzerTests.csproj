@@ -61,12 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\StringExtension.cs" />
-    <Compile Include="Tests\LoaderFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\SimpleConfigurationTest.cs" />
-    <Compile Include="Tests\SimpleLogLineTest.cs" />
-    <Compile Include="Tests\SimpleConfigurationLoaderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
