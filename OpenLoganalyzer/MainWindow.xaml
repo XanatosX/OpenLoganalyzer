@@ -32,6 +32,7 @@
                     <MenuItem x:Name="MI_ImportFilter" Header="{x:Static p:Resources.ImportFilter}" Style="{DynamicResource SubMenuItem}" Click="MI_ImportFilter_Click"/>
                     <MenuItem x:Name="MI_ExportFilter" Header="{x:Static p:Resources.ExportFilter}" Style="{DynamicResource SubMenuItem}" Click="MI_ExportFilter_Click"/>
                     <Separator Style="{DynamicResource SperatorStyle}"/>
+                    <MenuItem x:Name="MI_EditFilter" Header="{x:Static p:Resources.EditFilter}" Style="{DynamicResource SubMenuItem}" Click="MI_EditFilter_Click"/>
                     <MenuItem x:Name="MI_Settings" Header="{x:Static p:Resources.Settings}" Style="{DynamicResource SubMenuItem}" Click="MI_Settings_Click"/>
                     <Separator Style="{DynamicResource SperatorStyle}"/>
                     <MenuItem x:Name="MI_Exit" Header="{x:Static p:Resources.Exit}" Click="MI_Exit_Click" Style="{DynamicResource SubMenuItem}"/>

@@ -481,5 +481,11 @@ namespace OpenLoganalyzer
                 LoadFile(CB_FilterBox);
             }
         }
+
+        private void MI_EditFilter_Click(object sender, RoutedEventArgs e)
+        {
+            AddOrEditFilterWindow addOrEditFilter = new AddOrEditFilterWindow(settings, filterManager, themeManager);
+            addOrEditFilter.ShowDialog();
+        }
     }
 }

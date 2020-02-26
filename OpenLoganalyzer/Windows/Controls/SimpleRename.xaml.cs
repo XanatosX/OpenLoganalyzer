@@ -1,5 +1,4 @@
-﻿using OpenLoganalyzerLib.Core.Interfaces.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,27 +16,19 @@ using System.Windows.Shapes;
 namespace OpenLoganalyzer.Windows.Controls
 {
     /// <summary>
-    /// Interaction logic for LogLineControl.xaml
+    /// Interaction logic for SimpleRename.xaml
     /// </summary>
-    public partial class FilterColumnControl : UserControl
+    public partial class SimpleRename : UserControl
     {
         private TreeViewItem item;
         public TreeViewItem Item => item;
 
-        private readonly IFilterColumn logLine;
-        public IFilterColumn LogLine => logLine;
-
-        public FilterColumnControl(IFilterColumn logLine, string text, TreeViewItem item)
+        public SimpleRename(string labelName, TreeViewItem treeViewItem)
         {
             InitializeComponent();
-            foreach (string regex in logLine.PossibleRegex)
-            {
-                LV_RegexView.Items.Add(regex);
-            }
-
-            this.logLine = logLine;
-            this.item = item;
-            L_Label.Content = text;
+            item = treeViewItem;
+            TB_NewName.Text = item.Header.ToString();
+            L_Label.Content = labelName;
         }
 
         private void TB_NewName_KeyDown(object sender, KeyEventArgs e)

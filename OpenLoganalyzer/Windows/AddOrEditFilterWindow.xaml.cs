@@ -31,10 +31,18 @@ namespace OpenLoganalyzer.Windows
         public IFilter Filter => filterToEdit;
         private IFilter filterToEdit;
 
-        private ILogLineFilter currentFilterLine;
-        private IFilterColumn currentColumn;
+        private bool subSelected;
 
-        private string oldFilterName;
+        private UserControl currentControl;
+
+        public AddOrEditFilterWindow(
+            ISettings settings,
+            IFilterManager filterManager,
+            ThemeManager themeManager
+        )
+            : this(settings, filterManager, themeManager, null)
+        {
+        }
 
         public AddOrEditFilterWindow(
             ISettings settings,
@@ -44,195 +52,105 @@ namespace OpenLoganalyzer.Windows
         ) {
             InitializeComponent();
 
-            currentFilterLine = null;
-            currentColumn = null;
-
             this.settings = settings;
             this.filterManager = filterManager;
             this.themeManager = themeManager;
             this.filterToEdit = filterToEdit;
 
-            if (filterToEdit != null)
+            SetupFilters();
+            currentControl = null;
+        }
+
+        private void SetupFilters()
+        {
+            foreach (string filterName in filterManager.GetAvailableFilterNames())
             {
-                SetupEditFilter();
+                TreeViewItem viewItem = new TreeViewItem();
+                viewItem.Header = filterName;
+                viewItem.Selected += ViewItem_Selected;
+                IFilter filter = filterManager.LoadFilterByName(filterName);
+                viewItem.Tag = filter;
+
+                if (filter == null)
+                {
+                    return;
+                }
+
+                foreach (ILogLineFilter logLineFilter in filter.LogLineTypes)
+                {
+                    TreeViewItem subViewItem = new TreeViewItem();
+                    subViewItem.Tag = logLineFilter;
+                    subViewItem.Selected += SubViewItem_Selected; ;
+                    subViewItem.Header = logLineFilter.Name;
+                    viewItem.Items.Add(subViewItem);
+                    foreach (IFilterColumn column in logLineFilter.FilterColumns)
+                    {
+                        TreeViewItem filterColumnItem = new TreeViewItem();
+                        filterColumnItem.Tag = column;
+                        //filterColumnItem.Selected += SubViewItem_Selected; ;
+                        filterColumnItem.Header = column.Type;
+
+                        subViewItem.Items.Add(filterColumnItem);
+                    }
+                }
+
+                if (filter == filterToEdit)
+                {
+                    viewItem.IsSelected = true;
+                    viewItem.IsExpanded = true;
+                }
+                TV_LogOverview.Items.Add(viewItem);
+
             }
         }
 
-        private void SetupEditFilter()
+        private void SubViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            oldFilterName = filterToEdit.Name;
-            TB_FilterName.Text = oldFilterName;
-            B_AddNewFilterLine.IsEnabled = true;
-
-            foreach (ILogLineFilter logLineFilter in filterToEdit.LogLineTypes)
-            {
-                AddLine(logLineFilter);
-            }
-        }
-
-        private void B_AddNewFilterLine_Click(object sender, RoutedEventArgs e)
-        {
-            AddLine(null);
-            if (filterToEdit == null)
-            {
-                filterToEdit = new Filter(TB_FilterName.Text);
-            }
+            subSelected = true;
+            ItemSelectedForRename((TreeViewItem)sender, "Logline name:");
             
         }
 
-        private void NewControl_Created(object sender, EventArgs e)
+        private void ViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            if (sender.GetType() != typeof(AddFilterLineControl))
+            if (subSelected)
             {
+                subSelected = false;
                 return;
             }
-            AddFilterLineControl context = (AddFilterLineControl)sender;
-            filterToEdit.AddFilter(context.LogLineFilter);
+            ItemSelectedForRename((TreeViewItem)sender, "Filter name:");
         }
 
-        private void NewControl_Changed(object sender, EventArgs e)
+        private void ItemSelectedForRename(TreeViewItem item, string text)
         {
-            if (sender.GetType() != typeof(AddFilterLineControl))
+            if (currentControl != null)
             {
-                return;
+                G_InnerGrid.Children.Remove(currentControl);
+                currentControl = null;
             }
-            AddFilterLineControl context = (AddFilterLineControl)sender;
-            filterToEdit.RemoveFilterLineByName(context.OldName);
-            filterToEdit.AddFilter(context.LogLineFilter);
+            SimpleRename newControl = new SimpleRename(text, item);
+            currentControl = newControl;
+            Grid.SetColumn(currentControl, 1);
+            G_InnerGrid.Children.Add(currentControl);
         }
 
-        private void NewControl_Remove(object sender, EventArgs e)
+        private IFilter GetFilterFromItem(TreeViewItem item)
         {
-            if (sender.GetType() != typeof(AddFilterLineControl))
+            if (item.Tag == null)
             {
-                return;
+                if (item.Parent != null && item is TreeViewItem)
+                {
+                    return GetFilterFromItem((TreeViewItem)item.Parent);
+                }
             }
 
-            AddFilterLineControl context = (AddFilterLineControl)sender;
-            if (context.LogLineFilter != null)
+            if (item.Tag is IFilter)
             {
-                filterToEdit.RemoveFilterLineByName(context.LogLineFilter.Name);
-            }
-            
-            SP_FilterLines.Children.Remove(context);
-            B_AddColumn.IsEnabled = false;
-        }
-
-        private void NewControl_Edit(object sender, EventArgs e)
-        {
-            if (sender.GetType() != typeof(AddFilterLineControl))
-            {
-                return;
+                return (IFilter)item.Tag;
             }
 
-            AddFilterLineControl addFilterLineControl = (AddFilterLineControl)sender;
-            ILogLineFilter logLine = addFilterLineControl.LogLineFilter;
-            B_AddColumn.IsEnabled = true;
-            SP_FilterColumn.Children.RemoveRange(1, SP_FilterColumn.Children.Count - 1);
-            SP_RegexLines.Children.RemoveRange(1, SP_RegexLines.Children.Count - 1);
-            currentFilterLine = logLine;
-            if (logLine == null)
-            {
-                return;
-            }
+            return null;
 
-            foreach (IFilterColumn column in logLine.FilterColumns)
-            {
-                AddColumn(column);
-            }
-        }
-
-        private void B_AddColumn_Click(object sender, RoutedEventArgs e)
-        {
-            AddColumn(null);
-        }
-
-        private void ColumnControl_Changed(object sender, EventArgs e)
-        {
-            if (currentFilterLine == null)
-            {
-                return;
-            }
-            if (sender.GetType() != typeof(FilterColumnControl))
-            {
-                return;
-            }
-            FilterColumnControl context = (FilterColumnControl)sender;
-
-            currentFilterLine.RemoveColumnByType(context.OldType);
-            currentFilterLine.AddColumn(context.Column);
-        }
-
-        private void ColumnControl_Created(object sender, EventArgs e)
-        {
-            if (currentFilterLine == null)
-            {
-                return;
-            }
-            if (sender.GetType() != typeof(FilterColumnControl))
-            {
-                return;
-            }
-            FilterColumnControl context = (FilterColumnControl)sender;
-
-            currentFilterLine.AddColumn(context.Column);
-        }
-
-        private void ColumnControl_Remove(object sender, EventArgs e)
-        {
-            if (sender.GetType() != typeof(FilterColumnControl))
-            {
-                return;
-            }
-            FilterColumnControl filterColumnControl = (FilterColumnControl)sender;
-            currentFilterLine.RemoveColumnByType(filterColumnControl.Column.Type);
-            SP_FilterColumn.Children.Remove(filterColumnControl);
-            currentColumn = null;
-        }
-
-        private void ColumnControl_Edit(object sender, EventArgs e)
-        {
-            if (sender.GetType() != typeof(FilterColumnControl))
-            {
-                return;
-            }
-            FilterColumnControl filterColumnControl = (FilterColumnControl)sender;
-            IFilterColumn column = filterColumnControl.Column;
-            if (column == null)
-            {
-                B_AddRegex.IsEnabled = false;
-                return;
-            }
-            currentColumn = column;
-            B_AddRegex.IsEnabled = true;
-
-            SP_RegexLines.Children.RemoveRange(1, SP_RegexLines.Children.Count - 1);
-            foreach (string regex in column.PossibleRegex)
-            {
-                AddRegex(regex);
-            }
-        }
-
-        private void TB_FilterName_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (sender.GetType() != typeof(TextBox))
-            {
-                return;
-            }
-
-            TextBox box = (TextBox)sender;
-            if (box.Text == "")
-            {
-                B_AddNewFilterLine.IsEnabled = false;
-                return;
-            }
-
-            B_AddNewFilterLine.IsEnabled = true;
-
-            if (filterToEdit != null)
-            {
-                filterToEdit.RenameFilter(TB_FilterName.Text);
-            }
         }
 
         private void B_Cancel_Click(object sender, RoutedEventArgs e)
@@ -248,81 +166,110 @@ namespace OpenLoganalyzer.Windows
             }
         }
 
-        private void B_AddRegex_Click(object sender, RoutedEventArgs e)
+        private void MI_NewFilter_Click(object sender, RoutedEventArgs e)
         {
-            AddRegex("");
-        }
-
-        private void AddLine(ILogLineFilter lineToAdd)
-        {
-            AddFilterLineControl newControl = new AddFilterLineControl(themeManager, lineToAdd);
-            newControl.Edit += NewControl_Edit;
-            newControl.Remove += NewControl_Remove;
-            newControl.Changed += NewControl_Changed;
-            newControl.Created += NewControl_Created;
-
-            Binding widthBinding = new Binding("Value") { ElementName = SP_FilterLines.Name };
-            BindingOperations.SetBinding(newControl, WidthProperty, widthBinding);
-            SP_FilterLines.Children.Add(newControl);
-        }
-
-        private void AddColumn(IFilterColumn columnToAdd)
-        {
-            FilterColumnControl columnControl = new FilterColumnControl(themeManager, columnToAdd);
-            columnControl.Edit += ColumnControl_Edit; ;
-            columnControl.Remove += ColumnControl_Remove;
-            columnControl.Changed += ColumnControl_Changed;
-            columnControl.Created += ColumnControl_Created;
-
-            Binding widthBinding = new Binding("Value") { ElementName = SP_FilterColumn.Name };
-            BindingOperations.SetBinding(columnControl, WidthProperty, widthBinding);
-            SP_FilterColumn.Children.Add(columnControl);
-        }
-
-        private void AddRegex(string regexToAdd)
-        {
-            TextBox box = new TextBox();
-            box.LostFocus += Box_LostFocus;
-            box.Text = regexToAdd;
-            Binding widthBinding = new Binding("Value") { ElementName = SP_FilterColumn.Name };
-            BindingOperations.SetBinding(box, WidthProperty, widthBinding);
-            SP_RegexLines.Children.Add(box);
-        }
-
-        private void Box_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (sender.GetType() != typeof(TextBox))
+            TreeViewItem viewItem = new TreeViewItem();
+            
+            viewItem.Header = "Unnamed Item";
+            if (TV_LogOverview.SelectedItem == null)
             {
-                return;
-            }
-            TextBox regexBox = new TextBox();
-            if (regexBox.Text == "" || currentColumn == null)
-            {
-                currentColumn.Reset();
-                List<TextBox> boxesToRemove = new List<TextBox>();
-                foreach (Control control in SP_RegexLines.Children)
-                {
-                    if (control.GetType() != typeof(TextBox))
-                    {
-                        continue;
-                    }
-                    TextBox currentBox = (TextBox)control;
-                    if (currentBox.Text == "")
-                    {
-                        boxesToRemove.Add(currentBox);
-                        continue;
-                    }
-                    currentColumn.addNewRegex(currentBox.Text);
-                    
-                }
-                foreach (TextBox textBoxToRemove in boxesToRemove)
-                {
-                    SP_RegexLines.Children.Remove(textBoxToRemove);
-                }
+                viewItem.Selected += ViewItem_Selected;
+                TV_LogOverview.Items.Add(viewItem);
+                viewItem.Tag = new Filter((string)viewItem.Header);
                 return;
             }
 
-            currentColumn.addNewRegex(regexBox.Text);
+            object selectedItem = TV_LogOverview.SelectedItem;
+            if (selectedItem is TreeViewItem)
+            {
+                TreeViewItem item = (TreeViewItem)selectedItem;
+                if (GetDepth(item) > 1)
+                {
+                    return;
+                }
+                viewItem.Selected += SubViewItem_Selected;
+                item.Items.Add(viewItem);
+                item.IsExpanded = true;
+            }
+        }
+
+        private int GetDepth(TreeViewItem item)
+        {
+            return GetDepth(item, 0);
+        }
+
+        private int GetDepth(TreeViewItem item, int startLevel)
+        {
+            if (item.Parent != null)
+            {
+                object parent = item.Parent;
+                if (parent is TreeViewItem)
+                {
+                    startLevel += GetDepth((TreeViewItem)parent, startLevel + 1);
+                }
+            }
+
+            return startLevel;
+        }
+
+        private void TV_LogOverview_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is TreeView)
+            {
+                TreeView treeView = (TreeView)sender;
+                TreeViewItem item = (TreeViewItem)treeView.SelectedItem;
+                if (item != null)
+                {
+                    item.IsSelected = false;
+                    treeView.Focus();
+                }
+
+            }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveItemFromTreeView(TV_LogOverview.SelectedItem);
+        }
+
+        private void RemoveItemFromTreeView(object item)
+        {
+            if (item != null)
+            {
+                if (TV_LogOverview.Items.Contains(item))
+                {
+                    TV_LogOverview.Items.Remove(item);
+                    return;
+                }
+
+                if (item is TreeViewItem)
+                {
+                    TreeViewItem treeViewItem = (TreeViewItem)item;
+                    RemoveSubItem(treeViewItem);
+                }
+            }
+        }
+
+        private void RemoveSubItem(TreeViewItem itemToRemove)
+        {
+            if (itemToRemove.Parent == null)
+            {
+                return;
+            }
+            object parentObject = itemToRemove.Parent;
+
+            if (parentObject is TreeViewItem)
+            {
+                TreeViewItem parentTreeView = (TreeViewItem)parentObject;
+                if (parentTreeView.Items.Contains(itemToRemove))
+                {
+                    parentTreeView.Items.Remove(itemToRemove);
+                    return;
+                }
+                RemoveSubItem(parentTreeView);
+            }
+
+            
         }
     }
 }

@@ -85,17 +85,17 @@
     <Compile Include="Core\Settings\SecureSettings.cs" />
     <Compile Include="Core\Style\StyleDict.cs" />
     <Compile Include="Core\Style\StyleManager.cs" />
+    <Compile Include="Windows\Controls\FilterColumnControl.xaml.cs">
+      <DependentUpon>FilterColumnControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Controls\SimpleRename.xaml.cs">
+      <DependentUpon>SimpleRename.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddOrEditFilterWindow.xaml.cs">
       <DependentUpon>AddOrEditFilterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\BugReportWindow.xaml.cs">
       <DependentUpon>BugReportWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Controls\AddFilterLineControl.xaml.cs">
-      <DependentUpon>AddFilterLineControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Controls\FilterColumnControl.xaml.cs">
-      <DependentUpon>FilterColumnControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\PopupWindow.xaml.cs">
       <DependentUpon>PopupWindow.xaml</DependentUpon>
@@ -125,6 +125,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\Controls\FilterColumnControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Controls\SimpleRename.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddOrEditFilterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,14 +140,6 @@
     <Page Include="Windows\BugReportWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\Controls\AddFilterLineControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Controls\FilterColumnControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\PopupWindow.xaml">
       <SubType>Designer</SubType>
