@@ -14,6 +14,8 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
 
         void AddColumn(IFilterColumn columnToAdd);
 
+        IFilterColumn GetColumnByName(string name);
+
         void RemoveColumnByType(string type);
 
         void RenameColumn(string newName);

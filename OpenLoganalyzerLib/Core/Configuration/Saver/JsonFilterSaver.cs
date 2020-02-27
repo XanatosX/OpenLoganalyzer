@@ -26,13 +26,26 @@ namespace OpenLoganalyzerLib.Core.Configuration.Saver
             }
         }
 
+        public void RemoveFilter(IFilter filterToRemove)
+        {
+            string filePath = GetFilePath(filterToRemove);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+
+        private string GetFilePath(IFilter filterToSave)
+        {
+            string realName = filterToSave.Name.Replace(" ", "_");
+            return saveFolder + realName + ".json";
+        }
+
         public bool Save(IFilter filterToSave)
         {
             JsonSerializer jsonSerializer = new JsonSerializer();
-            string realName = filterToSave.Name.Replace(" ", "_");
-            string filePath = saveFolder + realName + ".json";
 
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(GetFilePath(filterToSave)))
             {
                 try
                 {
@@ -42,7 +55,7 @@ namespace OpenLoganalyzerLib.Core.Configuration.Saver
                 {
                     return false;
                 }
-                
+
             }
 
             return true;

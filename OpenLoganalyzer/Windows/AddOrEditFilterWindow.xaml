@@ -26,10 +26,10 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="300"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ScrollViewer x:Name="SV_FilterLines" Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="SV_FilterLines" Grid.Column="0" VerticalScrollBarVisibility="Auto">
                     <TreeView x:Name="TV_LogOverview" Margin="0,0,0,0" MouseLeftButtonDown="TV_LogOverview_MouseLeftButtonDown">
                         <TreeView.ContextMenu>
                             <ContextMenu>

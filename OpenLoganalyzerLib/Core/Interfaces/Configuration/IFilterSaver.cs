@@ -9,5 +9,7 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
     public interface IFilterSaver
     {
         bool Save(IFilter filterToSave);
+
+        void RemoveFilter(IFilter filterToRemove);
     }
 }

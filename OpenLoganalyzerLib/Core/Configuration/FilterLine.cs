@@ -58,5 +58,13 @@ namespace OpenLoganalyzerLib.Core.Configuration
         {
             name = newName;
         }
+
+        public IFilterColumn GetColumnByName(string name)
+        {
+            return FilterColumns.Find((column) =>
+            {
+                return column.Type == name;
+            });
+        }
     }
 }

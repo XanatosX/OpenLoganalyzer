@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenLoganalyzer.Core.Interfaces.Adapter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,27 +21,37 @@ namespace OpenLoganalyzer.Windows.Controls
     /// </summary>
     public partial class SimpleRename : UserControl
     {
-        private TreeViewItem item;
-        public TreeViewItem Item => item;
+        private IFilterAdapter apdater;
+        public IFilterAdapter Adapter => apdater;
 
-        public SimpleRename(string labelName, TreeViewItem treeViewItem)
+        public SimpleRename(string labelName, IFilterAdapter adapter)
         {
             InitializeComponent();
-            item = treeViewItem;
-            TB_NewName.Text = item.Header.ToString();
+            apdater = adapter;
+            TB_NewName.Text = apdater.GetName();
             L_Label.Content = labelName;
+        }
+
+        public void AddUserControl(UserControl userControlToAdd)
+        {
+            if (userControlToAdd == null)
+            {
+                return;
+            }
+            SP_MainPanel.Children.Add(userControlToAdd);
+
         }
 
         private void TB_NewName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
-                TB_NewName.Text = item.Header.ToString();
+                TB_NewName.Text = apdater.GetName();
                 return;
             }
             if (e.Key == Key.Enter)
             {
-                item.Header = TB_NewName.Text;
+                apdater.SetName(TB_NewName.Text);
                 return;
             }
         }

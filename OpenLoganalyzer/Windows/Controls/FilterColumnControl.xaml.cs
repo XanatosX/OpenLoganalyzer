@@ -27,31 +27,90 @@ namespace OpenLoganalyzer.Windows.Controls
         private readonly IFilterColumn logLine;
         public IFilterColumn LogLine => logLine;
 
-        public FilterColumnControl(IFilterColumn logLine, string text, TreeViewItem item)
+        private bool addMode;
+
+        public FilterColumnControl(IFilterColumn logLine)
         {
             InitializeComponent();
             foreach (string regex in logLine.PossibleRegex)
             {
-                LV_RegexView.Items.Add(regex);
+                ListViewItem item = new ListViewItem
+                {
+                    Content = regex
+                };
+                LV_RegexView.Items.Add(item);
             }
 
             this.logLine = logLine;
-            this.item = item;
-            L_Label.Content = text;
+            LV_RegexView.SelectionChanged += LV_RegexView_SelectionChanged;
+            LV_RegexView.MouseLeftButtonDown += LV_RegexView_MouseLeftButtonDown;
+
+            TB_Regex.Text = string.Empty;
         }
 
-        private void TB_NewName_KeyDown(object sender, KeyEventArgs e)
+        private void LV_RegexView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            if (sender is ListView)
             {
-                TB_NewName.Text = item.Header.ToString();
+                ListView listView = (ListView)sender;
+                listView.SelectedItem = null;
+                listView.Focus();
+            }
+        }
+
+        private void LV_RegexView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LV_RegexView.SelectedValue != null)
+            {
+                B_Remove.IsEnabled = true;
+                B_SaveEdit.Visibility = Visibility.Visible;
+                TB_Regex.Visibility = Visibility.Visible;
+                TB_Regex.Text = ((ListViewItem)LV_RegexView.SelectedItem).Content.ToString();
+            }
+        }
+
+        private void B_Add_Click(object sender, RoutedEventArgs e)
+        {
+            B_SaveEdit.Visibility = Visibility.Visible;
+            TB_Regex.Visibility = Visibility.Visible;
+            addMode = true;
+            TB_Regex.Text = "New regex";
+            TB_Regex.Focus();
+            TB_Regex.SelectAll();
+        }
+
+        private void B_SaveEdit_Click(object sender, RoutedEventArgs e)
+        {
+            B_SaveEdit.Visibility = Visibility.Hidden;
+            TB_Regex.Visibility = Visibility.Hidden;
+
+            if (addMode)
+            {
+                ListViewItem newItem = new ListViewItem
+                {
+                    Content = TB_Regex.Text
+                };
+                LV_RegexView.Items.Add(newItem);
+                addMode = false;
                 return;
             }
-            if (e.Key == Key.Enter)
+
+            ListViewItem item = (ListViewItem)LV_RegexView.SelectedItem;
+            item.Content = TB_Regex.Text;
+
+            TB_Regex.Text = string.Empty;
+            LV_RegexView.SelectedItem = null;
+        }
+
+        private void B_Remove_Click(object sender, RoutedEventArgs e)
+        {
+            if (LV_RegexView.SelectedValue == null)
             {
-                item.Header = TB_NewName.Text;
                 return;
             }
+            ListViewItem item = (ListViewItem)LV_RegexView.SelectedItem;
+            logLine.RemoveRegex(item.Content.ToString());
+            LV_RegexView.Items.Remove(LV_RegexView.SelectedItem);
         }
     }
 }

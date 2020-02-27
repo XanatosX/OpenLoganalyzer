@@ -7,8 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label x:Name="L_Label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="TB_NewName" HorizontalAlignment="Left" Height="23" Margin="0,31,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.631,-0.206" KeyDown="TB_NewName_KeyDown"/>
 
+        <StackPanel x:Name="SP_MainPanel"  Margin="0,0,0,0">
+            <Label x:Name="L_Label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+            <TextBox x:Name="TB_NewName" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.631,-0.206" KeyDown="TB_NewName_KeyDown"/>
+        </StackPanel>
     </Grid>
 </UserControl>

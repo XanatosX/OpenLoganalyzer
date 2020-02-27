@@ -18,6 +18,8 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
 
         void addNewRegex(string regex);
 
+        void RemoveRegex(string regex);
+
         void addMultipleRegex(List<string> regexList);
 
         void addMultipleRegex(string[] regexList);

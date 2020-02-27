@@ -52,5 +52,13 @@ namespace OpenLoganalyzerLib.Core.Configuration
         {
             name = newName;
         }
+
+        public ILogLineFilter GetLogLineFilterByName(string name)
+        {
+            return LogLineTypes.Find((logLineType) =>
+            {
+                return logLineType.Name == name;
+            });
+        }
     }
 }

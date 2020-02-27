@@ -28,7 +28,6 @@ namespace OpenLoganalyzerLib.Core.Configuration
             {
                 possibleRegex.Add(regex);
             }
-            
         }
 
         public void addMultipleRegex(string[] regexList)
@@ -94,6 +93,11 @@ namespace OpenLoganalyzerLib.Core.Configuration
         public void Reset()
         {
             possibleRegex.Clear();
+        }
+
+        public void RemoveRegex(string regex)
+        {
+            possibleRegex.Remove(regex);
         }
     }
 }

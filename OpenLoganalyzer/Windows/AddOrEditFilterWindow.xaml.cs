@@ -1,21 +1,17 @@
-﻿using OpenLoganalyzer.Core.Interfaces;
+﻿using OpenLoganalyzer.Core.Adapter;
+using OpenLoganalyzer.Core.Interfaces;
+using OpenLoganalyzer.Core.Interfaces.Adapter;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows.Controls;
 using OpenLoganalyzerLib.Core.Configuration;
 using OpenLoganalyzerLib.Core.Interfaces.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OpenLoganalyzer.Windows
 {
@@ -27,6 +23,8 @@ namespace OpenLoganalyzer.Windows
         private readonly ISettings settings;
         private readonly IFilterManager filterManager;
         private readonly ThemeManager themeManager;
+
+        private readonly List<IFilter> filterToRemove;
 
         public IFilter Filter => filterToEdit;
         private IFilter filterToEdit;
@@ -52,6 +50,7 @@ namespace OpenLoganalyzer.Windows
         ) {
             InitializeComponent();
 
+            filterToRemove = new List<IFilter>();
             this.settings = settings;
             this.filterManager = filterManager;
             this.themeManager = themeManager;
@@ -65,8 +64,7 @@ namespace OpenLoganalyzer.Windows
         {
             foreach (string filterName in filterManager.GetAvailableFilterNames())
             {
-                TreeViewItem viewItem = new TreeViewItem();
-                viewItem.Header = filterName;
+                TreeViewItem viewItem = CreateTreeViewEntry(filterName, "\\Images\\Icons\\FilterIcon.png");
                 viewItem.Selected += ViewItem_Selected;
                 IFilter filter = filterManager.LoadFilterByName(filterName);
                 viewItem.Tag = filter;
@@ -78,17 +76,13 @@ namespace OpenLoganalyzer.Windows
 
                 foreach (ILogLineFilter logLineFilter in filter.LogLineTypes)
                 {
-                    TreeViewItem subViewItem = new TreeViewItem();
-                    subViewItem.Tag = logLineFilter;
-                    subViewItem.Selected += SubViewItem_Selected; ;
-                    subViewItem.Header = logLineFilter.Name;
+                    TreeViewItem subViewItem = CreateTreeViewEntry(logLineFilter.Name);
+                    subViewItem.Selected += SubViewItem_Selected;
                     viewItem.Items.Add(subViewItem);
                     foreach (IFilterColumn column in logLineFilter.FilterColumns)
                     {
-                        TreeViewItem filterColumnItem = new TreeViewItem();
-                        filterColumnItem.Tag = column;
-                        //filterColumnItem.Selected += SubViewItem_Selected; ;
-                        filterColumnItem.Header = column.Type;
+                        TreeViewItem filterColumnItem = CreateTreeViewEntry(column.Type);
+                        filterColumnItem.Selected += FilterColumnItem_Selected; ;
 
                         subViewItem.Items.Add(filterColumnItem);
                     }
@@ -104,21 +98,56 @@ namespace OpenLoganalyzer.Windows
             }
         }
 
+        private void FilterColumnItem_Selected(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            ItemSelectedForRename((TreeViewItem)sender, "Column name:");
+        }
+
         private void SubViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            subSelected = true;
+            e.Handled = true;
             ItemSelectedForRename((TreeViewItem)sender, "Logline name:");
-            
         }
 
         private void ViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            if (subSelected)
-            {
-                subSelected = false;
-                return;
-            }
             ItemSelectedForRename((TreeViewItem)sender, "Filter name:");
+        }
+
+        private TreeViewItem CreateTreeViewEntry(string itemName)
+        {
+            return CreateTreeViewEntry(itemName, string.Empty);
+        }
+
+        private TreeViewItem CreateTreeViewEntry(string itemName, string imageToUse)
+        {
+            TreeViewItem returnItem = new TreeViewItem();
+
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+            string appPath = Application.ResourceAssembly.Location;
+            FileInfo fileInfo = new FileInfo(appPath);
+            if (imageToUse != string.Empty)
+            {
+                Uri imagePath = new Uri(fileInfo.DirectoryName + imageToUse);
+                BitmapImage bitmap = new BitmapImage(imagePath);
+                Image treeViewImage = new Image
+                {
+                    Source = bitmap,
+                    Height = 16
+                };
+
+                stackPanel.Children.Add(treeViewImage);
+            }
+
+            TextBlock text = new TextBlock();
+            text.Text = itemName;
+            stackPanel.Children.Add(text);
+
+            returnItem.Header = stackPanel;
+
+            return returnItem;
         }
 
         private void ItemSelectedForRename(TreeViewItem item, string text)
@@ -128,10 +157,55 @@ namespace OpenLoganalyzer.Windows
                 G_InnerGrid.Children.Remove(currentControl);
                 currentControl = null;
             }
-            SimpleRename newControl = new SimpleRename(text, item);
+            IFilter currentFilter = GetFilterFromItem(item);
+            int Level = GetDepth(item);
+            IFilterAdapter adapter = null;
+
+            StackPanel panel = (StackPanel)item.Header;
+            TextBlock block = GetTextBlock(panel);
+            UserControl userControlToAdd = null;
+
+            switch (Level)
+            {
+                case 0:
+                    adapter = new FilterAdapter(currentFilter, block);
+                    break;
+                case 1:
+                    string logName = block.Text;
+                    adapter = new LogLineAdapter(currentFilter.GetLogLineFilterByName(logName), block);
+                    break;
+                case 2:
+                    string columnName = block.Text;
+                    TreeViewItem parent = (TreeViewItem)item.Parent;
+                    string logScope = GetTextBlock((StackPanel)parent.Header).Text;
+                    ILogLineFilter filter = currentFilter.GetLogLineFilterByName(logScope);
+                    IFilterColumn column = filter.GetColumnByName(columnName);
+                    adapter = new ColumnAdapter(column, block);
+                    userControlToAdd = new FilterColumnControl(column);
+
+                    break;
+                default:
+                    break;
+            }
+            SimpleRename newControl = new SimpleRename(text, adapter);
+            newControl.AddUserControl(userControlToAdd);
             currentControl = newControl;
             Grid.SetColumn(currentControl, 1);
             G_InnerGrid.Children.Add(currentControl);
+        }
+
+        private TextBlock GetTextBlock(StackPanel stackPanel)
+        {
+            TextBlock block = null;
+            foreach (UIElement children in stackPanel.Children)
+            {
+                if (children is TextBlock)
+                {
+                    block = (TextBlock)children;
+                    break;
+                }
+            }
+            return block;
         }
 
         private IFilter GetFilterFromItem(TreeViewItem item)
@@ -160,22 +234,32 @@ namespace OpenLoganalyzer.Windows
 
         private void B_Save_Click(object sender, RoutedEventArgs e)
         {
-            if (!filterManager.Save(filterToEdit))
+            foreach (IFilter toRemove in filterToRemove)
             {
-                //Error Handling!
+                filterManager.RemoveFilter(toRemove);
             }
+            filterToRemove.Clear();
+
+            foreach (TreeViewItem item in TV_LogOverview.Items)
+            {
+                IFilter filter = (IFilter)item.Tag;
+                if (!filterManager.Save(filter))
+                {
+                    //Error Handling!
+                }
+            }
+            this.Close();
         }
 
         private void MI_NewFilter_Click(object sender, RoutedEventArgs e)
         {
-            TreeViewItem viewItem = new TreeViewItem();
-            
-            viewItem.Header = "Unnamed Item";
+            string text = "Unnamed Item";
+            TreeViewItem viewItem = CreateTreeViewEntry(text, "\\Images\\Icons\\FilterIcon.png");
             if (TV_LogOverview.SelectedItem == null)
             {
                 viewItem.Selected += ViewItem_Selected;
                 TV_LogOverview.Items.Add(viewItem);
-                viewItem.Tag = new Filter((string)viewItem.Header);
+                viewItem.Tag = new Filter(text);
                 return;
             }
 
@@ -183,11 +267,26 @@ namespace OpenLoganalyzer.Windows
             if (selectedItem is TreeViewItem)
             {
                 TreeViewItem item = (TreeViewItem)selectedItem;
-                if (GetDepth(item) > 1)
+                IFilter filter = GetFilterFromItem(item);
+                int depth = GetDepth(item);
+                if (depth > 1)
                 {
                     return;
                 }
-                viewItem.Selected += SubViewItem_Selected;
+                viewItem = CreateTreeViewEntry(text);
+                if (depth == 0)
+                {
+                    filter.AddFilter(new FilterLine(text));
+                    viewItem.Selected += SubViewItem_Selected;
+                }
+                if (depth == 1)
+                {
+                    string filterLine = GetTextBlock((StackPanel)item.Header).Text;
+                    IFilterColumn column = new FilterColumn(text);
+                    filter.GetLogLineFilterByName(filterLine).AddColumn(column);
+                    viewItem.Selected += FilterColumnItem_Selected;
+                }
+
                 item.Items.Add(viewItem);
                 item.IsExpanded = true;
             }
@@ -205,7 +304,7 @@ namespace OpenLoganalyzer.Windows
                 object parent = item.Parent;
                 if (parent is TreeViewItem)
                 {
-                    startLevel += GetDepth((TreeViewItem)parent, startLevel + 1);
+                    startLevel = GetDepth((TreeViewItem)parent, startLevel + 1);
                 }
             }
 
@@ -223,7 +322,6 @@ namespace OpenLoganalyzer.Windows
                     item.IsSelected = false;
                     treeView.Focus();
                 }
-
             }
         }
 
@@ -236,15 +334,16 @@ namespace OpenLoganalyzer.Windows
         {
             if (item != null)
             {
-                if (TV_LogOverview.Items.Contains(item))
-                {
-                    TV_LogOverview.Items.Remove(item);
-                    return;
-                }
-
                 if (item is TreeViewItem)
                 {
                     TreeViewItem treeViewItem = (TreeViewItem)item;
+                    if (TV_LogOverview.Items.Contains(item))
+                    {
+                        TV_LogOverview.Items.Remove(item);
+
+                        filterToRemove.Add((IFilter)treeViewItem.Tag);
+                        return;
+                    }
                     RemoveSubItem(treeViewItem);
                 }
             }
@@ -261,6 +360,17 @@ namespace OpenLoganalyzer.Windows
             if (parentObject is TreeViewItem)
             {
                 TreeViewItem parentTreeView = (TreeViewItem)parentObject;
+                int depth = GetDepth(itemToRemove);
+                IFilter filter = GetFilterFromItem(itemToRemove);
+                if (depth == 1)
+                {
+                    filter.RemoveFilterLineByName(GetTextBlock((StackPanel)itemToRemove.Header).Text);
+                }
+                if (depth == 2)
+                {
+                    ILogLineFilter lineFilter = filter.GetLogLineFilterByName(GetTextBlock((StackPanel)parentTreeView.Header).Text);
+                    lineFilter.RemoveColumnByType(GetTextBlock((StackPanel)itemToRemove.Header).Text);
+                }
                 if (parentTreeView.Items.Contains(itemToRemove))
                 {
                     parentTreeView.Items.Remove(itemToRemove);

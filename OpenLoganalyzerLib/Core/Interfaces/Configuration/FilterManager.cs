@@ -33,5 +33,10 @@ namespace OpenLoganalyzerLib.Core.Configuration
         {
             return loader.GetAvailableFilterNames();
         }
+
+        public void RemoveFilter(IFilter filterToRemove)
+        {
+            saver.RemoveFilter(filterToRemove);
+        }
     }
 }
