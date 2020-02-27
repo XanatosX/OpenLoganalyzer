@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
 using OpenLoganalyzerLib.Core.Interfaces.Configuration;
+using OpenLoganalyzerLib.Core.Interfaces.Persistant.Filter;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenLoganalyzerLib.Core.Configuration.Saver
 {
@@ -26,7 +23,7 @@ namespace OpenLoganalyzerLib.Core.Configuration.Saver
             }
         }
 
-        public void RemoveFilter(IFilter filterToRemove)
+        public void Delete(IFilter filterToRemove)
         {
             string filePath = GetFilePath(filterToRemove);
             if (File.Exists(filePath))

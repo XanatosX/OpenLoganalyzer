@@ -1,4 +1,4 @@
-﻿using OpenLoganalyzerLib.Core.Interfaces.Data;
+﻿using OpenLoganalyzerLib.Core.Interfaces.Persistant.Analyzing;
 using System.Collections.Generic;
 using System.IO;
 

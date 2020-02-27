@@ -60,19 +60,18 @@ namespace OpenLoganalyzer.Windows
 
         private void SetupFilters()
         {
-            foreach (string filterName in filterManager.GetAvailableFilterNames())
+            foreach (IFilter loadedFilter in filterManager.GetAllFilters())
             {
-                TreeViewItem viewItem = CreateTreeViewEntry(filterName, "\\Images\\Icons\\FilterIcon.png");
+                TreeViewItem viewItem = CreateTreeViewEntry(loadedFilter.Name, "\\Images\\Icons\\FilterIcon.png");
                 viewItem.Selected += ViewItem_Selected;
-                IFilter filter = filterManager.LoadFilterByName(filterName);
-                viewItem.Tag = filter;
+                viewItem.Tag = loadedFilter;
 
-                if (filter == null)
+                if (loadedFilter == null)
                 {
                     return;
                 }
 
-                foreach (ILogLineFilter logLineFilter in filter.LogLineTypes)
+                foreach (ILogLineFilter logLineFilter in loadedFilter.LogLineTypes)
                 {
                     TreeViewItem subViewItem = CreateTreeViewEntry(logLineFilter.Name);
                     subViewItem.Selected += SubViewItem_Selected;
@@ -86,13 +85,25 @@ namespace OpenLoganalyzer.Windows
                     }
                 }
 
-                if (filter == filterToEdit)
+                if (loadedFilter.Name == filterToEdit.Name)
                 {
                     viewItem.IsSelected = true;
-                    viewItem.IsExpanded = true;
+                    ExtendTreeView(viewItem);
                 }
                 TV_LogOverview.Items.Add(viewItem);
 
+            }
+        }
+
+        private void ExtendTreeView(TreeViewItem treeViewItem)
+        {
+            treeViewItem.IsExpanded = true;
+            foreach (object subItem in treeViewItem.Items)
+            {
+                if (subItem is TreeViewItem)
+                {
+                    ExtendTreeView((TreeViewItem)subItem);
+                }
             }
         }
 
@@ -238,14 +249,14 @@ namespace OpenLoganalyzer.Windows
         {
             foreach (IFilter toRemove in filterToRemove)
             {
-                filterManager.RemoveFilter(toRemove);
+                filterManager.DeleteFilter(toRemove);
             }
             filterToRemove.Clear();
 
             foreach (TreeViewItem item in TV_LogOverview.Items)
             {
                 IFilter filter = (IFilter)item.Tag;
-                if (!filterManager.Save(filter))
+                if (!filterManager.SaveFilter(filter))
                 {
                     //Error Handling!
                 }

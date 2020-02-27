@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using OpenLoganalyzer.Core;
 using OpenLoganalyzer.Core.Commands;
 using OpenLoganalyzer.Core.Extensions;
 using OpenLoganalyzer.Core.Interfaces;
@@ -7,13 +6,11 @@ using OpenLoganalyzer.Core.Notification;
 using OpenLoganalyzer.Core.Settings;
 using OpenLoganalyzer.Core.Style;
 using OpenLoganalyzer.Windows;
-using OpenLoganalyzerLib.Core.Configuration;
 using OpenLoganalyzerLib.Core.Configuration.Loader;
-using OpenLoganalyzerLib.Core.Configuration.Saver;
-using OpenLoganalyzerLib.Core.Factories;
+using OpenLoganalyzerLib.Core.Factories.Filter;
 using OpenLoganalyzerLib.Core.Interfaces.Configuration;
+using OpenLoganalyzerLib.Core.Interfaces.Factories;
 using OpenLoganalyzerLib.Core.Interfaces.LogAnalyzing;
-using OpenLoganalyzerLib.Core.Loader;
 using OpenLoganalyzerLib.Core.Loader.Data;
 using OpenLoganalyzerLib.Core.LogAnalyzing;
 using System;
@@ -171,7 +168,7 @@ namespace OpenLoganalyzer
 
         private void SetupFilters()
         {
-            List<string> filterNames = filterManager.GetAvailableFilterNames();
+            List<string> filterNames = filterManager.GetAllFilterNames();
             CB_FilterBox.Items.Clear();
             foreach (string filterName in filterNames)
             {
@@ -323,7 +320,7 @@ namespace OpenLoganalyzer
             {
                 return;
             }
-            IFilter filter = filterManager.LoadFilterByName(box.SelectedItem.ToString());
+            IFilter filter = filterManager.GetFilter(box.SelectedItem.ToString());
             if (filter != null)
             {
                 BuildViewGrid(filter);
@@ -385,7 +382,7 @@ namespace OpenLoganalyzer
                 messageBoxContent = messageBoxContent.GetTranslated();
                 messageBoxContent = messageBoxContent.Replace("%name%", filterName);
 
-                if (filterManager.LoadFilterByName(filterName) != null)
+                if (filterManager.GetFilter(filterName) != null)
                 {
                     MessageBoxResult result = MessageBox.Show(
                         messageBoxContent,
@@ -405,7 +402,7 @@ namespace OpenLoganalyzer
                 string content = "MainWindow_Load_Filter_Content_Success";
 
                 bool loadingDone = true;
-                if (filterToImport == null || !filterManager.Save(filterToImport))
+                if (filterToImport == null || !filterManager.SaveFilter(filterToImport))
                 {
                     title = "MainWindow_Load_Filter_Headline_Failed";
                     content = "MainWindow_Load_Filter_Content_Failed";
@@ -456,7 +453,7 @@ namespace OpenLoganalyzer
             IFilter filter = null;
             if (IsEdit)
             {
-                filter = filterManager.LoadFilterByName(CB_FilterBox.SelectedItem.ToString());
+                filter = filterManager.GetFilter(CB_FilterBox.SelectedItem.ToString());
             }
             AddOrEditFilterWindow addOrEditFilter = new AddOrEditFilterWindow(settings, filterManager, themeManager, filter);
             addOrEditFilter.ShowDialog();

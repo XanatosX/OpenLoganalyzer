@@ -1,10 +1,7 @@
-﻿using System;
+﻿using OpenLoganalyzerLib.Core.Interfaces.Configuration;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
+namespace OpenLoganalyzerLib.Core.Interfaces.Persistant.Filter
 {
     public interface IFilterLoader
     {
