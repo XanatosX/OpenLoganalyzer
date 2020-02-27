@@ -27,9 +27,7 @@ namespace OpenLoganalyzer.Windows
         private readonly List<IFilter> filterToRemove;
 
         public IFilter Filter => filterToEdit;
-        private IFilter filterToEdit;
-
-        private bool subSelected;
+        private readonly IFilter filterToEdit;
 
         private UserControl currentControl;
 
@@ -124,8 +122,10 @@ namespace OpenLoganalyzer.Windows
         {
             TreeViewItem returnItem = new TreeViewItem();
 
-            StackPanel stackPanel = new StackPanel();
-            stackPanel.Orientation = Orientation.Horizontal;
+            StackPanel stackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal
+            };
             string appPath = Application.ResourceAssembly.Location;
             FileInfo fileInfo = new FileInfo(appPath);
             if (imageToUse != string.Empty)
@@ -141,8 +141,10 @@ namespace OpenLoganalyzer.Windows
                 stackPanel.Children.Add(treeViewImage);
             }
 
-            TextBlock text = new TextBlock();
-            text.Text = itemName;
+            TextBlock text = new TextBlock
+            {
+                Text = itemName
+            };
             stackPanel.Children.Add(text);
 
             returnItem.Header = stackPanel;

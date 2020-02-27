@@ -17,7 +17,7 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Data
         /// <summary>
         /// This method will load the file content 
         /// </summary>
-        /// <returns>WIll return a list of strings</returns>
+        /// <returns>Will return a list of strings</returns>
         IEnumerable<string> Load();
     }
 }

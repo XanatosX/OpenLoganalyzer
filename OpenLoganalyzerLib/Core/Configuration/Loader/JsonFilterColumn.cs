@@ -21,7 +21,7 @@ namespace OpenLoganalyzerLib.Core.Configuration.Loader
         public IFilterColumn GetFilterColumn()
         {
             IFilterColumn column = new FilterColumn(Type);
-            column.addMultipleRegex(PossibleRegex);
+            column.AddMultipleRegex(PossibleRegex);
 
             return column;
         }

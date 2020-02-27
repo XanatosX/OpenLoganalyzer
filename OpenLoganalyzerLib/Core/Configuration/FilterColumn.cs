@@ -22,7 +22,7 @@ namespace OpenLoganalyzerLib.Core.Configuration
             this.type = type;
         }
 
-        public void addNewRegex(string regex)
+        public void AddNewRegex(string regex)
         {
             if (!possibleRegex.Contains(regex))
             {
@@ -30,17 +30,17 @@ namespace OpenLoganalyzerLib.Core.Configuration
             }
         }
 
-        public void addMultipleRegex(string[] regexList)
+        public void AddMultipleRegex(string[] regexList)
         {
             foreach (string regex in regexList)
             {
-                addNewRegex(regex);
+                AddNewRegex(regex);
             }
         }
 
-        public void addMultipleRegex(List<string> regexList)
+        public void AddMultipleRegex(List<string> regexList)
         {
-            addMultipleRegex(regexList.ToArray());
+            AddMultipleRegex(regexList.ToArray());
         }
 
         public bool IsValid(string logLine)

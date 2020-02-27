@@ -16,13 +16,13 @@ namespace OpenLoganalyzerLib.Core.Interfaces.Configuration
 
         void Reset();
 
-        void addNewRegex(string regex);
+        void AddNewRegex(string regex);
 
         void RemoveRegex(string regex);
 
-        void addMultipleRegex(List<string> regexList);
+        void AddMultipleRegex(List<string> regexList);
 
-        void addMultipleRegex(string[] regexList);
+        void AddMultipleRegex(string[] regexList);
 
         bool IsValid(string logLine);
 
